@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "321902183870",
+    "project_id": "digit41",
+    "storage_bucket": "digit41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321902183870:android:2e336564e5c44bf40765ef",
+        "android_client_info": {
+          "package_name": "com.digit41.wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321902183870-cuq0hi338abt4oljqbotrr8qbsofoldq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQLkwTdaf46rl3ko_gtrF-aKMxFcKhr5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321902183870-cuq0hi338abt4oljqbotrr8qbsofoldq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
