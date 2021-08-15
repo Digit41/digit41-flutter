@@ -55,6 +55,9 @@ class AppTranslations extends Translations{
       "signInTitle": "Fingerprint Authentication",
       "lockOut": "Biometric authentication is disabled. Please lock and unlock your screen to enable it.",
       "descShowRecPhrase": "If you lose access to this device, your funds will be lost. unless you backup!",
+      "con1RecPh": "The recovery phrase is the master key to your funds. Never share with anyone else!",
+      "con2RecPh": "DIGIT41 will never ask you to share your recovery phrase!",
+      "con3RecPh": "If your recovery phrase lost, not even DIGIT41 can recover your funds",
     },
     'tr_TU':{
       'currentLan': 'Tr',
@@ -162,6 +165,11 @@ class AppTranslations extends Translations{
       "descShowRecPhrase": "Bu cihaza erişiminizi kaybederseniz, paranız kaybolur. yedeklemediğiniz sürece!",
       "Account Public Keys": "Hesap Genel Anahtarları",
       "Export Account Public Keys": "Hesap Ortak Anahtarlarını Dışa Aktar",
+      "Recovery Phrase": "Kurtarma İfadesi",
+      "con1RecPh": "Kurtarma ifadesi, paranızın ana anahtarıdır. Asla başkasıyla paylaşmayın!",
+      "con2RecPh": "DIGIT41, asla kurtarma ifadenizi paylaşmanızı istemez!",
+      "con3RecPh": "Kurtarma ifadeniz kaybolursa, DIGIT41 bile paranızı geri alamaz",
+      "I understand the risks": "riskleri anlıyorum",
     },
   };
 

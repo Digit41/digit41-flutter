@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class InnerAppbar extends StatelessWidget implements PreferredSizeWidget {
+class InnerAppbar extends StatelessWidget {
   String title;
+  Function? function;
 
-  InnerAppbar({required this.title});
-
-  @override
-  Size get preferredSize => Size.fromHeight(58.0);
+  InnerAppbar({required this.title, this.function});
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios,
-          color: Get.theme.primaryColor,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(
+          onPressed: () {
+            if (function != null) function!();
+            Get.back();
+          },
+          icon: Icon(Icons.arrow_back_ios),
         ),
-      ),
-      title: Text(title, style: TextStyle(fontSize: 20.0)),
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Center(),
+      ],
     );
   }
 }

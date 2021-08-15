@@ -3,6 +3,7 @@ import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_button.dart';
+import 'package:digit41/widgets/app_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +13,6 @@ class Backup extends StatefulWidget {
 }
 
 class _BackupState extends State<Backup> {
-  bool boxChecked = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class _BackupState extends State<Backup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 92.0),
+            const SizedBox(height: 92.0),
             Image.asset(
               Images.LOCK,
               height: 100.0,
@@ -41,39 +40,14 @@ class _BackupState extends State<Backup> {
                 style: TextStyle(fontSize: 18.0),
               ),
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Checkbox(
-                  value: boxChecked,
-                  onChanged: (newVal) {
-                    setState(() {
-                      boxChecked = newVal!;
-                    });
-                  },
-                ),
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0,
-                    ),
-                    child: Text(Strings.MESS_ACCEPTING_CON.tr),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 24.0),
-            Opacity(
-              opacity: boxChecked ? 1.0 : 0.3,
-              child: AbsorbPointer(
-                absorbing: !boxChecked,
-                child: AppButton(
-                  title: Strings.PROCEED.tr,
-                  btnColor: Get.theme.primaryColor,
-                  onTap: () {
-                    navigateToPage(Phrases());
-                  },
-                ),
+            AppCheckbox(
+              Strings.MESS_ACCEPTING_CON.tr,
+              AppButton(
+                title: Strings.PROCEED.tr,
+                btnColor: Get.theme.primaryColor,
+                onTap: () {
+                  navigateToPage(Phrases());
+                },
               ),
             ),
           ],
