@@ -54,6 +54,7 @@ class AppTranslations extends Translations{
       "goToSettingsDescription": "Fingerprint is not set up on your device. Go to 'Settings > Security' to add your fingerprint.",
       "signInTitle": "Fingerprint Authentication",
       "lockOut": "Biometric authentication is disabled. Please lock and unlock your screen to enable it.",
+      "descShowRecPhrase": "If you lose access to this device, your funds will be lost. unless you backup!",
     },
     'tr_TU':{
       'currentLan': 'Tr',
@@ -155,6 +156,12 @@ class AppTranslations extends Translations{
       "IN PROGRESS": "DEVAM ETMEKTE",
       "Sending": "gönderme",
       "Browser": "Tarayıcı",
+      "Wallet Name": "Cüzdan Adı",
+      "Backup Options": "Yedekleme Seçenekleri",
+      "Show Recovery Phrase": "Kurtarma İfadesini Göster",
+      "descShowRecPhrase": "Bu cihaza erişiminizi kaybederseniz, paranız kaybolur. yedeklemediğiniz sürece!",
+      "Account Public Keys": "Hesap Genel Anahtarları",
+      "Export Account Public Keys": "Hesap Ortak Anahtarlarını Dışa Aktar",
     },
   };
 

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:digit41/hive/app_hive.dart';
 import 'package:digit41/hive/wallet_model.dart';
+import 'package:digit41/pages/settings/user_wallets/manage_wallet.dart';
 import 'package:digit41/pages/welcome.dart';
 import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/app_theme.dart';
@@ -79,16 +82,29 @@ void userWallets() {
                           color: wallets[index].selected ? Colors.white : null,
                         ),
                       ),
-                      trailing: wallets[index].selected
-                          ? Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(35.0),
-                                color: Get.theme.primaryColor,
-                              ),
-                              padding: const EdgeInsets.all(4.0),
-                              child: Icon(Icons.check, color: Colors.black),
-                            )
-                          : null,
+                      trailing: IconButton(
+                        onPressed: () {
+                          Get.back();
+                          Timer(Duration(milliseconds: 200), (){
+                            navigateToPage(ManageWallet(wallets[index]));
+                          });
+                        },
+                        icon: Icon(
+                          Icons.menu,
+                          color: wallets[index].selected ? Colors.white : null,
+                        ),
+                      ),
+
+                      // wallets[index].selected
+                      //     ? Container(
+                      //         decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(35.0),
+                      //           color: Get.theme.primaryColor,
+                      //         ),
+                      //         padding: const EdgeInsets.all(4.0),
+                      //         child: Icon(Icons.check, color: Colors.black),
+                      //       )
+                      //     : null,
                     ),
                   );
                 },

@@ -99,4 +99,14 @@ class Strings {
   static const DATE = 'Date';
   static const SENDING = 'Sending';
   static const IN_PROGRESS = 'IN PROGRESS';
+  static const WALLET_NAME = 'Wallet Name';
+  static const BACKUP_OPTIONS = 'Backup Options';
+  static const SHOW_REC_PHRASES = 'Show Recovery Phrase';
+  static const DESC_SHOW_REC_PHRASES = 'descShowRecPhrase';
+  static const ACCOUNT_PUBLIC_KEYS = 'Account Public Keys';
+  static const EXPORT_ACC_PUB_KEYS = 'Export Account Public Keys';
+  static const RECOVERY_PHRASE = 'Recovery Phrase';
+  static const CON1_REC_PH = 'con1RecPh';
+  static const CON2_REC_PH = 'con2RecPh';
+  static const CON3_REC_PH = 'con2RecPh';
 }

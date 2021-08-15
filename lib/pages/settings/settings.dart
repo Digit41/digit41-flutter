@@ -1,6 +1,5 @@
 import 'package:digit41/pages/settings/currency.dart';
 import 'package:digit41/pages/settings/languages.dart';
-import 'package:digit41/pages/settings/user_wallets.dart';
 import 'package:digit41/rest_full_apis/routes.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
 import 'package:digit41/utils/app_state_management.dart';
@@ -14,6 +13,7 @@ import 'package:get/get.dart';
 
 import '../with_confirmation.dart';
 import 'my_pass_code.dart';
+import 'user_wallets/user_wallets.dart';
 
 class Settings extends StatefulWidget {
   @override
