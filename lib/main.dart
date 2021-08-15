@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:digit41/models/address_model.dart';
+import 'package:digit41/models/asset_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +20,9 @@ import 'utils/app_translations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   _hiveInit();
+
   await Firebase.initializeApp();
   AppLocalNotification appLocalNotification = AppLocalNotification();
   appLocalNotification.initLocalNotification();
@@ -26,6 +30,7 @@ void main() async {
   await appFCMPushNotification.initializeFcm();
 
   runApp(MyApp());
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
@@ -34,11 +39,14 @@ void _hiveInit() async {
     Directory directory = await getApplicationDocumentsDirectory();
     Hive
       ..init(directory.path)
+      ..registerAdapter(AssetAdapter())
+      ..registerAdapter(AddressAdapter())
       ..registerAdapter(WalletAdapter());
-    // ..registerAdapter(CoinTokenAdapter());
   } else {
-    Hive..registerAdapter(WalletAdapter());
-    // ..registerAdapter(CoinTokenAdapter());
+    Hive
+      ..registerAdapter(AssetAdapter())
+      ..registerAdapter(AddressAdapter())
+      ..registerAdapter(WalletAdapter());
   }
 }
 

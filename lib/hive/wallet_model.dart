@@ -1,8 +1,7 @@
+import 'package:digit41/models/address_model.dart';
 import 'package:hive/hive.dart';
 
-// import 'coin_token_model.dart';
-
-@HiveType(typeId: 0)
+@HiveType(typeId: 2)
 class WalletModel extends HiveObject {
   @HiveField(0)
   String name;
@@ -13,21 +12,21 @@ class WalletModel extends HiveObject {
   @HiveField(2)
   bool selected;
 
-  // @HiveField(3)
-  // List coinTokenList;
+  @HiveField(3)
+  List<AddressModel>? addresses;
 
   WalletModel(
     this.name,
     this.mnemonic, {
     this.selected = false,
-    // this.coinTokenList,
+    this.addresses,
   });
 }
 
 //wallet adapter for hive
 class WalletAdapter extends TypeAdapter<WalletModel> {
   @override
-  final typeId = 0;
+  final typeId = 2;
 
   @override
   WalletModel read(BinaryReader reader) {
@@ -40,21 +39,21 @@ class WalletAdapter extends TypeAdapter<WalletModel> {
       fields[0],
       fields[1],
       selected: fields[2],
-      // coinTokenList: fields[3],
+      addresses: fields[3],
     );
   }
 
   @override
   void write(BinaryWriter writer, WalletModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.mnemonic)
       ..writeByte(2)
-      ..write(obj.selected);
-      // ..writeByte(3)
-      // ..write(obj.coinTokenList);
+      ..write(obj.selected)
+      ..writeByte(4)
+      ..write(obj.addresses);
   }
 }
