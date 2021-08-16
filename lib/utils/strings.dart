@@ -110,4 +110,6 @@ class Strings {
   static const CON2_REC_PH = 'con2RecPh';
   static const CON3_REC_PH = 'con3RecPh';
   static const I_UNDERSTAND = 'I understand the risks';
+  static const YOUR_REC_PH = 'Your recovery phrase';
+  static const DESC_YOUR_REC_PH = 'descYourRecPh';
 }

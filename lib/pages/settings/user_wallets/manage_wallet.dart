@@ -53,7 +53,7 @@ class ManageWallet extends StatelessWidget {
                   borderColor: darkModeEnabled() ? Colors.white : null,
                   btnColor: darkModeEnabled() ? null : AppTheme.gray,
                   onTap: () {
-                    navigateToPage(TermOfRecPhrase());
+                    navigateToPage(TermOfRecPhrase(_wallet.mnemonic));
                   },
                 ),
                 _txt(Strings.DESC_SHOW_REC_PHRASES.tr),

@@ -1,5 +1,7 @@
+import 'package:digit41/pages/settings/user_wallets/show_recovery_phrases.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
+import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_button.dart';
 import 'package:digit41/widgets/app_checkbox.dart';
 import 'package:digit41/widgets/inner_appbar.dart';
@@ -7,6 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TermOfRecPhrase extends StatefulWidget {
+  String mnemonic;
+
+
+  TermOfRecPhrase(this.mnemonic);
+
   @override
   _TermOfRecPhraseState createState() => _TermOfRecPhraseState();
 }
@@ -61,7 +68,7 @@ class _TermOfRecPhraseState extends State<TermOfRecPhrase> {
                 title: Strings.CONTINUE.tr,
                 btnColor: Get.theme.primaryColor,
                 onTap: () {
-                  // navigateToPage(Phrases());
+                  navigateToPage(ShowRecoveryPhrases(widget.mnemonic));
                 },
               ),
             ),
