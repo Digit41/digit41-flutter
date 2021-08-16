@@ -78,7 +78,7 @@ class ManageWallet extends StatelessWidget {
     if (_wallet.name != _walletName!.controller.text) {
       _wallet.name = _walletName!.controller.text;
       _wallet.save();
-      AppGet.appGet.setWalletModel(wm: _wallet);
+      if (_wallet.selected) AppGet.appGet.setWalletModel(wm: _wallet);
     }
   }
 }
