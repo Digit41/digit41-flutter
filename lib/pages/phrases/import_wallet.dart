@@ -128,7 +128,7 @@ void importWallet() async {
             ],
           ),
     child: Padding(
-      padding: const EdgeInsets.only(top: 24.0),
+      padding: const EdgeInsets.only(top: 24.0, bottom: 16.0),
       child: Form(
         key: formKey,
         child: Column(

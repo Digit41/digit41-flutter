@@ -26,7 +26,7 @@ class InnerAppbar extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Center(),
+        Container(width: 40.0),
       ],
     );
   }
