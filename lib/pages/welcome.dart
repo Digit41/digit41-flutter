@@ -90,9 +90,7 @@ class Welcome extends StatelessWidget {
                 AppButton(
                   title: Strings.HAVE_ALREADY_WALL.tr,
                   btnColor: Colors.white,
-                  onTap: () {
-                    navigateToPage(ImportWallet());
-                  },
+                  onTap: importWallet,
                 ),
                 Padding(padding: const EdgeInsets.symmetric(vertical: 8.0)),
                 AppButton(

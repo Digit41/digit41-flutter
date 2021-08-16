@@ -89,7 +89,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       decoration: InputDecoration(
         counterText: "",
         hintText: widget.hint,
-        contentPadding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 4.0),
+        contentPadding: widget.maxLine != null
+            ? null
+            : const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 4.0),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
           borderSide: BorderSide(color: Colors.grey.shade300, width: 1.0),
@@ -114,7 +116,11 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
 
   String? selfValidator(String? value) {
     if (value!.isEmpty)
-      return Strings.PLEASE.tr + ' ' + Strings.ENTER_SELF.tr + ' ' + widget.hint;
+      return Strings.PLEASE.tr +
+          ' ' +
+          Strings.ENTER_SELF.tr +
+          ' ' +
+          widget.hint;
     else if (widget.length != null &&
         value.length < widget.length!.toInt() &&
         widget.showLengthFail)

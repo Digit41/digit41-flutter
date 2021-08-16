@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 void bottomSheet(String title,
     {String? message,
     Widget? child,
+    Widget? frontOfTitle,
     bool enableDrag = true,
     bool isDismissible = true}) {
   Get.bottomSheet(
@@ -27,13 +28,16 @@ void bottomSheet(String title,
                   ),
                 ),
               ),
-              if (isDismissible)
-                IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(Icons.close),
-                ),
+              frontOfTitle != null
+                  ? frontOfTitle
+                  : isDismissible
+                      ? IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(Icons.close),
+                        )
+                      : Center(),
             ],
           ),
           if (message != null)

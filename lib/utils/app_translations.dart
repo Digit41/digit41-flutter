@@ -59,6 +59,7 @@ class AppTranslations extends Translations{
       "con2RecPh": "DIGIT41 will never ask you to share your recovery phrase!",
       "con3RecPh": "If your recovery phrase lost, not even DIGIT41 can recover your funds",
       "descYourRecPh": "Write down or copy these words in the right order and save them somewhere safe.",
+      "qImportWallet":"What is recovery phrase?"
     },
     'tr_TU':{
       'currentLan': 'Tr',
@@ -173,6 +174,7 @@ class AppTranslations extends Translations{
       "I understand the risks": "riskleri anlıyorum",
       "Your recovery phrase": "Kurtarma ifadeniz",
       "descYourRecPh": "Bu kelimeleri doğru sırayla yazın veya kopyalayın ve güvenli bir yere kaydedin.",
+      "qImportWallet":"Kurtarma ifadesi nedir?"
     },
   };
 
