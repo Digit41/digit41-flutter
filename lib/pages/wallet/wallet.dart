@@ -1,4 +1,5 @@
 import 'package:digit41/pages/wallet/assets.dart';
+import 'package:digit41/pages/wallet/nfts.dart';
 import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
@@ -91,7 +92,7 @@ class _WalletState extends State<Wallet> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: selectedTab == 0 ? Assets() : Center(child: Text('okk')),
+            child: selectedTab == 0 ? Assets() : NFTs(),
           ),
         ],
       ),
