@@ -36,7 +36,7 @@ void manageWallet(WalletModel wallet) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 8.0),
         _txt(Strings.WALLET_NAME.tr),
         walletName,
         const SizedBox(height: 24.0),

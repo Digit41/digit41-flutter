@@ -1,7 +1,8 @@
+import 'dart:async';
+
 import 'package:digit41/pages/settings/user_wallets/show_recovery_phrases.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
-import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_bottom_sheet.dart';
 import 'package:digit41/widgets/app_button.dart';
 import 'package:digit41/widgets/app_checkbox.dart';
@@ -32,6 +33,7 @@ void termOfRecPhrase(String mnemonic) {
     Strings.RECOVERY_PHRASE.tr,
     child: Column(
       children: [
+        const SizedBox(height: 8.0),
         Image.asset(Images.LOGO, width: 250.0, height: 250.0),
         const SizedBox(height: 32.0),
         terms(Strings.CON1_REC_PH.tr),
@@ -44,10 +46,14 @@ void termOfRecPhrase(String mnemonic) {
             title: Strings.CONTINUE.tr,
             btnColor: Get.theme.primaryColor,
             onTap: () {
-              navigateToPage(ShowRecoveryPhrases(mnemonic));
+              Get.back();
+              Timer(Duration(milliseconds: 200), (){
+                showRecoveryPhrases(mnemonic);
+              });
             },
           ),
         ),
+        const SizedBox(height: 8.0),
       ],
     ),
   );
