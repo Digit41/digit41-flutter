@@ -47,7 +47,7 @@ void manageWallet(WalletModel wallet) {
           borderColor: darkModeEnabled() ? Colors.white : null,
           btnColor: darkModeEnabled() ? null : AppTheme.gray,
           onTap: () {
-            navigateToPage(TermOfRecPhrase(wallet.mnemonic));
+            termOfRecPhrase(wallet.mnemonic);
           },
         ),
         _txt(Strings.DESC_SHOW_REC_PHRASES.tr),
