@@ -29,7 +29,7 @@ void showRecoveryPhrases(String mnemonic) {
               ),
           ],
         ),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 32.0),
         AppButton(
           title: Strings.COPY_PHRASES.tr,
           btnColor: AppTheme.gray,

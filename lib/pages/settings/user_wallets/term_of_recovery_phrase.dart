@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:digit41/pages/settings/user_wallets/show_recovery_phrases.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
+import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_bottom_sheet.dart';
 import 'package:digit41/widgets/app_button.dart';
 import 'package:digit41/widgets/app_checkbox.dart';
@@ -34,7 +35,12 @@ void termOfRecPhrase(String mnemonic) {
     child: Column(
       children: [
         const SizedBox(height: 8.0),
-        Image.asset(Images.LOGO, width: 250.0, height: 250.0),
+        Image.asset(
+          Images.KEY,
+          width: 220.0,
+          height: 220.0,
+          color: darkModeEnabled() ? null : Colors.black87,
+        ),
         const SizedBox(height: 32.0),
         terms(Strings.CON1_REC_PH.tr),
         terms(Strings.CON2_REC_PH.tr),
@@ -47,7 +53,7 @@ void termOfRecPhrase(String mnemonic) {
             btnColor: Get.theme.primaryColor,
             onTap: () {
               Get.back();
-              Timer(Duration(milliseconds: 200), (){
+              Timer(Duration(milliseconds: 200), () {
                 showRecoveryPhrases(mnemonic);
               });
             },
