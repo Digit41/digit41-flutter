@@ -18,7 +18,8 @@ import 'package:get/get.dart';
 void userWallets() {
   AppHive appHive = AppHive();
   List<WalletModel> wallets;
-  int? selectedIndex;
+  List<Widget> items = [];
+  int selectedIndex = 0;
 
   bottomSheet(
     Strings.YOUR_WALLETS.tr,
@@ -29,76 +30,64 @@ void userWallets() {
         if (snapShot.hasData) {
           wallets = snapShot.data as List<WalletModel>;
 
-          double h = wallets.length * 70.0;
+          for (int i = 0; i < wallets.length; i++) {
+            if (wallets[i].selected) selectedIndex = i;
+            items.add(
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                child: ListTile(
+                  onTap: () async {
+                    if (!wallets[i].selected) {
+                      wallets[i].selected = true;
+                      wallets[i].save();
+                      AppGet.appGet.setWalletModel(wm: wallets[i]);
 
-          return SizedBox(
-            height: wallets.length == 1
-                ? 150.0
-                : h < MediaQuery.of(ctx).size.height - 90.0
-                    ? h
-                    : MediaQuery.of(ctx).size.height - 90.0,
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: wallets.length,
-                itemBuilder: (ctx, int index) {
-                  if (selectedIndex == null && wallets[index].selected)
-                    selectedIndex = index;
+                      /// There may be no selected wallet
+                      try {
+                        wallets[selectedIndex].selected = false;
+                        wallets[selectedIndex].save();
+                      } catch (e) {}
 
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      bottom: wallets.length - 1 == index ? 96.0 : 0.0,
-                      top: 8.0,
+                      appHive.box!.close();
+                    }
+                    Get.back();
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  tileColor: wallets[i].selected
+                      ? AppTheme.gray
+                      : darkModeEnabled()
+                          ? AppTheme.dark.scaffoldBackgroundColor
+                          : Colors.grey.shade300,
+                  title: Text(
+                    wallets[i].name,
+                    style: TextStyle(
+                      color: wallets[i].selected ? Colors.white : null,
                     ),
-                    child: ListTile(
-                      onTap: () async {
-                        if (!wallets[index].selected) {
-                          wallets[index].selected = true;
-                          wallets[index].save();
-                          AppGet.appGet.setWalletModel(wm: wallets[index]);
-
-                          /// There may be no selected wallet
-                          try {
-                            wallets[selectedIndex!].selected = false;
-                            wallets[selectedIndex!].save();
-                          } catch (e) {}
-
-                          appHive.box!.close();
-                          Get.back();
-                        }
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      tileColor: wallets[index].selected
-                          ? AppTheme.gray
-                          : darkModeEnabled()
-                              ? AppTheme.dark.scaffoldBackgroundColor
-                              : Colors.grey.shade300,
-                      title: Text(
-                        wallets[index].name,
-                        style: TextStyle(
-                          color: wallets[index].selected ? Colors.white : null,
-                        ),
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          Get.back();
-                          Timer(Duration(milliseconds: 200), (){
-                            manageWallet(wallets[index]);
-                          });
-                        },
-                        icon: Icon(
-                          Icons.menu,
-                          color: wallets[index].selected ? Colors.white : null,
-                        ),
-                      ),
+                  ),
+                  trailing: IconButton(
+                    onPressed: () {
+                      Get.back();
+                      Timer(Duration(milliseconds: 200), () {
+                        manageWallet(wallets[i]);
+                      });
+                    },
+                    icon: Icon(
+                      Icons.menu,
+                      color: wallets[i].selected ? Colors.white : null,
                     ),
-                  );
-                },
+                  ),
+                ),
               ),
-              floatingActionButton: Column(
+            );
+          }
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ...items,
+              Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   FloatingActionButton(
@@ -111,14 +100,14 @@ void userWallets() {
                       height: 25.0,
                     ),
                   ),
-                  const SizedBox(height: 4.0),
+                  const SizedBox(height: 3.0),
                   Text(
                     Strings.ADD_WALLET.tr,
                     style: TextStyle(color: Get.theme.primaryColor),
                   ),
                 ],
               ),
-            ),
+            ],
           );
         } else
           return Center(child: CupertinoActivityIndicator());
