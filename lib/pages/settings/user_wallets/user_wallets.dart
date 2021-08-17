@@ -86,7 +86,7 @@ void userWallets() {
                         onPressed: () {
                           Get.back();
                           Timer(Duration(milliseconds: 200), (){
-                            navigateToPage(ManageWallet(wallets[index]));
+                            manageWallet(wallets[index]);
                           });
                         },
                         icon: Icon(
@@ -94,17 +94,6 @@ void userWallets() {
                           color: wallets[index].selected ? Colors.white : null,
                         ),
                       ),
-
-                      // wallets[index].selected
-                      //     ? Container(
-                      //         decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(35.0),
-                      //           color: Get.theme.primaryColor,
-                      //         ),
-                      //         padding: const EdgeInsets.all(4.0),
-                      //         child: Icon(Icons.check, color: Colors.black),
-                      //       )
-                      //     : null,
                     ),
                   );
                 },
