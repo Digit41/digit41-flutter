@@ -134,28 +134,30 @@ void importWallet() async {
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () async {
-                      String re = await barcodeScan();
-                      phrases.controller.text = re;
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(
-                          Images.SCAN,
-                          width: 20.0,
-                          height: 20.0,
-                          color: Get.theme.primaryColor,
+                  GetPlatform.isWeb
+                      ? Center()
+                      : InkWell(
+                          onTap: () async {
+                            String re = await barcodeScan();
+                            phrases.controller.text = re;
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.asset(
+                                Images.SCAN,
+                                width: 20.0,
+                                height: 20.0,
+                                color: Get.theme.primaryColor,
+                              ),
+                              const SizedBox(width: 4.0),
+                              Text(
+                                Strings.SCAN_QR.tr,
+                                style: TextStyle(color: Get.theme.primaryColor),
+                              ),
+                            ],
+                          ),
                         ),
-                        const SizedBox(width: 4.0),
-                        Text(
-                          Strings.SCAN_QR.tr,
-                          style: TextStyle(color: Get.theme.primaryColor),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(height: 16.0),

@@ -39,14 +39,14 @@ void _hiveInit() async {
     Directory directory = await getApplicationDocumentsDirectory();
     Hive
       ..init(directory.path)
-      ..registerAdapter(AssetAdapter())
+      ..registerAdapter(WalletAdapter())
       ..registerAdapter(AddressAdapter())
-      ..registerAdapter(WalletAdapter());
+      ..registerAdapter(AssetAdapter());
   } else {
     Hive
-      ..registerAdapter(AssetAdapter())
+      ..registerAdapter(WalletAdapter())
       ..registerAdapter(AddressAdapter())
-      ..registerAdapter(WalletAdapter());
+      ..registerAdapter(AssetAdapter());
   }
 }
 

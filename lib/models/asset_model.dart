@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 2)
 class AssetModel extends HiveObject {
   @HiveField(0)
   String? contract;
@@ -44,7 +44,7 @@ class AssetModel extends HiveObject {
 
 class AssetAdapter extends TypeAdapter<AssetModel> {
   @override
-  final typeId = 0;
+  final typeId = 2;
 
   @override
   AssetModel read(BinaryReader reader) {
