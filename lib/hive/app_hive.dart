@@ -65,7 +65,7 @@ class AppHive {
       temp.selected = false;
       await temp.save();
     }
-    box!.close();
+
     return walletModel;
   }
 

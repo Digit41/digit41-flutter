@@ -4,19 +4,23 @@ import 'package:hive/hive.dart';
 @HiveType(typeId: 1)
 class AddressModel extends HiveObject {
   @HiveField(0)
-  String? address;
+  String? name;
 
   @HiveField(1)
-  String? blockChain;
+  String? address;
 
   @HiveField(2)
-  String? network;
+  String? blockChain;
 
   @HiveField(3)
+  String? network;
+
+  @HiveField(4)
   List<AssetModel>? assets;
 
 
   AddressModel({
+    this.name,
     this.address,
     this.blockChain,
     this.network,
@@ -36,24 +40,27 @@ class AddressAdapter extends TypeAdapter<AddressModel> {
     };
 
     return AddressModel(
-      address: fields[0],
-      blockChain: fields[1],
-      network: fields[2],
-      assets: fields[3],
+      name: fields[0],
+      address: fields[1],
+      blockChain: fields[2],
+      network: fields[3],
+      assets: fields[4],
     );
   }
 
   @override
   void write(BinaryWriter writer, AddressModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.address)
+      ..write(obj.name)
       ..writeByte(1)
-      ..write(obj.blockChain)
+      ..write(obj.address)
       ..writeByte(2)
-      ..write(obj.network)
+      ..write(obj.blockChain)
       ..writeByte(3)
+      ..write(obj.network)
+      ..writeByte(4)
       ..write(obj.assets);
   }
 }

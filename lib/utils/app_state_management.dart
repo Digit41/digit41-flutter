@@ -20,7 +20,6 @@ class AppGet extends GetxController {
           break;
         }
       }
-      box.close();
     } else
       walletModel = wm;
     update();
