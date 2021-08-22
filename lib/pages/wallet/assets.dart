@@ -59,7 +59,7 @@ class Assets extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text('${_assetsController.assets[index].balance} ETH'),
+                        Text('${_assetsController.assets[index].balance} ${_assetsController.assets[index].symbol}'),
                         Text(
                           '\$1,325',
                           style: TextStyle(

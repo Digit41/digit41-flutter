@@ -92,10 +92,10 @@ class AssetsController extends GetxController {
 
   void _prepareData() {
     for (AssetModel a in _coinsAddress[0].assets!)
-      if (a.standard == 'ERC20')
-        assets.add(a);
-      else
+      if (a.standard == 'ERC721')
         nfts.add(a);
+      else
+        assets.add(a);
 
     isLoading.value = false;
   }
