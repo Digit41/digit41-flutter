@@ -1,3 +1,4 @@
+import 'package:digit41/models/balance_model.dart';
 import 'package:digit41/rest_full_apis/base_api.dart';
 import 'package:digit41/rest_full_apis/routes.dart';
 
@@ -11,6 +12,6 @@ Future getBalances(
     url: Routes.BALANCES +
         'blockchain=$blockChain&network=$network&address=$address&force_update=true',
   );
-  print(result);
-  return true;
+
+  return balanceModelListFromJson(result);
 }

@@ -1,6 +1,8 @@
 import 'package:digit41/app_web3/addresses.dart';
 import 'package:digit41/app_web3/utils.dart';
 import 'package:digit41/models/address_model.dart';
+import 'package:digit41/models/asset_model.dart';
+import 'package:digit41/models/balance_model.dart';
 import 'package:digit41/rest_full_apis/wallet_api.dart';
 import 'package:digit41/utils/app_state_management.dart';
 import 'package:get/get.dart';
@@ -25,6 +27,8 @@ class AssetsController extends GetxController {
 
   void _getAddressesAndAssets() async {
     AddressModel tempAddress;
+    List<AssetModel> tempAssets = [];
+    List<BalanceModel> tempBalanceList;
 
     /// now, just for Ethereum
     EthereumAddress address = await getCoinPublicAddress(
@@ -32,23 +36,33 @@ class AssetsController extends GetxController {
       _wallet.walletModel!.mnemonic,
       0,
     );
-    
-    await getBalances(
+
+    tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,
       Networks.MAIN_NET,
       address.toString(),
     );
 
+    for (BalanceModel b in tempBalanceList)
+      if (b.contract == null) {
+        tempAssets.add(
+          AssetModel(
+            name: 'Ethereum',
+            balance: b.balance,
+            icon: 'https://s4.uupload.ir/files/ethereum-eth-icon_w0jo.png',
+          ),
+        );
+      }
+
     tempAddress = AddressModel(
-      name: 'Ehtereum',
       address: address.toString(),
       blockChain: BlockChains.ETHEREUM,
       network: Networks.MAIN_NET,
+      assets: tempAssets,
     );
-
     coinsAddress.add(tempAddress);
 
-    _wallet.walletModel!.addresses = [tempAddress];
-    _wallet.walletModel!.save();
+    // _wallet.walletModel!.addresses = [tempAddress];
+    // _wallet.walletModel!.save();
   }
 }
