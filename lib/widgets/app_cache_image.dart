@@ -6,8 +6,9 @@ class CacheImage extends StatelessWidget {
   String url;
   Color? color;
   BoxFit? boxFit;
+  double? size;
 
-  CacheImage(this.url, {this.boxFit, this.color});
+  CacheImage(this.url, {this.boxFit, this.color, this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +18,9 @@ class CacheImage extends StatelessWidget {
       progressIndicatorBuilder: (context, url, downloadProgress) =>
           CupertinoActivityIndicator(),
       fit: boxFit ?? BoxFit.fill,
-      errorWidget: (context, url, error) => Icon(
-        Icons.image_outlined,
-        size: 17.0,
-        color: Colors.grey,
-      ),
+      width: size,
+      height: size,
+      errorWidget: (context, url, error) => Icon(Icons.image_outlined),
     );
   }
 }

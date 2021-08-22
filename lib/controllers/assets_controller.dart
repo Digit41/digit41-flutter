@@ -11,8 +11,12 @@ import 'package:web3dart/web3dart.dart';
 class AssetsController extends GetxController {
   static AssetsController get assetsController => Get.put(AssetsController());
 
-  RxList<AddressModel> coinsAddress = <AddressModel>[].obs;
+  Rx<bool> isLoading = true.obs;
 
+  RxList<AssetModel> assets = <AssetModel>[].obs;
+  RxList<AssetModel> nfts = <AssetModel>[].obs;
+
+  RxList<AddressModel> _coinsAddress = <AddressModel>[].obs;
   AppGet _wallet = AppGet.appGet;
 
   @override
@@ -20,14 +24,17 @@ class AssetsController extends GetxController {
     super.onInit();
     if (_wallet.walletModel!.addresses == null)
       _getAddressesAndAssets();
-    else
+    else {
       for (AddressModel am in _wallet.walletModel!.addresses!)
-        coinsAddress.add(am);
+        _coinsAddress.add(am);
+      _prepareData();
+    }
   }
 
   void _getAddressesAndAssets() async {
     AddressModel tempAddress;
     List<AssetModel> tempAssets = [];
+    AssetModel tempAsset;
     List<BalanceModel> tempBalanceList;
 
     /// now, just for Ethereum
@@ -50,8 +57,17 @@ class AssetsController extends GetxController {
             name: 'Ethereum',
             balance: b.balance,
             icon: 'https://s4.uupload.ir/files/ethereum-eth-icon_w0jo.png',
+            standard: 'ERC20',
           ),
         );
+      } else {
+        tempAsset = await getContractDetail(
+          BlockChains.ETHEREUM,
+          Networks.MAIN_NET,
+          b.contract!,
+        );
+        tempAsset.balance = b.balance;
+        tempAssets.add(tempAsset);
       }
 
     tempAddress = AddressModel(
@@ -60,9 +76,22 @@ class AssetsController extends GetxController {
       network: Networks.MAIN_NET,
       assets: tempAssets,
     );
-    coinsAddress.add(tempAddress);
+    _coinsAddress.add(tempAddress);
 
-    // _wallet.walletModel!.addresses = [tempAddress];
-    // _wallet.walletModel!.save();
+    _prepareData();
+
+    _wallet.walletModel!.addresses = _coinsAddress;
+    _wallet.walletModel!.save();
+  }
+
+  void _prepareData(){
+
+    for(AssetModel a in _coinsAddress[0].assets!)
+      if(a.standard == 'ERC20')
+        assets.add(a);
+      else
+        nfts.add(a);
+
+    isLoading.value = false;
   }
 }

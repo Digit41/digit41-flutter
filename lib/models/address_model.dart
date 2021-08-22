@@ -35,10 +35,10 @@ class AddressAdapter extends TypeAdapter<AddressModel> {
     };
 
     return AddressModel(
-      address: fields[1],
-      blockChain: fields[2],
-      network: fields[3],
-      assets: fields[4],
+      address: fields[0],
+      blockChain: fields[1],
+      network: fields[2],
+      assets: fields[3],
     );
   }
 

@@ -113,4 +113,5 @@ class Strings {
   static const YOUR_REC_PH = 'Your recovery phrase';
   static const DESC_YOUR_REC_PH = 'descYourRecPh';
   static const Q_IMPORT_WALL = 'qImportWallet';
+  static const EMPTY_DATA = 'emptyData';
 }

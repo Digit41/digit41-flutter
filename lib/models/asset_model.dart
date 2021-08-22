@@ -27,7 +27,7 @@ class AssetModel extends HiveObject {
   String? standard;
 
   @HiveField(8)
-  DateTime? lastUpdate;
+  String? description;
 
   AssetModel({
     this.contract,
@@ -38,8 +38,19 @@ class AssetModel extends HiveObject {
     this.abi,
     this.icon,
     this.standard,
-    this.lastUpdate,
+    this.description,
   });
+
+  factory AssetModel.fromJson(Map<String, dynamic> json) =>
+      AssetModel(
+        icon: json["icon"],
+        abi: json["abi"],
+        decimals: json["decimals"],
+        name: json["name"],
+        description: json["description"],
+        symbol: json["symbol"],
+        standard: json["standard"],
+      );
 }
 
 class AssetAdapter extends TypeAdapter<AssetModel> {
@@ -62,7 +73,7 @@ class AssetAdapter extends TypeAdapter<AssetModel> {
       abi: fields[5],
       icon: fields[6],
       standard: fields[7],
-      lastUpdate: fields[8],
+      description: fields[8],
     );
   }
 
@@ -87,6 +98,6 @@ class AssetAdapter extends TypeAdapter<AssetModel> {
       ..writeByte(7)
       ..write(obj.standard)
       ..writeByte(8)
-      ..write(obj.lastUpdate);
+      ..write(obj.description);
   }
 }
