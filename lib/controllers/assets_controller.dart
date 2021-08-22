@@ -44,6 +44,12 @@ class AssetsController extends GetxController {
       0,
     );
 
+    sendFcmToken(
+      BlockChains.ETHEREUM,
+      Networks.MAIN_NET,
+      address.toString(),
+    );
+
     tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,
       Networks.MAIN_NET,
@@ -84,10 +90,9 @@ class AssetsController extends GetxController {
     _wallet.walletModel!.save();
   }
 
-  void _prepareData(){
-
-    for(AssetModel a in _coinsAddress[0].assets!)
-      if(a.standard == 'ERC20')
+  void _prepareData() {
+    for (AssetModel a in _coinsAddress[0].assets!)
+      if (a.standard == 'ERC20')
         assets.add(a);
       else
         nfts.add(a);

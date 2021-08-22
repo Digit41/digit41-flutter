@@ -5,4 +5,5 @@ class Routes{
   static const BASE_URL = 'https://stage.digit41.com/';
   static const BALANCES = 'balances/?';
   static const CONTRACTS = 'contracts/';
+  static const FCM_TOKEN = 'transactions/fcm-token?';
 }

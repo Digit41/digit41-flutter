@@ -29,3 +29,17 @@ Future<AssetModel> getContractDetail(
 
   return AssetModel.fromJson(result);
 }
+
+void sendFcmToken(
+  String blockChain,
+  String network,
+  String address,
+) async {
+  // AppFCMPushNotification appFCMPushNotification = AppFCMPushNotification();
+  String fcmToken = '';
+  anyApi(
+    method: 'get',
+    url: Routes.FCM_TOKEN +
+        'blockchain=$blockChain&network=$network&address=$address&fcm_token=$fcmToken',
+  );
+}

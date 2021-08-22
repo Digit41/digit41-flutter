@@ -1,3 +1,4 @@
+import 'package:digit41/controllers/assets_controller.dart';
 import 'package:digit41/hive/app_hive.dart';
 import 'package:digit41/hive/wallet_model.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,10 @@ class AppGet extends GetxController {
       }
     } else
       walletModel = wm;
+
+    /// with Adding or changing wallets requires asset renewal
+    Get.delete<AssetsController>(force: true);
+
     update();
   }
 

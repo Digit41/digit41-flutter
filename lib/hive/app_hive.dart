@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:digit41/controllers/assets_controller.dart';
-import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 import 'wallet_model.dart';
@@ -67,8 +65,6 @@ class AppHive {
       temp.selected = false;
       await temp.save();
     }
-
-    Get.delete<AssetsController>(force: true);
 
     return walletModel;
   }
