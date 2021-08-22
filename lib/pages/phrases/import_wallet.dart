@@ -178,6 +178,8 @@ void importWallet() async {
                 onPressed: () {},
                 child: Text(Strings.Q_IMPORT_WALL.tr),
               ),
+              if(GetPlatform.isWeb)
+                const SizedBox(height: 8.0),
               AppButton(
                 title: Strings.IMPORT.tr,
                 onTap: import,

@@ -1,12 +1,16 @@
-import 'package:digit41/app_web3/addresses.dart';
-import 'package:digit41/app_web3/supported_coins.dart';
-import 'package:web3dart/credentials.dart';
+import 'package:digit41/rest_full_apis/base_api.dart';
+import 'package:digit41/rest_full_apis/routes.dart';
 
-Future getBalances(String mnemonic) async {
-  EthereumAddress address = await getEthereumPublicAddress(
-    Coins.Ehtereum,
-    mnemonic,
-    0,
+Future getBalances(
+  String blockChain,
+  String network,
+  String address,
+) async {
+  var result = await anyApi(
+    method: 'get',
+    url: Routes.BALANCES +
+        'blockchain=$blockChain&network=$network&address=$address&force_update=true',
   );
-
+  print(result);
+  return true;
 }

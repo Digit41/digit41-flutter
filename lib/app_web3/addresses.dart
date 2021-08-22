@@ -3,14 +3,14 @@ import 'package:bip39/bip39.dart' as bip39;
 import 'package:hex/hex.dart';
 import 'package:web3dart/web3dart.dart';
 
-import 'supported_coins.dart';
+import 'utils.dart';
 
-Future<EthereumAddress> getEthereumPublicAddress(
+Future<EthereumAddress> getCoinPublicAddress(
     Coins coin,
     String mnemonic,
     int index,
     ) async {
-  if (coin != Coins.Ehtereum) if (coin != Coins.EthereumClassic) {
+  if (coin != Coins.Ethereum) if (coin != Coins.EthereumClassic) {
     if (coin != Coins.VeChain)
       throw ArgumentError("only ethereum, ethereumClassic and Vechain");
   }
@@ -36,7 +36,7 @@ String getCoinPrivateKeyThatWIFNotSupported(
   final root = bip32.BIP32.fromSeed(seed);
 
   bip32.BIP32 node;
-  if (Coins.Ehtereum == coin)
+  if (Coins.Ethereum == coin)
     node = root.derivePath("m/44'/60'/0'/0/$index");
   else if (Coins.Tron == coin)
     node = root.derivePath("m/44'/195'/0'/0/$index");

@@ -1,6 +1,6 @@
 
 enum Coins {
-  Ehtereum,
+  Ethereum,
   Bitcoin,
   BitcoinSegwit,
   Litecoin,
@@ -11,4 +11,12 @@ enum Coins {
   EthereumClassic,
   VeChain,
   Ripple,
+}
+
+class Networks{
+  static const MAIN_NET = 'mainnet';
+}
+
+class BlockChains{
+  static const ETHEREUM = 'ethereum';
 }
