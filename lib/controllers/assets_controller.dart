@@ -56,23 +56,29 @@ class AssetsController extends GetxController {
       address.toString(),
     );
 
+    /// add ethereum as default for empty wallet
+    tempAssets.add(
+      AssetModel(
+        name: 'Ethereum',
+        symbol: 'ETH',
+        balance: 0.0,
+        balanceInPrice: 0.0,
+        icon: 'https://s4.uupload.ir/files/ethereum-eth-icon_w0jo.png',
+        standard: 'ERC20',
+      ),
+    );
+
     for (BalanceModel b in tempBalanceList)
-      if (b.contract == null) {
-        tempAssets.add(
-          AssetModel(
-            name: 'Ethereum',
-            balance: b.balance,
-            icon: 'https://s4.uupload.ir/files/ethereum-eth-icon_w0jo.png',
-            standard: 'ERC20',
-          ),
-        );
-      } else {
+      if (b.contract == null)
+        tempAssets[0].balance = b.balance;
+      else {
         tempAsset = await getContractDetail(
           BlockChains.ETHEREUM,
           Networks.MAIN_NET,
           b.contract!,
         );
         tempAsset.balance = b.balance;
+        tempAsset.balanceInPrice = 0.0;
         tempAssets.add(tempAsset);
       }
 
@@ -86,8 +92,8 @@ class AssetsController extends GetxController {
 
     _prepareData();
 
-    _wallet.walletModel!.addresses = _coinsAddress;
-    _wallet.walletModel!.save();
+    // _wallet.walletModel!.addresses = _coinsAddress;
+    // _wallet.walletModel!.save();
   }
 
   void _prepareData() {

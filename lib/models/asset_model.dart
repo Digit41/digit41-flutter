@@ -29,6 +29,9 @@ class AssetModel extends HiveObject {
   @HiveField(8)
   String? description;
 
+  @HiveField(9)
+  double? balanceInPrice;
+
   AssetModel({
     this.contract,
     this.name,
@@ -39,6 +42,7 @@ class AssetModel extends HiveObject {
     this.icon,
     this.standard,
     this.description,
+    this.balanceInPrice,
   });
 
   factory AssetModel.fromJson(Map<String, dynamic> json) =>
@@ -74,13 +78,14 @@ class AssetAdapter extends TypeAdapter<AssetModel> {
       icon: fields[6],
       standard: fields[7],
       description: fields[8],
+      balanceInPrice: fields[9],
     );
   }
 
   @override
   void write(BinaryWriter writer, AssetModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.contract)
       ..writeByte(1)
@@ -98,6 +103,8 @@ class AssetAdapter extends TypeAdapter<AssetModel> {
       ..writeByte(7)
       ..write(obj.standard)
       ..writeByte(8)
-      ..write(obj.description);
+      ..write(obj.description)
+      ..writeByte(9)
+      ..write(obj.balanceInPrice);
   }
 }
