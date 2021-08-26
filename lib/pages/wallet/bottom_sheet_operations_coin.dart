@@ -154,9 +154,9 @@ void sendBottomSheet(BuildContext context) {
                                   icon: _buttonIcon(Images.COPY),
                                 ),
                               ),
-                              if (GetPlatform.isAndroid || GetPlatform.isIOS)
+                              if (!GetPlatform.isWeb)
                                 const SizedBox(width: 32.0),
-                              if (GetPlatform.isAndroid || GetPlatform.isIOS)
+                              if (!GetPlatform.isWeb)
                                 Expanded(
                                   child: AppButton1(
                                     title: Strings.SCAN_QR.tr,

@@ -14,7 +14,7 @@ import 'phrases/import_wallet.dart';
 
 class Welcome extends StatelessWidget {
   Welcome() {
-    if (GetPlatform.isAndroid || GetPlatform.isIOS)
+    if (!GetPlatform.isWeb)
       Timer(Duration(microseconds: 300), () async {
         showDialogPermission();
       });

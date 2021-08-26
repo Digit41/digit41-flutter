@@ -12,8 +12,6 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'hive/wallet_model.dart';
 import 'pages/splash.dart';
-import 'utils/app_local_notification.dart';
-import 'utils/app_push_notification.dart';
 import 'utils/app_shared_preferences.dart';
 import 'utils/app_theme.dart';
 import 'utils/app_translations.dart';
@@ -35,15 +33,15 @@ void main() async {
 }
 
 void _hiveInit() async {
-  if (GetPlatform.isAndroid || GetPlatform.isIOS) {
-    Directory directory = await getApplicationDocumentsDirectory();
+  if (GetPlatform.isWeb) {
     Hive
-      ..init(directory.path)
       ..registerAdapter(WalletAdapter())
       ..registerAdapter(AddressAdapter())
       ..registerAdapter(AssetAdapter());
   } else {
+    Directory directory = await getApplicationDocumentsDirectory();
     Hive
+      ..init(directory.path)
       ..registerAdapter(WalletAdapter())
       ..registerAdapter(AddressAdapter())
       ..registerAdapter(AssetAdapter());

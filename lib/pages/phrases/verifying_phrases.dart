@@ -168,7 +168,10 @@ class _VerifyingPhrasesState extends State<VerifyingPhrases> {
     /**
         using hive for save any wallet into storage
      */
-    if (await storagePermission()) {
+    bool isAllow = true;
+    if(!GetPlatform.isWeb)
+      isAllow = await storagePermission();
+    if (isAllow) {
       AppHive ah = AppHive();
       WalletModel walletModel = await ah.configureWallet(
         widget.mnemonicList!.join(' '),

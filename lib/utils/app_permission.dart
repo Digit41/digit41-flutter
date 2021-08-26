@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 Future<bool> storagePermission() async {
-  if (GetPlatform.isIOS || GetPlatform.isAndroid) {
+  if (!GetPlatform.isWeb) {
     await Permission.storage.request();
     return await Permission.storage.isGranted;
   } else

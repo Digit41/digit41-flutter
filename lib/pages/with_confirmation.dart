@@ -72,7 +72,7 @@ class _WithConfirmationState extends State<WithConfirmation> {
   void initState() {
     super.initState();
     Timer(Duration(milliseconds: 100), () async {
-      if (!widget.forDisabling && (GetPlatform.isAndroid || GetPlatform.isIOS))
+      if (!widget.forDisabling && !GetPlatform.isWeb)
         authenticate();
     });
   }

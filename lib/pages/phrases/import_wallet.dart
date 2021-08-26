@@ -74,7 +74,12 @@ void importWallet() async {
   box.close();
 
   void import() async {
-    if (formKey.currentState!.validate() && await storagePermission()) {
+
+    bool isAllow = true;
+    if(!GetPlatform.isWeb)
+      isAllow = await storagePermission();
+
+    if (formKey.currentState!.validate() && isAllow) {
       WalletModel walletModel = await appHive.configureWallet(
         phrases.controller.text,
         name: name.controller.text,
