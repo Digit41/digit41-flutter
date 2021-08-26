@@ -17,14 +17,12 @@ Future<List<BalanceModel>> getBalances(
   return balanceModelListFromJson(result);
 }
 
-Future<AssetModel> getContractDetail(
-  String blockChain,
-  String network,
-  String contract,
-) async {
+Future<AssetModel> getContractDetail(String blockChain, String network,
+    {String? contract}) async {
   var result = await anyApi(
     method: 'get',
-    url: Routes.CONTRACTS + '/$blockChain/$network/$contract',
+    url: Routes.CONTRACTS +
+        '/$blockChain/$network${contract == null ? '' : '/' + contract}',
   );
 
   return AssetModel.fromJson(result);
