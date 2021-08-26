@@ -65,7 +65,7 @@ class _WalletState extends State<Wallet> {
                   '\$ 9,555',
                   style: TextStyle(fontSize: 52.0, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 32.0),
+                const SizedBox(height: 30.0),
                 TabBar(
                   onTap: (index){
                     setState(() {
