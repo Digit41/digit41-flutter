@@ -32,6 +32,18 @@ class AssetModel extends HiveObject {
   @HiveField(9)
   double? balanceInPrice;
 
+  @HiveField(10)
+  double? price;
+
+  @HiveField(11)
+  double? percentChange24h;
+
+  @HiveField(12)
+  double? percentChange7d;
+
+  @HiveField(13)
+  double? marketCap;
+
   AssetModel({
     this.contract,
     this.name,
@@ -43,6 +55,10 @@ class AssetModel extends HiveObject {
     this.standard,
     this.description,
     this.balanceInPrice,
+    this.price,
+    this.percentChange24h,
+    this.percentChange7d,
+    this.marketCap,
   });
 
   factory AssetModel.fromJson(Map<String, dynamic> json) =>
@@ -54,6 +70,15 @@ class AssetModel extends HiveObject {
         description: json["description"],
         symbol: json["symbol"],
         standard: json["standard"],
+      );
+
+  factory AssetModel.fromJsonForPrice(Map<String, dynamic> json) =>
+      AssetModel(
+        symbol: json['symbol'],
+        price: json['price'],
+        percentChange24h: json['percent_change_24h'],
+        percentChange7d: json['percent_change_7d'],
+        marketCap: json['market_cap'],
       );
 }
 
@@ -79,13 +104,17 @@ class AssetAdapter extends TypeAdapter<AssetModel> {
       standard: fields[7],
       description: fields[8],
       balanceInPrice: fields[9],
+      price: fields[10],
+      percentChange24h: fields[11],
+      percentChange7d: fields[12],
+      marketCap: fields[13],
     );
   }
 
   @override
   void write(BinaryWriter writer, AssetModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.contract)
       ..writeByte(1)
@@ -105,6 +134,14 @@ class AssetAdapter extends TypeAdapter<AssetModel> {
       ..writeByte(8)
       ..write(obj.description)
       ..writeByte(9)
-      ..write(obj.balanceInPrice);
+      ..write(obj.balanceInPrice)
+      ..writeByte(10)
+      ..write(obj.price)
+      ..writeByte(11)
+      ..write(obj.percentChange24h)
+      ..writeByte(12)
+      ..write(obj.percentChange7d)
+      ..writeByte(13)
+      ..write(obj.marketCap);
   }
 }

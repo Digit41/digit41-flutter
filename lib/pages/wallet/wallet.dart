@@ -1,3 +1,4 @@
+import 'package:digit41/controllers/assets_controller.dart';
 import 'package:digit41/pages/wallet/assets.dart';
 import 'package:digit41/pages/wallet/nfts.dart';
 import 'package:digit41/utils/app_state_management.dart';
@@ -61,13 +62,24 @@ class _WalletState extends State<Wallet> {
                   style: TextStyle(color: Colors.grey, fontSize: 20.0),
                 ),
                 const SizedBox(height: 32.0),
-                Text(
-                  '\$ 9,555',
-                  style: TextStyle(fontSize: 52.0, fontWeight: FontWeight.bold),
+                GetBuilder(
+                  init: AssetsController(),
+                  builder: (AssetsController controller) => controller.isLoading
+                      ? Padding(
+                        padding: const EdgeInsets.only(top: 32.0),
+                        child: CupertinoActivityIndicator(),
+                      )
+                      : Text(
+                          '\$ ${controller.totalAssets[0].toStringAsFixed(3)}',
+                          style: TextStyle(
+                            fontSize: 52.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                 ),
                 const SizedBox(height: 30.0),
                 TabBar(
-                  onTap: (index){
+                  onTap: (index) {
                     setState(() {
                       selectedTab = index;
                     });

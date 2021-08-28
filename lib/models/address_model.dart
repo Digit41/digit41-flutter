@@ -14,12 +14,16 @@ class AddressModel extends HiveObject {
   @HiveField(3)
   List? assets;
 
+  @HiveField(4)
+  double? totalAssets;
+
 
   AddressModel({
     this.address,
     this.blockChain,
     this.network,
     this.assets,
+    this.totalAssets,
   });
 }
 
@@ -39,13 +43,14 @@ class AddressAdapter extends TypeAdapter<AddressModel> {
       blockChain: fields[1],
       network: fields[2],
       assets: fields[3],
+      totalAssets: fields[4],
     );
   }
 
   @override
   void write(BinaryWriter writer, AddressModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.address)
       ..writeByte(1)
@@ -53,6 +58,8 @@ class AddressAdapter extends TypeAdapter<AddressModel> {
       ..writeByte(2)
       ..write(obj.network)
       ..writeByte(3)
-      ..write(obj.assets);
+      ..write(obj.assets)
+      ..writeByte(4)
+      ..write(obj.totalAssets);
   }
 }

@@ -8,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Assets extends StatelessWidget {
+  bool positive = true;
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
       init: AssetsController(),
       builder: (AssetsController controller) {
-        if (controller.isLoading.value)
+        if (controller.isLoading)
           return Padding(
             padding: const EdgeInsets.only(top: 64.0),
             child: CupertinoActivityIndicator(),
@@ -24,49 +26,55 @@ class Assets extends StatelessWidget {
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemBuilder: (ctx, index) => Padding(
-              padding: EdgeInsets.only(
-                bottom: index == controller.assets.length - 1 ? 80.0 : 0.0,
-                top: 12.0,
-              ),
-              child: ListTile(
-                onTap: () {
-                  navigateToPage(CoinDetails());
-                },
-                leading: CacheImage(controller.assets[index].icon ?? ''),
-                title: Text(controller.assets[index].name!),
-                subtitle: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      '\$ 3,221',
-                      style: TextStyle(color: Get.theme.primaryColor),
-                    ),
-                    Icon(
-                      Icons.arrow_drop_up,
-                      color: Get.theme.primaryColor,
-                      size: 18.0,
-                    ),
-                  ],
+            itemBuilder: (ctx, index) {
+              positive = controller.assets[index].percentChange24h! > 0;
+              return Padding(
+                padding: EdgeInsets.only(
+                  bottom: index == controller.assets.length - 1 ? 80.0 : 0.0,
+                  top: 12.0,
                 ),
-                trailing: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      '${controller.assets[index].balance} ${controller.assets[index].symbol}',
-                    ),
-                    Text(
-                      '\$ ${controller.assets[index].balanceInPrice}',
-                      style: TextStyle(
-                        color: darkModeEnabled() ? Colors.grey : AppTheme.gray,
+                child: ListTile(
+                  onTap: () {
+                    navigateToPage(CoinDetails());
+                  },
+                  leading: CacheImage(controller.assets[index].icon ?? ''),
+                  title: Text(controller.assets[index].name!),
+                  subtitle: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '\$ ${controller.assets[index].price!.toStringAsFixed(4)}',
+                        style: TextStyle(
+                          color: positive ? Get.theme.primaryColor : Colors.red,
+                        ),
                       ),
-                    ),
-                  ],
+                      Icon(
+                        positive ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                        color: positive ? Get.theme.primaryColor : Colors.red,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '${controller.assets[index].balance} ${controller.assets[index].symbol}',
+                      ),
+                      Text(
+                        '\$ ${controller.assets[index].balanceInPrice!.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          color:
+                              darkModeEnabled() ? Colors.grey : AppTheme.gray,
+                        ),
+                      ),
+                    ],
+                  ),
+                  contentPadding: EdgeInsets.zero,
                 ),
-                contentPadding: EdgeInsets.zero,
-              ),
-            ),
+              );
+            },
           );
       },
     );

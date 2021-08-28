@@ -28,6 +28,24 @@ Future<AssetModel> getContractDetail(String blockChain, String network,
   return AssetModel.fromJson(result);
 }
 
+Future<List<AssetModel>> getPrices(
+  String blockChain,
+  String network,
+  List<String> symbols,
+) async {
+  var result = await anyApi(
+    method: 'post',
+    url: Routes.PRICES,
+    data: {
+      'blockchain': blockChain,
+      'network': network,
+      'symbol': symbols,
+    },
+  );
+
+  return result.map<AssetModel>((x) => AssetModel.fromJsonForPrice(x)).toList();
+}
+
 void sendFcmToken(
   String blockChain,
   String network,

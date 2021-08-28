@@ -13,7 +13,7 @@ class NFTs extends StatelessWidget {
     return GetBuilder(
       init: AssetsController(),
       builder: (AssetsController controller) {
-        if (controller.isLoading.value)
+        if (controller.isLoading)
           return Padding(
             padding: const EdgeInsets.only(top: 64.0),
             child: CupertinoActivityIndicator(),

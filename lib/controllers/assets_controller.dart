@@ -11,14 +11,16 @@ import 'package:web3dart/web3dart.dart';
 class AssetsController extends GetxController {
   static AssetsController get assetsController => Get.put(AssetsController());
 
-  Rx<bool> isLoading = true.obs;
+  bool isLoading = true;
 
-  RxList<AssetModel> assets = <AssetModel>[].obs;
-  RxList<AssetModel> nfts = <AssetModel>[].obs;
+  List<AssetModel> assets = <AssetModel>[];
+  List<AssetModel> nfts = <AssetModel>[];
+  List<double> totalAssets = [0.0];
 
   List<AddressModel> _coinsAddress = <AddressModel>[];
   AppGet _wallet = AppGet.appGet;
   List<BalanceModel>? _tempBalanceList;
+  List<AssetModel> _tempAssets = [];
 
   @override
   void onInit() {
@@ -26,8 +28,10 @@ class AssetsController extends GetxController {
     if (_wallet.walletModel!.addresses == null)
       _getAddressesAndAssets();
     else {
-      for (AddressModel am in _wallet.walletModel!.addresses!)
+      for (AddressModel am in _wallet.walletModel!.addresses!) {
         _coinsAddress.add(am);
+        totalAssets[0] = am.totalAssets!;
+      }
       _prepareData();
       _refresh();
     }
@@ -35,7 +39,6 @@ class AssetsController extends GetxController {
 
   void _getAddressesAndAssets() async {
     AddressModel tempAddress;
-    List<AssetModel> tempAssets = [];
     AssetModel tempAsset;
 
     /// now, just for Ethereum
@@ -64,11 +67,11 @@ class AssetsController extends GetxController {
     );
     tempAsset.balanceInPrice = 0.0;
     tempAsset.balance = 0.0;
-    tempAssets.add(tempAsset);
+    _tempAssets.add(tempAsset);
 
     for (BalanceModel b in _tempBalanceList!)
       if (b.contract == null)
-        tempAssets[0].balance = b.balance;
+        _tempAssets[0].balance = b.balance;
       else {
         tempAsset = await getContractDetail(
           BlockChains.ETHEREUM,
@@ -77,26 +80,78 @@ class AssetsController extends GetxController {
         );
         tempAsset.contract = b.contract;
         tempAsset.balance = b.balance;
-        tempAsset.balanceInPrice = 0.0;
-        tempAssets.add(tempAsset);
+        _tempAssets.add(tempAsset);
       }
 
     tempAddress = AddressModel(
       address: address.toString(),
       blockChain: BlockChains.ETHEREUM,
       network: Networks.MAIN_NET,
-      assets: tempAssets,
+      assets: _tempAssets,
     );
     _coinsAddress.add(tempAddress);
 
-    _prepareData();
+    _refreshPrices();
 
     /// with below code, caching enable
-    // _wallet.walletModel!.addresses = _coinsAddress;
-    // _wallet.walletModel!.save();
+    _wallet.walletModel!.addresses = _coinsAddress;
+    _wallet.walletModel!.save();
+  }
+
+  void _refresh() async {
+    await _refreshBalances();
+    await _refreshPrices();
+
+    _wallet.walletModel!.addresses = _coinsAddress;
+    _wallet.walletModel!.save();
+  }
+
+  Future<void> _refreshBalances() async {
+    AddressModel addreModel = _coinsAddress[0];
+
+    _tempBalanceList = await getBalances(
+      BlockChains.ETHEREUM,
+      Networks.MAIN_NET,
+      addreModel.address.toString(),
+    );
+
+    for (BalanceModel b in _tempBalanceList!)
+      for (AssetModel a in addreModel.assets!)
+        if (b.contract == a.contract) a.balance = b.balance;
+
+    _prepareData();
+  }
+
+  Future<void> _refreshPrices() async {
+    AddressModel addreModel = _coinsAddress[0];
+    addreModel.totalAssets = 0.0;
+
+    List<String> sym = [];
+    for (AssetModel a in addreModel.assets!) {
+      sym.add(a.symbol!);
+    }
+    _tempAssets = await getPrices(BlockChains.ETHEREUM, Networks.MAIN_NET, sym);
+
+    for (AssetModel a in addreModel.assets!)
+      for (AssetModel aNew in _tempAssets)
+        if (a.symbol == aNew.symbol) {
+          a.price = aNew.price;
+          a.percentChange24h = aNew.percentChange24h;
+          a.percentChange7d = aNew.percentChange7d;
+          a.marketCap = aNew.marketCap;
+          a.balanceInPrice = (a.price ?? 0) * a.balance!;
+          addreModel.totalAssets = addreModel.totalAssets! + a.balanceInPrice!;
+        }
+
+    totalAssets[0] = addreModel.totalAssets!;
+
+    _prepareData();
   }
 
   void _prepareData() {
+    assets.clear();
+    nfts.clear();
+
     /// now, only on ethereum mainnet
     for (AssetModel a in _coinsAddress[0].assets!)
       if (a.standard == 'ERC721')
@@ -104,41 +159,8 @@ class AssetsController extends GetxController {
       else
         assets.add(a);
 
-    isLoading.value = false;
-  }
+    isLoading = false;
 
-  void _refresh() async {
-    String? address = _coinsAddress[0].address;
-
-    _tempBalanceList = await getBalances(
-      BlockChains.ETHEREUM,
-      Networks.MAIN_NET,
-      address.toString(),
-    );
-
-    bool check = false;
-    for (BalanceModel b in _tempBalanceList!) {
-      check = false;
-      for (AssetModel a in assets)
-        if (b.contract == a.contract) {
-          a.balance = b.balance;
-          update();
-          check = true;
-          break;
-        }
-
-      if (!check)
-        for (AssetModel a in nfts)
-          if (b.contract == a.contract) {
-            a.balance = b.balance;
-            update();
-            break;
-          }
-    }
-    _coinsAddress[0].assets!.clear();
-    _coinsAddress[0].assets!.addAll(assets);
-    _coinsAddress[0].assets!.addAll(nfts);
-    _wallet.walletModel!.addresses = _coinsAddress;
-    _wallet.walletModel!.save();
+    update();
   }
 }
