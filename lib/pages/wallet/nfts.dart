@@ -8,63 +8,64 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NFTs extends StatelessWidget {
-  AssetsController _assetsController = AssetsController.assetsController;
-
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      if (_assetsController.isLoading.value)
-        return Padding(
-          padding: const EdgeInsets.only(top: 64.0),
-          child: CupertinoActivityIndicator(),
-        );
-      else
-        return _assetsController.nfts.length == 0
-            ? AppEmptyData()
-            : ListView.builder(
-                itemCount: _assetsController.nfts.length,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (ctx, int index) => Padding(
-                  padding: EdgeInsets.only(
-                    bottom:
-                        index == _assetsController.nfts.length - 1 ? 80.0 : 0.0,
-                    top: 12.0,
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      navigateToPage(NFTDetail());
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CacheImage(
-                          _assetsController.nfts[index].icon ?? '',
-                          size: 70.0,
-                        ),
-                        const SizedBox(width: 12.0),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                _assetsController.nfts[index].name!,
-                                style: TextStyle(fontWeight: FontWeight.bold),
+    return GetBuilder(
+        init: AssetsController(),
+        builder: (AssetsController controller) {
+          if (controller.isLoading.value)
+            return Padding(
+              padding: const EdgeInsets.only(top: 64.0),
+              child: CupertinoActivityIndicator(),
+            );
+          else
+            return controller.nfts.length == 0
+                ? AppEmptyData()
+                : ListView.builder(
+                    itemCount: controller.nfts.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (ctx, int index) => Padding(
+                      padding: EdgeInsets.only(
+                        bottom:
+                            index == controller.nfts.length - 1 ? 80.0 : 0.0,
+                        top: 12.0,
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          navigateToPage(NFTDetail());
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CacheImage(
+                              controller.nfts[index].icon ?? '',
+                              size: 70.0,
+                            ),
+                            const SizedBox(width: 12.0),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    controller.nfts[index].name!,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 8.0),
+                                  Text(
+                                    controller.nfts[index].description ?? '',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 8.0),
-                              Text(
-                                _assetsController.nfts[index].description ?? '',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Icon(Icons.arrow_forward_ios),
+                          ],
                         ),
-                        Icon(Icons.arrow_forward_ios),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              );
-    });
+                  );
+        });
   }
 }

@@ -8,35 +8,33 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Assets extends StatelessWidget {
-  AssetsController _assetsController = AssetsController.assetsController;
-
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        if (_assetsController.isLoading.value)
+    return GetBuilder(
+      init: AssetsController(),
+      builder: (AssetsController controller) {
+        if (controller.isLoading.value)
           return Padding(
             padding: const EdgeInsets.only(top: 64.0),
             child: CupertinoActivityIndicator(),
           );
         else
           return ListView.builder(
-            itemCount: _assetsController.assets.length,
+            itemCount: controller.assets.length,
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (ctx, index) => Padding(
               padding: EdgeInsets.only(
-                bottom:
-                    index == _assetsController.assets.length - 1 ? 80.0 : 0.0,
+                bottom: index == controller.assets.length - 1 ? 80.0 : 0.0,
                 top: 12.0,
               ),
               child: ListTile(
                 onTap: () {
                   navigateToPage(CoinDetails());
                 },
-                leading: CacheImage(_assetsController.assets[index].icon ?? ''),
-                title: Text(_assetsController.assets[index].name!),
+                leading: CacheImage(controller.assets[index].icon ?? ''),
+                title: Text(controller.assets[index].name!),
                 subtitle: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -56,10 +54,10 @@ class Assets extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '${_assetsController.assets[index].balance} ${_assetsController.assets[index].symbol}',
+                      '${controller.assets[index].balance} ${controller.assets[index].symbol}',
                     ),
                     Text(
-                      '\$ ${_assetsController.assets[index].balanceInPrice}',
+                      '\$ ${controller.assets[index].balanceInPrice}',
                       style: TextStyle(
                         color: darkModeEnabled() ? Colors.grey : AppTheme.gray,
                       ),
