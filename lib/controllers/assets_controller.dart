@@ -16,8 +16,9 @@ class AssetsController extends GetxController {
   RxList<AssetModel> assets = <AssetModel>[].obs;
   RxList<AssetModel> nfts = <AssetModel>[].obs;
 
-  RxList<AddressModel> _coinsAddress = <AddressModel>[].obs;
+  List<AddressModel> _coinsAddress = <AddressModel>[];
   AppGet _wallet = AppGet.appGet;
+  List<BalanceModel>? _tempBalanceList;
 
   @override
   void onInit() {
@@ -28,6 +29,7 @@ class AssetsController extends GetxController {
       for (AddressModel am in _wallet.walletModel!.addresses!)
         _coinsAddress.add(am);
       _prepareData();
+      _refresh();
     }
   }
 
@@ -35,7 +37,6 @@ class AssetsController extends GetxController {
     AddressModel tempAddress;
     List<AssetModel> tempAssets = [];
     AssetModel tempAsset;
-    List<BalanceModel> tempBalanceList;
 
     /// now, just for Ethereum
     EthereumAddress address = await getCoinPublicAddress(
@@ -50,7 +51,7 @@ class AssetsController extends GetxController {
       address.toString(),
     );
 
-    tempBalanceList = await getBalances(
+    _tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,
       Networks.MAIN_NET,
       address.toString(),
@@ -65,7 +66,7 @@ class AssetsController extends GetxController {
     tempAsset.balance = 0.0;
     tempAssets.add(tempAsset);
 
-    for (BalanceModel b in tempBalanceList)
+    for (BalanceModel b in _tempBalanceList!)
       if (b.contract == null)
         tempAssets[0].balance = b.balance;
       else {
@@ -74,6 +75,7 @@ class AssetsController extends GetxController {
           Networks.MAIN_NET,
           contract: b.contract,
         );
+        tempAsset.contract = b.contract;
         tempAsset.balance = b.balance;
         tempAsset.balanceInPrice = 0.0;
         tempAssets.add(tempAsset);
@@ -89,11 +91,13 @@ class AssetsController extends GetxController {
 
     _prepareData();
 
-    _wallet.walletModel!.addresses = _coinsAddress;
-    _wallet.walletModel!.save();
+    /// with below code, caching enable
+    // _wallet.walletModel!.addresses = _coinsAddress;
+    // _wallet.walletModel!.save();
   }
 
   void _prepareData() {
+    /// now, only on ethereum mainnet
     for (AssetModel a in _coinsAddress[0].assets!)
       if (a.standard == 'ERC721')
         nfts.add(a);
@@ -101,5 +105,40 @@ class AssetsController extends GetxController {
         assets.add(a);
 
     isLoading.value = false;
+  }
+
+  void _refresh() async {
+    String? address = _coinsAddress[0].address;
+
+    _tempBalanceList = await getBalances(
+      BlockChains.ETHEREUM,
+      Networks.MAIN_NET,
+      address.toString(),
+    );
+
+    bool check = false;
+    for (BalanceModel b in _tempBalanceList!) {
+      check = false;
+      for (AssetModel a in assets)
+        if (b.contract == a.contract) {
+          a.balance = b.balance;
+          update();
+          check = true;
+          break;
+        }
+
+      if (!check)
+        for (AssetModel a in nfts)
+          if (b.contract == a.contract) {
+            a.balance = b.balance;
+            update();
+            break;
+          }
+    }
+    _coinsAddress[0].assets!.clear();
+    _coinsAddress[0].assets!.addAll(assets);
+    _coinsAddress[0].assets!.addAll(nfts);
+    _wallet.walletModel!.addresses = _coinsAddress;
+    _wallet.walletModel!.save();
   }
 }
