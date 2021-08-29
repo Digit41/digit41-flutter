@@ -43,7 +43,7 @@ class Assets extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        '\$ ${controller.assets[index].price!.toStringAsFixed((controller.assets[index].precision ?? 4))}',
+                        '\$ ${controller.assets[index].price!.toStringAsFixed(2)}',
                         style: TextStyle(
                           color: positive ? Get.theme.primaryColor : Colors.red,
                         ),
@@ -60,7 +60,7 @@ class Assets extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '${controller.assets[index].balance!} ${controller.assets[index].symbol}',
+                        '${controller.assets[index].balance!.toStringAsFixed((controller.assets[index].precision ?? 4))} ${controller.assets[index].symbol}',
                       ),
                       Text(
                         '\$ ${controller.assets[index].balanceInPrice!.toStringAsFixed(2)}',

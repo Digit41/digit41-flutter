@@ -35,18 +35,18 @@ class _WalletState extends State<Wallet> {
                       fit: BoxFit.cover,
                     )
                   : null,
-              gradient: darkModeEnabled()
-                  ? null
-                  : LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                        const Color(0xFFccefb5),
-                        const Color(0xFFaddcfd),
-                        const Color(0xFFdeb9f9),
-                        const Color(0xFFdeb9f9),
-                      ],
-                    ),
+              // gradient: darkModeEnabled()
+              //     ? null
+              //     : LinearGradient(
+              //         begin: Alignment.topRight,
+              //         end: Alignment.bottomLeft,
+              //         colors: [
+              //           const Color(0xFFccefb5),
+              //           const Color(0xFFaddcfd),
+              //           const Color(0xFFdeb9f9),
+              //           const Color(0xFFdeb9f9),
+              //         ],
+              //       ),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -91,9 +91,9 @@ class _WalletState extends State<Wallet> {
                   unselectedLabelColor: Colors.grey,
                   indicatorWeight: 3.0,
                   labelPadding: const EdgeInsets.only(bottom: 12.0),
-                  indicatorPadding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                  ),
+                  // indicatorPadding: const EdgeInsets.symmetric(
+                  //   horizontal: 16.0,
+                  // ),
                   tabs: [
                     Text(Strings.ASSETS.tr, style: TextStyle(fontSize: 20.0)),
                     Text(Strings.NFTS.tr, style: TextStyle(fontSize: 20.0)),
