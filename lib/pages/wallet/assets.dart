@@ -43,7 +43,7 @@ class Assets extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        '\$ ${controller.assets[index].price!.toStringAsFixed(4)}',
+                        '\$ ${controller.assets[index].price!.toStringAsFixed((controller.assets[index].precision ?? 4))}',
                         style: TextStyle(
                           color: positive ? Get.theme.primaryColor : Colors.red,
                         ),

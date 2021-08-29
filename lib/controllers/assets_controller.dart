@@ -21,6 +21,7 @@ class AssetsController extends GetxController {
   AppGet _wallet = AppGet.appGet;
   List<BalanceModel>? _tempBalanceList;
   List<AssetModel> _tempAssets = [];
+  AddressModel? _tempAddress;
 
   @override
   void onInit() {
@@ -38,7 +39,6 @@ class AssetsController extends GetxController {
   }
 
   void _getAddressesAndAssets() async {
-    AddressModel tempAddress;
     AssetModel tempAsset;
 
     /// now, just for Ethereum
@@ -83,13 +83,14 @@ class AssetsController extends GetxController {
         _tempAssets.add(tempAsset);
       }
 
-    tempAddress = AddressModel(
+    _tempAddress = AddressModel(
       address: address.toString(),
       blockChain: BlockChains.ETHEREUM,
       network: Networks.MAIN_NET,
       assets: _tempAssets,
+      totalAssets: 0.0,
     );
-    _coinsAddress.add(tempAddress);
+    _coinsAddress.add(_tempAddress!);
 
     _refreshPrices();
 
@@ -107,32 +108,32 @@ class AssetsController extends GetxController {
   }
 
   Future<void> _refreshBalances() async {
-    AddressModel addreModel = _coinsAddress[0];
+    _tempAddress = _coinsAddress[0];
 
     _tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,
       Networks.MAIN_NET,
-      addreModel.address.toString(),
+      _tempAddress!.address.toString(),
     );
 
     for (BalanceModel b in _tempBalanceList!)
-      for (AssetModel a in addreModel.assets!)
+      for (AssetModel a in _tempAddress!.assets!)
         if (b.contract == a.contract) a.balance = b.balance;
 
     _prepareData();
   }
 
   Future<void> _refreshPrices() async {
-    AddressModel addreModel = _coinsAddress[0];
-    addreModel.totalAssets = 0.0;
+    _tempAddress = _coinsAddress[0];
+    _tempAddress!.totalAssets = 0.0;
 
     List<String> sym = [];
-    for (AssetModel a in addreModel.assets!) {
+    for (AssetModel a in _tempAddress!.assets!) {
       sym.add(a.symbol!);
     }
     _tempAssets = await getPrices(BlockChains.ETHEREUM, Networks.MAIN_NET, sym);
 
-    for (AssetModel a in addreModel.assets!)
+    for (AssetModel a in _tempAddress!.assets!)
       for (AssetModel aNew in _tempAssets)
         if (a.symbol == aNew.symbol) {
           a.price = aNew.price;
@@ -140,10 +141,11 @@ class AssetsController extends GetxController {
           a.percentChange7d = aNew.percentChange7d;
           a.marketCap = aNew.marketCap;
           a.balanceInPrice = (a.price ?? 0) * a.balance!;
-          addreModel.totalAssets = addreModel.totalAssets! + a.balanceInPrice!;
+          _tempAddress!.totalAssets =
+              _tempAddress!.totalAssets! + a.balanceInPrice!;
         }
 
-    totalAssets[0] = addreModel.totalAssets!;
+    totalAssets[0] = _tempAddress!.totalAssets!;
 
     _prepareData();
   }
