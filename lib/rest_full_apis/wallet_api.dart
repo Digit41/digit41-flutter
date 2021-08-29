@@ -10,8 +10,13 @@ Future<List<BalanceModel>> getBalances(
 ) async {
   var result = await anyApi(
     method: 'get',
-    url: Routes.BALANCES +
-        'blockchain=$blockChain&network=$network&address=$address&force_update=true',
+    url: Routes.BALANCES,
+    queryParam: {
+      'blockchain': blockChain,
+      'network': network,
+      'address': address,
+      'force_update': 'true',
+    },
   );
 
   return balanceModelListFromJson(result);
@@ -55,7 +60,12 @@ void sendFcmToken(
   String fcmToken = '';
   anyApi(
     method: 'get',
-    url: Routes.FCM_TOKEN +
-        'blockchain=$blockChain&network=$network&address=$address&fcm_token=$fcmToken',
+    url: Routes.FCM_TOKEN,
+    queryParam: {
+      'blockchain': blockChain,
+      'network': network,
+      'address': address,
+      'fcm_token': fcmToken,
+    },
   );
 }

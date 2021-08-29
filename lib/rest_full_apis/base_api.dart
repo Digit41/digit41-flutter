@@ -8,7 +8,6 @@ Future anyApi({
   Map<String, dynamic>? data,
   Map<String, dynamic>? queryParam,
   Map<String, dynamic>? header,
-  bool isLogin = false,
 }) async {
   try {
     Dio? dio = DioSingleton.getInstance();
