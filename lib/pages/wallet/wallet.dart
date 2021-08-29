@@ -70,7 +70,7 @@ class _WalletState extends State<Wallet> {
                         child: CupertinoActivityIndicator(),
                       )
                       : Text(
-                          '\$ ${controller.totalAssets[0].toStringAsFixed(3)}',
+                          '\$ ${controller.totalAssets[0].toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 52.0,
                             fontWeight: FontWeight.bold,
@@ -102,10 +102,7 @@ class _WalletState extends State<Wallet> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: selectedTab == 0 ? Assets() : NFTs(),
-          ),
+          selectedTab == 0 ? Assets() : NFTs(),
         ],
       ),
     );

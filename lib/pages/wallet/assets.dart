@@ -27,11 +27,11 @@ class Assets extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (ctx, index) {
-              positive = controller.assets[index].percentChange24h! > 0;
+              positive = (controller.assets[index].percentChange24h ?? 1) > 0;
               return Padding(
                 padding: EdgeInsets.only(
                   bottom: index == controller.assets.length - 1 ? 80.0 : 0.0,
-                  top: 12.0,
+                  top: 2.0,
                 ),
                 child: ListTile(
                   onTap: () {
@@ -60,7 +60,7 @@ class Assets extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '${controller.assets[index].balance} ${controller.assets[index].symbol}',
+                        '${controller.assets[index].balance!} ${controller.assets[index].symbol}',
                       ),
                       Text(
                         '\$ ${controller.assets[index].balanceInPrice!.toStringAsFixed(2)}',
@@ -71,7 +71,6 @@ class Assets extends StatelessWidget {
                       ),
                     ],
                   ),
-                  contentPadding: EdgeInsets.zero,
                 ),
               );
             },
