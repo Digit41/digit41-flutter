@@ -24,5 +24,4 @@ class Images{
   static const SCAN = 'assets/images/scaner.png';
   static const FIRE = 'assets/images/fire.png';
   static const KEY = 'assets/images/key.png';
-  static const BACKGROUND = 'assets/images/digit41_space_pattern.jpg';
 }

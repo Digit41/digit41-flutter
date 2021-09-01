@@ -80,7 +80,7 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
               BoxShadow(color: Colors.black12, blurRadius: 5.0),
             ],
           ),
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(15.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

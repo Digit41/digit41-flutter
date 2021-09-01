@@ -20,15 +20,14 @@ class Phrases extends StatelessWidget {
     mnemonicList = mnemonic!.split(' ');
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 64.0),
             Text(Strings.LETS_CREATE_WALL.tr, style: TextStyle(fontSize: 26.0)),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(Strings.KEEP_SAFE.tr),
-            SizedBox(height: 64.0),
+            const SizedBox(height: 64.0),
             Expanded(
               child: Wrap(
                 alignment: WrapAlignment.center,

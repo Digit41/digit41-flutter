@@ -2,7 +2,6 @@ import 'package:digit41/controllers/assets_controller.dart';
 import 'package:digit41/pages/wallet/assets.dart';
 import 'package:digit41/pages/wallet/nfts.dart';
 import 'package:digit41/utils/app_state_management.dart';
-import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,26 +27,6 @@ class _WalletState extends State<Wallet> {
           Container(
             height: 290.0,
             width: double.infinity,
-            decoration: BoxDecoration(
-              image: darkModeEnabled()
-                  ? DecorationImage(
-                      image: AssetImage(Images.BACKGROUND),
-                      fit: BoxFit.cover,
-                    )
-                  : null,
-              // gradient: darkModeEnabled()
-              //     ? null
-              //     : LinearGradient(
-              //         begin: Alignment.topRight,
-              //         end: Alignment.bottomLeft,
-              //         colors: [
-              //           const Color(0xFFccefb5),
-              //           const Color(0xFFaddcfd),
-              //           const Color(0xFFdeb9f9),
-              //           const Color(0xFFdeb9f9),
-              //         ],
-              //       ),
-            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

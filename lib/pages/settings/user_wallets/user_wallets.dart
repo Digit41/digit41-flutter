@@ -74,7 +74,7 @@ void userWallets() {
                       });
                     },
                     icon: Icon(
-                      Icons.menu,
+                      Icons.edit,
                       color: wallets[i].selected ? Colors.white : null,
                     ),
                   ),
@@ -87,6 +87,7 @@ void userWallets() {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               ...items,
+              const SizedBox(height: 8.0),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

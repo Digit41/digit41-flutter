@@ -53,38 +53,13 @@ class _SplashState extends State<Splash> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     image: AssetImage(Images.BACKGROUND),
-        //     fit: BoxFit.fill,
-        //   ),
-        // ),
-        child: Stack(
-          children: [
-            GridView.count(
-              crossAxisCount: 2,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-                Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              ],
-            ),
-            Center(
-              child: Image.asset(
-                Images.SPLASH_LOGO,
-                height: 200.0,
-                width: 200.0,
-              ),
-            ),
-          ],
+        color: Colors.black,
+        child: Center(
+          child: Image.asset(
+            Images.SPLASH_LOGO,
+            height: 200.0,
+            width: 200.0,
+          ),
         ),
       ),
     );

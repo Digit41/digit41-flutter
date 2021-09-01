@@ -112,7 +112,7 @@ void importWallet() async {
   }
 
   Widget txt(Widget child) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 0.0),
         child: child,
       );
 
@@ -126,7 +126,7 @@ void importWallet() async {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 8.0),
+              const SizedBox(height: 12.0),
               Row(
                 children: [
                   Expanded(
@@ -199,8 +199,8 @@ void importWallet() async {
     backgroundColor: Get.theme.bottomSheetTheme.backgroundColor,
     shape: const RoundedRectangleBorder(
       borderRadius: const BorderRadius.only(
-        topLeft: const Radius.circular(24.0),
-        topRight: const Radius.circular(24.0),
+        topLeft: const Radius.circular(16.0),
+        topRight: const Radius.circular(16.0),
       ),
     ),
   );

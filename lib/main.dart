@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
 
                   return ResponsiveWrapper.builder(
                     widget,
-                    maxWidth: 740.0,
+                    maxWidth: 700.0,
                     minWidth: 200.0,
                     defaultScale: true,
                     background: Container(
@@ -103,8 +103,8 @@ class MyApp extends StatelessWidget {
                     ),
                     breakpoints: [
                       ResponsiveBreakpoint.resize(200.0, name: MOBILE),
-                      ResponsiveBreakpoint.autoScale(740.0, name: TABLET),
-                      ResponsiveBreakpoint.resize(740.0, name: DESKTOP),
+                      ResponsiveBreakpoint.autoScale(700.0, name: TABLET),
+                      ResponsiveBreakpoint.resize(700.0, name: DESKTOP),
                     ],
                   );
                 },

@@ -38,72 +38,51 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          GridView.count(
-            crossAxisCount: 2,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-              Image.asset(Images.BACKGROUND, fit: BoxFit.fill),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 16.0,
-                    right: 16.0,
-                    top: 64.0,
-                  ),
-                  child: Image.asset(Images.LOGO, width: 140.0, height: 140.0),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 32.0,
-                      horizontal: 16.0,
-                    ),
-                    child: Text(
-                      Strings.MESS_WELCOME.tr,
-                      style: TextStyle(
-                        fontSize: 36.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(padding: const EdgeInsets.symmetric(vertical: 32.0)),
-                AppButton(
-                  title: Strings.HAVE_ALREADY_WALL.tr,
-                  btnColor: Colors.white,
-                  onTap: importWallet,
-                ),
-                Padding(padding: const EdgeInsets.symmetric(vertical: 8.0)),
-                AppButton(
-                  title: Strings.NEW_WALLET.tr,
-                  btnColor: Get.theme.primaryColor,
-                  onTap: () {
-                    navigateToPage(Backup());
-                  },
-                ),
-              ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                top: 16.0,
+              ),
+              child: Image.asset(Images.LOGO, width: 140.0, height: 140.0),
             ),
-          ),
-        ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16.0,
+                  horizontal: 16.0,
+                ),
+                child: Text(
+                  Strings.MESS_WELCOME.tr,
+                  style: TextStyle(
+                    fontSize: 40.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            AppButton(
+              title: Strings.HAVE_ALREADY_WALL.tr,
+              btnColor: Colors.white,
+              onTap: importWallet,
+            ),
+            Padding(padding: const EdgeInsets.symmetric(vertical: 8.0)),
+            AppButton(
+              title: Strings.NEW_WALLET.tr,
+              btnColor: Get.theme.primaryColor,
+              onTap: () {
+                navigateToPage(Backup());
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

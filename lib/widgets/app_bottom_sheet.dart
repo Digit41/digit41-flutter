@@ -1,4 +1,5 @@
 import 'package:digit41/utils/strings.dart';
+import 'package:digit41/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +16,7 @@ void bottomSheet(String title,
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 12.0),
           Row(
             children: [
               Expanded(
@@ -55,16 +56,19 @@ void bottomSheet(String title,
     backgroundColor: Get.theme.bottomSheetTheme.backgroundColor,
     shape: const RoundedRectangleBorder(
       borderRadius: const BorderRadius.only(
-        topLeft: const Radius.circular(24.0),
-        topRight: const Radius.circular(24.0),
+        topLeft: const Radius.circular(16.0),
+        topRight: const Radius.circular(16.0),
       ),
     ),
   );
 }
 
-void confirmBottomSheet(String title, String mess,
-    GestureTapCallback confirmOnTap, String confirmTxt,
-    {bool negative = false}) {
+void confirmBottomSheet(
+  String title,
+  String mess,
+  GestureTapCallback confirmOnTap,
+  String confirmTxt,
+) {
   bottomSheet(
     title,
     message: mess,
@@ -75,7 +79,7 @@ void confirmBottomSheet(String title, String mess,
           onPressed: confirmOnTap,
           child: Text(
             confirmTxt,
-            style: negative ? null : TextStyle(color: Get.theme.primaryColor),
+            style: TextStyle(color: Get.theme.primaryColor),
           ),
         ),
         TextButton(
@@ -84,7 +88,7 @@ void confirmBottomSheet(String title, String mess,
           },
           child: Text(
             Strings.NO.tr,
-            style: !negative ? null : TextStyle(color: Get.theme.primaryColor),
+            style: darkModeEnabled() ? TextStyle(color: Colors.white) : null,
           ),
         ),
       ],

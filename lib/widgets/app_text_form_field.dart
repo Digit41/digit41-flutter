@@ -93,19 +93,19 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             ? null
             : const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 4.0),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(16.0),
           borderSide: BorderSide(color: Colors.grey.shade300, width: 1.0),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(16.0),
           borderSide: BorderSide(color: Colors.red),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(16.0),
           borderSide: BorderSide(color: Colors.red),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(16.0),
           borderSide: BorderSide(color: Theme.of(context).primaryColor),
         ),
         suffixIcon: widget.suffixIcon,

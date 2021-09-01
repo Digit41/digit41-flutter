@@ -41,7 +41,7 @@ class _VerifyingPhrasesState extends State<VerifyingPhrases> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Expanded(
@@ -51,14 +51,14 @@ class _VerifyingPhrasesState extends State<VerifyingPhrases> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 32.0),
+                    const SizedBox(height: 16.0),
                     Text(
                       Strings.CONF_PHRASES.tr,
                       style: TextStyle(fontSize: 26.0),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Text(Strings.SELECT_PHRASES_RIGHT.tr),
-                    SizedBox(height: 32.0),
+                    const SizedBox(height: 32.0),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.33,
                       child: Wrap(
@@ -99,7 +99,7 @@ class _VerifyingPhrasesState extends State<VerifyingPhrases> {
             AppButton(
               title: Strings.SKIP.tr,
               titleColor: darkModeEnabled() ? Colors.white : Colors.white,
-              borderColor: darkModeEnabled() ? Colors.white : null,
+              borderColor: darkModeEnabled() ? Colors.white : AppTheme.gray,
               btnColor: darkModeEnabled() ? null : AppTheme.gray,
               onTap: () {
                 confirmBottomSheet(
@@ -107,7 +107,6 @@ class _VerifyingPhrasesState extends State<VerifyingPhrases> {
                   Strings.MESS_CONF_PHRASES.tr,
                   finish,
                   Strings.YES.tr,
-                  negative: true,
                 );
               },
             ),
