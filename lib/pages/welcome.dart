@@ -45,18 +45,14 @@ class Welcome extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                left: 16.0,
-                right: 16.0,
-                top: 16.0,
-              ),
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0),
               child: Image.asset(Images.LOGO, width: 140.0, height: 140.0),
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 16.0,
-                  horizontal: 16.0,
+                  horizontal: 8.0,
                 ),
                 child: Text(
                   Strings.MESS_WELCOME.tr,

@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
       else
         Get.locale = Locale('en', 'US');
 
-      String theme = await pref.getTheme() ?? 'system';
+      String theme = await pref.getTheme() ?? 'dark';
       if (theme == 'light') {
         Get.changeTheme(AppTheme.light);
         Get.changeThemeMode(ThemeMode.light);

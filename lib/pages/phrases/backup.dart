@@ -17,15 +17,18 @@ class _BackupState extends State<Backup> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 16.0),
-            Image.asset(
-              Images.LOCK,
-              height: 100.0,
-              color: darkModeEnabled() ? null : Colors.black87,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Image.asset(
+                Images.LOCK,
+                height: 100.0,
+                color: darkModeEnabled() ? null : Colors.black87,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
