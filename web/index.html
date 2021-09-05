@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js"></script>
+<!--  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>-->
   <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
@@ -25,14 +29,24 @@
 
   <title>digit41</title>
   <link rel="manifest" href="manifest.json">
+  <script>
+  let firebaseConfig = {
+    apiKey: "AIzaSyBgeGijVEBkSa80UnbTmTULVITOlzJlxgo",
+    authDomain: "digit41.firebaseapp.com",
+    projectId: "digit41",
+    storageBucket: "digit41.appspot.com",
+    messagingSenderId: "321902183870",
+    appId: "1:321902183870:web:625724399fb66c450765ef",
+    measurementId: "G-2Y8KKDGS1E"
+  };
+  firebase.initializeApp(firebaseConfig);
+<!--  firebase.analytics();-->
+ </script>
 </head>
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
-
-  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-messaging.js"></script>
 
   <script>
     var serviceWorkerVersion = null;
@@ -51,6 +65,7 @@
     if ('serviceWorker' in navigator) {
       // Service workers are supported. Use them.
       window.addEventListener('load', function () {
+        navigator.serviceWorker.register("/firebase-messaging-sw.js");
         // Wait for registration to finish before dropping the <script> tag.
         // Otherwise, the browser will load the script multiple times,
         // potentially different versions.

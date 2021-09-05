@@ -12,6 +12,8 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'hive/wallet_model.dart';
 import 'pages/splash.dart';
+import 'utils/app_local_notification.dart';
+import 'utils/app_push_notification.dart';
 import 'utils/app_shared_preferences.dart';
 import 'utils/app_theme.dart';
 import 'utils/app_translations.dart';
@@ -25,7 +27,7 @@ void main() async {
   AppLocalNotification appLocalNotification = AppLocalNotification();
   appLocalNotification.initLocalNotification();
   AppFCMPushNotification appFCMPushNotification = AppFCMPushNotification();
-  await appFCMPushNotification.initializeFcm();
+  appFCMPushNotification.initializeFcm();
 
   runApp(MyApp());
 
