@@ -13,7 +13,7 @@ class WalletController extends GetxController {
     if (wm == null) {
       WalletModel temp;
       AppHive ah = AppHive();
-      var box = await ah.getBox(SecureKey.HIVE_WALLET_BOX);
+      var box = await ah.getBox(HiveKey.HIVE_WALLET_BOX);
       for (int i = 0; i < box.length; i++) {
         temp = box.getAt(i) as WalletModel;
         if (temp.selected) {

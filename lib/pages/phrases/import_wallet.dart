@@ -68,7 +68,7 @@ void importWallet() async {
   );
 
   int countWall;
-  Box box = await appHive.getBox(SecureKey.HIVE_WALLET_BOX);
+  Box box = await appHive.getBox(HiveKey.HIVE_WALLET_BOX);
   countWall = box.length + 1;
   name.controller.text = 'Wallet $countWall';
   box.close();

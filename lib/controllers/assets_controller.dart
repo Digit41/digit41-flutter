@@ -1,11 +1,13 @@
 import 'package:digit41/app_web3/addresses.dart';
 import 'package:digit41/app_web3/utils.dart';
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/models/address_model.dart';
 import 'package:digit41/models/asset_model.dart';
 import 'package:digit41/models/balance_model.dart';
 import 'package:digit41/rest_full_apis/wallet_api.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
+import 'package:web3dart/json_rpc.dart';
 import 'package:web3dart/web3dart.dart';
 
 class AssetsController extends GetxController {
@@ -18,7 +20,7 @@ class AssetsController extends GetxController {
   List<double> totalAssets = [0.0];
 
   List<AddressModel> coinsAddress = <AddressModel>[];
-  AppGet _wallet = AppGet.appGet;
+  WalletController _wallet = WalletController.appGet;
   List<BalanceModel>? _tempBalanceList;
   List<AssetModel> _tempAssets = [];
   AddressModel? _tempAddress;
@@ -113,12 +115,15 @@ class AssetsController extends GetxController {
     _tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,
       Networks.MAIN_NET,
-      _tempAddress!.address.toString(),
+      _tempAddress!.address!,
     );
 
     for (BalanceModel b in _tempBalanceList!)
       for (AssetModel a in _tempAddress!.assets!)
-        if (b.contract == a.contract) a.balance = b.balance;
+        if (b.contract == a.contract) {
+          a.balance = b.balance;
+          break;
+        }
 
     _prepareData();
   }

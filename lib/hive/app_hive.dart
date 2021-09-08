@@ -49,7 +49,7 @@ class AppHive {
   Future<WalletModel> configureWallet(String seed, {String? name}) async {
     WalletModel walletModel;
     WalletModel temp;
-    box = await getBox(SecureKey.HIVE_WALLET_BOX);
+    box = await getBox(HiveKey.HIVE_WALLET_BOX);
     int countWall = box!.length;
 
     walletModel = WalletModel(
@@ -71,7 +71,7 @@ class AppHive {
 
   Future<List<WalletModel>> getWallets() async {
     List<WalletModel> _wallets = [];
-    box = await getBox(SecureKey.HIVE_WALLET_BOX);
+    box = await getBox(HiveKey.HIVE_WALLET_BOX);
     for (int i = 0; i < box!.length; i++)
       _wallets.add(box!.getAt(i) as WalletModel);
 
@@ -79,8 +79,7 @@ class AppHive {
   }
 }
 
-class SecureKey {
+class HiveKey {
   static const HIVE_KEY = 'hiveEncryptionKey';
   static const HIVE_WALLET_BOX = 'wallet';
-  static const PASS_CODE = 'userPassCode';
 }
