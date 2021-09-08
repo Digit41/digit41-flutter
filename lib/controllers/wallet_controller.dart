@@ -12,7 +12,7 @@ class WalletController extends GetxController {
   Future<void> setWalletModel({WalletModel? wm}) async {
     if (wm == null) {
       WalletModel temp;
-      AppHive ah = AppHive();
+      WalletHive ah = WalletHive();
       var box = await ah.getBox(HiveKey.HIVE_WALLET_BOX);
       for (int i = 0; i < box.length; i++) {
         temp = box.getAt(i) as WalletModel;

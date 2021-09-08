@@ -171,7 +171,7 @@ class _VerifyingPhrasesState extends State<VerifyingPhrases> {
     if(!GetPlatform.isWeb)
       isAllow = await storagePermission();
     if (isAllow) {
-      AppHive ah = AppHive();
+      WalletHive ah = WalletHive();
       WalletModel walletModel = await ah.configureWallet(
         widget.mnemonicList!.join(' '),
       );

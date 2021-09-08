@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 void importWallet() async {
-  AppHive appHive = AppHive();
+  WalletHive appHive = WalletHive();
   final formKey = GlobalKey<FormState>();
   AppTextFormField phrases = AppTextFormField(
     hint: Strings.PHRASE.tr,

@@ -16,7 +16,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 void userWallets() {
-  AppHive appHive = AppHive();
+  WalletHive appHive = WalletHive();
   List<WalletModel> wallets;
   List<Widget> items = [];
   int selectedIndex = 0;

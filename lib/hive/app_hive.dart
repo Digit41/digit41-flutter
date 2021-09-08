@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 
 import 'wallet_model.dart';
 
-class AppHive {
+class WalletHive {
   Box? box;
 
   Future<List<int>> _key() async {
