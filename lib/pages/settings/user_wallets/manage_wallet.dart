@@ -1,6 +1,6 @@
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/hive/wallet_model.dart';
 import 'package:digit41/pages/settings/user_wallets/term_of_recovery_phrase.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/utils/utils.dart';
@@ -27,7 +27,7 @@ void manageWallet(WalletModel wallet) {
         if (wallet.name != walletName.controller.text) {
           wallet.name = walletName.controller.text;
           wallet.save();
-          if (wallet.selected) AppGet.appGet.setWalletModel(wm: wallet);
+          if (wallet.selected) WalletController.appGet.setWalletModel(wm: wallet);
         }
         Get.back();
       },

@@ -1,8 +1,8 @@
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/pages/settings/currency.dart';
 import 'package:digit41/pages/settings/languages.dart';
 import 'package:digit41/rest_full_apis/routes.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
@@ -62,8 +62,8 @@ class _SettingsState extends State<Settings> {
             Strings.WALLETS.tr,
             onTap: userWallets,
             trailing: GetBuilder(
-              init: AppGet(),
-              builder: (ctx) => Text(AppGet.appGet.walletModel!.name),
+              init: WalletController(),
+              builder: (ctx) => Text(WalletController.appGet.walletModel!.name),
             ),
           ),
           passcode(),
@@ -71,7 +71,7 @@ class _SettingsState extends State<Settings> {
             Images.CURRENCY,
             Strings.CURRENCY.tr,
             trailing: GetBuilder(
-              init: AppGet(),
+              init: WalletController(),
               builder: (ctx) => FutureBuilder(
                 future: init(),
                 builder: (ctx, snapData) {
@@ -168,7 +168,7 @@ class _SettingsState extends State<Settings> {
           }
         },
         trailing: GetBuilder(
-          init: AppGet(),
+          init: WalletController(),
           builder: (ctx) => FutureBuilder(
             future: init(),
             builder: (ctx, snapData) {

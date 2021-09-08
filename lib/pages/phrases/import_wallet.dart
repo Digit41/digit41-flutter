@@ -1,9 +1,9 @@
 import 'package:bip39/bip39.dart' as bip39;
 import 'package:clipboard/clipboard.dart';
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/hive/app_hive.dart';
 import 'package:digit41/hive/wallet_model.dart';
 import 'package:digit41/utils/app_permission.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/utils/utils.dart';
@@ -86,7 +86,7 @@ void importWallet() async {
       );
 
       /// set active wallet
-      AppGet.appGet.setWalletModel(wm: walletModel);
+      WalletController.appGet.setWalletModel(wm: walletModel);
 
       bottomSheet(
         'DIGIT41',

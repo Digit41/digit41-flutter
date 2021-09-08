@@ -1,7 +1,7 @@
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/models/currency_model.dart';
 import 'package:digit41/pages/settings/any_item.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/widgets/app_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ void currencyBottomSheet(String currencyKey) {
             cL[index].key == currencyKey,
             onTap: () {
               _pref.saveCurrency(cL[index].key);
-              AppGet.appGet.forUpdateUI();
+              WalletController.appGet.forUpdateUI();
               Get.back();
             },
           ),

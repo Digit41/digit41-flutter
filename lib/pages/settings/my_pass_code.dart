@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
 import 'package:digit41/utils/app_snackbar.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/utils/utils.dart';
@@ -84,7 +84,7 @@ class _MyPassCodeState extends State<MyPassCode> {
         isValidCallback: () {
           /// it is call final with set correctly passcode
           pref.setPasscode(widget.pass.hashCode.toString());
-          AppGet.appGet.forUpdateUI();
+          WalletController.appGet.forUpdateUI();
         },
         cancelButton: Text(
           Strings.CLOSE.tr,

@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/hive/app_hive.dart';
 import 'package:digit41/hive/wallet_model.dart';
 import 'package:digit41/pages/settings/user_wallets/manage_wallet.dart';
 import 'package:digit41/pages/welcome.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
@@ -40,7 +40,7 @@ void userWallets() {
                     if (!wallets[i].selected) {
                       wallets[i].selected = true;
                       wallets[i].save();
-                      AppGet.appGet.setWalletModel(wm: wallets[i]);
+                      WalletController.appGet.setWalletModel(wm: wallets[i]);
 
                       /// There may be no selected wallet
                       try {

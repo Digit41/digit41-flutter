@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/pages/welcome.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_bottom_navigation.dart';
@@ -16,7 +16,7 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
-  AppGet appGet = AppGet.appGet;
+  WalletController appGet = WalletController.appGet;
   bool exist = false;
 
   Future<void> checkExistActiveWallet() async {

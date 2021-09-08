@@ -1,7 +1,7 @@
 import 'package:digit41/controllers/assets_controller.dart';
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/pages/wallet/assets.dart';
 import 'package:digit41/pages/wallet/nfts.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +15,7 @@ class Wallet extends StatefulWidget {
 
 class _WalletState extends State<Wallet> {
   int selectedTab = 0;
-  AppGet appGet = AppGet.appGet;
+  WalletController appGet = WalletController.appGet;
 
   @override
   Widget build(BuildContext context) {

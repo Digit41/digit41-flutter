@@ -3,8 +3,8 @@ import 'package:digit41/hive/app_hive.dart';
 import 'package:digit41/hive/wallet_model.dart';
 import 'package:get/get.dart';
 
-class AppGet extends GetxController {
-  static AppGet get appGet => Get.put(AppGet());
+class WalletController extends GetxController {
+  static WalletController get appGet => Get.put(WalletController());
 
   /// use for recognize active wallet
   WalletModel? walletModel;

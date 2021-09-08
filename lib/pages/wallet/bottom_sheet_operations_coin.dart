@@ -1,7 +1,7 @@
 import 'package:clipboard/clipboard.dart';
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/models/asset_model.dart';
 import 'package:digit41/models/trx_model.dart';
-import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
@@ -109,7 +109,7 @@ void trxDetailsBottomSheet(
 }
 
 void sendBottomSheet(BuildContext context) {
-  AppGet appGet = AppGet.appGet;
+  WalletController appGet = WalletController.appGet;
   final formKey = GlobalKey<FormState>();
   AppTextFormField amount = AppTextFormField(
     hint: Strings.AMOUNT.tr,
@@ -149,7 +149,7 @@ void sendBottomSheet(BuildContext context) {
           amount,
           const SizedBox(height: 16.0),
           GetBuilder(
-            init: AppGet(),
+            init: WalletController(),
             builder: (ctx) =>
                 address.controller.text != '' && amount.controller.text != ''
                     ? AppButton(
