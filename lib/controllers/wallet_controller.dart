@@ -12,8 +12,8 @@ class WalletController extends GetxController {
   Future<void> setWalletModel({WalletModel? wm}) async {
     if (wm == null) {
       WalletModel temp;
-      WalletHive ah = WalletHive();
-      var box = await ah.getBox(HiveKey.HIVE_WALLET_BOX);
+      WalletHive w = WalletHive();
+      var box = await w.getBox();
       for (int i = 0; i < box.length; i++) {
         temp = box.getAt(i) as WalletModel;
         if (temp.selected) {

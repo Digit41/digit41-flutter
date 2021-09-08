@@ -16,7 +16,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 void userWallets() {
-  WalletHive appHive = WalletHive();
+  WalletHive walletHive = WalletHive();
   List<WalletModel> wallets;
   List<Widget> items = [];
   int selectedIndex = 0;
@@ -25,7 +25,7 @@ void userWallets() {
     Strings.YOUR_WALLETS.tr,
     enableDrag: false,
     child: FutureBuilder(
-      future: appHive.getWallets(),
+      future: walletHive.getWallets(),
       builder: (BuildContext ctx, snapShot) {
         if (snapShot.hasData) {
           wallets = snapShot.data as List<WalletModel>;
@@ -48,7 +48,7 @@ void userWallets() {
                         wallets[selectedIndex].save();
                       } catch (e) {}
 
-                      appHive.box!.close();
+                      walletHive.box!.close();
                     }
                     Get.back();
                   },

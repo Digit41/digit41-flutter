@@ -39,9 +39,9 @@ class WalletHive {
     return secureList;
   }
 
-  Future<Box> getBox(String boxName) async {
+  Future<Box> getBox() async {
     return await Hive.openBox(
-      boxName,
+      HiveKey.HIVE_WALLET_BOX,
       // encryptionCipher: HiveAesCipher(await _key()),
     );
   }
@@ -49,7 +49,7 @@ class WalletHive {
   Future<WalletModel> configureWallet(String seed, {String? name}) async {
     WalletModel walletModel;
     WalletModel temp;
-    box = await getBox(HiveKey.HIVE_WALLET_BOX);
+    box = await getBox();
     int countWall = box!.length;
 
     walletModel = WalletModel(
@@ -71,7 +71,7 @@ class WalletHive {
 
   Future<List<WalletModel>> getWallets() async {
     List<WalletModel> _wallets = [];
-    box = await getBox(HiveKey.HIVE_WALLET_BOX);
+    box = await getBox();
     for (int i = 0; i < box!.length; i++)
       _wallets.add(box!.getAt(i) as WalletModel);
 

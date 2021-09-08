@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 void importWallet() async {
-  WalletHive appHive = WalletHive();
+  WalletHive walletHive = WalletHive();
   final formKey = GlobalKey<FormState>();
   AppTextFormField phrases = AppTextFormField(
     hint: Strings.PHRASE.tr,
@@ -68,7 +68,7 @@ void importWallet() async {
   );
 
   int countWall;
-  Box box = await appHive.getBox(HiveKey.HIVE_WALLET_BOX);
+  Box box = await walletHive.getBox();
   countWall = box.length + 1;
   name.controller.text = 'Wallet $countWall';
   box.close();
@@ -80,7 +80,7 @@ void importWallet() async {
       isAllow = await storagePermission();
 
     if (formKey.currentState!.validate() && isAllow) {
-      WalletModel walletModel = await appHive.configureWallet(
+      WalletModel walletModel = await walletHive.configureWallet(
         phrases.controller.text,
         name: name.controller.text,
       );
