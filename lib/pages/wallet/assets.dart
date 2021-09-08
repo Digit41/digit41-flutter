@@ -27,7 +27,7 @@ class Assets extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (ctx, index) {
-              positive = (controller.assets[index].percentChange24h ?? 1) > 0;
+              positive = controller.assets[index].percentChange24h! > 0;
               return Padding(
                 padding: EdgeInsets.only(
                   bottom: index == controller.assets.length - 1 ? 80.0 : 0.0,
@@ -35,9 +35,12 @@ class Assets extends StatelessWidget {
                 ),
                 child: ListTile(
                   onTap: () {
-                    navigateToPage(CoinDetails());
+                    navigateToPage(CoinDetails(index));
                   },
-                  leading: CacheImage(controller.assets[index].icon ?? ''),
+                  leading: CacheImage(
+                    controller.assets[index].icon ?? '',
+                    size: 46.0,
+                  ),
                   title: Text(controller.assets[index].name!),
                   subtitle: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -60,7 +63,7 @@ class Assets extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '${controller.assets[index].balance!.toStringAsFixed((controller.assets[index].precision ?? 4))} ${controller.assets[index].symbol}',
+                        '${controller.assets[index].balance!.toStringAsPrecision((controller.assets[index].precision ?? 4))} ${controller.assets[index].symbol}',
                       ),
                       Text(
                         '\$ ${controller.assets[index].balanceInPrice!.toStringAsFixed(2)}',

@@ -95,7 +95,7 @@ class Strings {
   static const COMPLETED = 'COMPLETED';
   static const FROM = 'From';
   static const RATE = 'Rate';
-  static const TRX_ID = 'Transaction ID';
+  static const TRX_HASH = 'Transaction Hash';
   static const DATE = 'Date';
   static const SENDING = 'Sending';
   static const IN_PROGRESS = 'IN PROGRESS';
@@ -114,4 +114,10 @@ class Strings {
   static const DESC_YOUR_REC_PH = 'descYourRecPh';
   static const Q_IMPORT_WALL = 'qImportWallet';
   static const EMPTY_DATA = 'emptyData';
+  static const VALUE = 'Value';
+  static const BALANCE = 'Balance';
+  static const TO = 'to';
+  static const FEE = 'fee';
+  static const ERROR_OCCURRED = 'An error has occurred';
+  static const TRY_AGAIN = 'try again';
 }

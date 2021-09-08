@@ -17,7 +17,7 @@ class AssetsController extends GetxController {
   List<AssetModel> nfts = <AssetModel>[];
   List<double> totalAssets = [0.0];
 
-  List<AddressModel> _coinsAddress = <AddressModel>[];
+  List<AddressModel> coinsAddress = <AddressModel>[];
   AppGet _wallet = AppGet.appGet;
   List<BalanceModel>? _tempBalanceList;
   List<AssetModel> _tempAssets = [];
@@ -30,7 +30,7 @@ class AssetsController extends GetxController {
       _getAddressesAndAssets();
     else {
       for (AddressModel am in _wallet.walletModel!.addresses!) {
-        _coinsAddress.add(am);
+        coinsAddress.add(am);
         totalAssets[0] = am.totalAssets!;
       }
       _prepareData();
@@ -90,12 +90,12 @@ class AssetsController extends GetxController {
       assets: _tempAssets,
       totalAssets: 0.0,
     );
-    _coinsAddress.add(_tempAddress!);
+    coinsAddress.add(_tempAddress!);
 
-    _refreshPrices();
+    await _refreshPrices();
 
     /// with below code, caching enable
-    _wallet.walletModel!.addresses = _coinsAddress;
+    _wallet.walletModel!.addresses = coinsAddress;
     _wallet.walletModel!.save();
   }
 
@@ -103,12 +103,12 @@ class AssetsController extends GetxController {
     await _refreshBalances();
     await _refreshPrices();
 
-    _wallet.walletModel!.addresses = _coinsAddress;
+    _wallet.walletModel!.addresses = coinsAddress;
     _wallet.walletModel!.save();
   }
 
   Future<void> _refreshBalances() async {
-    _tempAddress = _coinsAddress[0];
+    _tempAddress = coinsAddress[0];
 
     _tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,
@@ -124,7 +124,7 @@ class AssetsController extends GetxController {
   }
 
   Future<void> _refreshPrices() async {
-    _tempAddress = _coinsAddress[0];
+    _tempAddress = coinsAddress[0];
     _tempAddress!.totalAssets = 0.0;
 
     List<String> sym = [];
@@ -155,7 +155,7 @@ class AssetsController extends GetxController {
     nfts.clear();
 
     /// now, only on ethereum mainnet
-    for (AssetModel a in _coinsAddress[0].assets!)
+    for (AssetModel a in coinsAddress[0].assets!)
       if (a.standard == 'ERC721')
         nfts.add(a);
       else

@@ -1,5 +1,6 @@
 import 'package:digit41/models/asset_model.dart';
 import 'package:digit41/models/balance_model.dart';
+import 'package:digit41/models/trx_model.dart';
 import 'package:digit41/rest_full_apis/base_api.dart';
 import 'package:digit41/rest_full_apis/routes.dart';
 
@@ -51,6 +52,26 @@ Future<List<AssetModel>> getPrices(
   return result.map<AssetModel>((x) => AssetModel.fromJsonForPrice(x)).toList();
 }
 
+Future<List<TrxModel>> getTrxs(String blockChain, String network, String address,
+    {String? contract, String forceUpdate = 'true'}) async {
+  var qp = {
+    'blockchain': blockChain,
+    'network': network,
+    'address': address,
+    'force_update': forceUpdate,
+  };
+
+  if (contract != null) qp['contract'] = contract;
+
+  var result = await anyApi(
+    method: 'get',
+    url: Routes.TRANSACTIONS,
+    queryParam: qp,
+  );
+
+  return trxsFromJson(result);
+}
+
 void sendFcmToken(
   String blockChain,
   String network,
@@ -58,6 +79,7 @@ void sendFcmToken(
 ) async {
   // AppFCMPushNotification appFCMPushNotification = AppFCMPushNotification();
   String fcmToken = '';
+
   anyApi(
     method: 'get',
     url: Routes.FCM_TOKEN,

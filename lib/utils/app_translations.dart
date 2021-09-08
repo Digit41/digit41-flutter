@@ -157,7 +157,8 @@ class AppTranslations extends Translations{
       "COMPLETED": "TAMAMLANDI",
       "From": "İtibaren",
       "Rate": "Oran",
-      "Transaction ID": "İşlem Kimliği",
+      "FEE": "ÜCRET",
+      "Transaction Hash": "İşlem Karması",
       "Date": "Tarih",
       "IN PROGRESS": "DEVAM ETMEKTE",
       "Sending": "gönderme",
@@ -177,6 +178,11 @@ class AppTranslations extends Translations{
       "descYourRecPh": "Bu kelimeleri doğru sırayla yazın veya kopyalayın ve güvenli bir yere kaydedin.",
       "qImportWallet":"Kurtarma ifadesi nedir?",
       "emptyData": "Görüntülenecek bilgi yok",
+      "Balance": "Denge",
+      "Value": "Değer",
+      "An error has occurred": "bir hata oluştu",
+      "to": "ile",
+      "try again": "Tekrar deneyin",
     },
   };
 

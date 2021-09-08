@@ -1,26 +1,43 @@
 import 'package:clipboard/clipboard.dart';
+import 'package:digit41/models/asset_model.dart';
+import 'package:digit41/models/trx_model.dart';
 import 'package:digit41/utils/app_state_management.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_button.dart';
+import 'package:digit41/widgets/app_cache_image.dart';
 import 'package:digit41/widgets/app_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void trxDetailsBottomSheet(BuildContext context) {
+void trxDetailsBottomSheet(
+  BuildContext context,
+  TrxModel trx,
+  AssetModel assetModel,
+) {
   Widget _anyItemOfInfo(String title, String value) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: TextStyle(color: AppTheme.gray)),
-          Text(value),
+          Text(
+            title,
+            style: TextStyle(
+                color: AppTheme.gray,
+                fontSize: MediaQuery.of(context).size.width * 0.025),
+          ),
+          Text(
+            value,
+            style:
+                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.019),
+          ),
         ],
       );
 
   _bottomSheetOperationCoins(
     context,
+    assetModel.icon!,
     Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -34,13 +51,13 @@ void trxDetailsBottomSheet(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '0.125654',
-              style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+              trx.amount.toString(),
+              style: TextStyle(fontSize: 34.0, fontWeight: FontWeight.bold),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
-                'ETH',
+                assetModel.symbol!,
                 style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
               ),
             ),
@@ -66,13 +83,13 @@ void trxDetailsBottomSheet(BuildContext context) {
           ],
         ),
         const SizedBox(height: 16.0),
-        _anyItemOfInfo(Strings.FROM.tr, '26,566' + 'USD'),
+        _anyItemOfInfo(Strings.FROM.tr, trx.sender!),
         const SizedBox(height: 10.0),
-        _anyItemOfInfo(Strings.RATE.tr, '1 USDT = 0.006 ETH'),
+        _anyItemOfInfo(Strings.TO.tr, trx.recipient!),
         const SizedBox(height: 10.0),
-        _anyItemOfInfo(Strings.TRX_ID.tr, '64116514548484'),
+        _anyItemOfInfo(Strings.TRX_HASH.tr, trx.hash!),
         const SizedBox(height: 10.0),
-        _anyItemOfInfo(Strings.DATE.tr, '2021/02/02 - 12:12:12'),
+        _anyItemOfInfo(Strings.FEE.tr, trx.fee.toString()),
         const SizedBox(height: 32.0),
         SizedBox(
           width: 120.0,
@@ -95,7 +112,7 @@ void sendBottomSheet(BuildContext context) {
   AppGet appGet = AppGet.appGet;
   final formKey = GlobalKey<FormState>();
   AppTextFormField amount = AppTextFormField(
-    hint: Strings.AMOUNT.tr + 'ETH',
+    hint: Strings.AMOUNT.tr,
     textInputType: TextInputType.number,
     onChanged: (val) {
       appGet.forUpdateUI();
@@ -115,6 +132,7 @@ void sendBottomSheet(BuildContext context) {
 
   _bottomSheetOperationCoins(
     context,
+    '',
     Form(
       key: formKey,
       child: Column(
@@ -187,6 +205,7 @@ void sendBottomSheet(BuildContext context) {
 void receiveBottomSheet(BuildContext context) {
   _bottomSheetOperationCoins(
     context,
+    '',
     Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -227,7 +246,7 @@ Widget _buttonIcon(String path, {Color? color}) => Image.asset(
       color: Colors.white,
     );
 
-void _bottomSheetOperationCoins(BuildContext context, Widget child,
+void _bottomSheetOperationCoins(BuildContext context, String icon, Widget child,
     {bool send = true, bool trxDetail = false}) {
   Get.bottomSheet(
     Stack(
@@ -265,7 +284,7 @@ void _bottomSheetOperationCoins(BuildContext context, Widget child,
                     borderRadius: BorderRadius.circular(50.0),
                   )
                 : null,
-            child: Image.asset(Images.LOGO),
+            child: CacheImage(icon),
           ),
         ),
         if (!trxDetail)
