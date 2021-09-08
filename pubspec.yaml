@@ -14,7 +14,7 @@ dependencies:
   get: ^4.3.8
   bip39: ^1.0.6
   bip32: ^2.0.0
-  web3dart: ^2.1.4
+  web3dart: ^2.3.0
   dio: ^4.0.0
   pointycastle: ^3.2.0-rc0
   clipboard: ^0.1.3
