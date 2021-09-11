@@ -9,13 +9,13 @@ class NetworkModel extends HiveObject {
   String? url;
 
   @HiveField(2)
-  String? selected;
+  bool selected;
 
 
   NetworkModel({
     this.name,
     this.url,
-    this.selected,
+    this.selected = false,
   });
 }
 

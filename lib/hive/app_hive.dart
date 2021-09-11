@@ -82,4 +82,5 @@ class WalletHive {
 class HiveKey {
   static const HIVE_KEY = 'hiveEncryptionKey';
   static const HIVE_WALLET_BOX = 'wallet';
+  static const HIVE_NETWORK_BOX = 'network';
 }

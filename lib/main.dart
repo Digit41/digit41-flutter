@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:digit41/models/address_model.dart';
 import 'package:digit41/models/asset_model.dart';
+import 'package:digit41/models/network_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,14 +40,16 @@ void _hiveInit() async {
     Hive
       ..registerAdapter(WalletAdapter())
       ..registerAdapter(AddressAdapter())
-      ..registerAdapter(AssetAdapter());
+      ..registerAdapter(AssetAdapter())
+      ..registerAdapter(NetworkAdapter());
   } else {
     Directory directory = await getApplicationDocumentsDirectory();
     Hive
       ..init(directory.path)
       ..registerAdapter(WalletAdapter())
       ..registerAdapter(AddressAdapter())
-      ..registerAdapter(AssetAdapter());
+      ..registerAdapter(AssetAdapter())
+      ..registerAdapter(NetworkAdapter());
   }
 }
 

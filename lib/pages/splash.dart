@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/pages/welcome.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
+import 'package:digit41/utils/iinitializing.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_bottom_navigation.dart';
@@ -26,6 +27,7 @@ class _SplashState extends State<Splash> {
   }
 
   void go() async {
+    initHiveNetwork();
     await checkExistActiveWallet();
     AppSharedPreferences pref = AppSharedPreferences();
     Widget page;
