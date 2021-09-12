@@ -120,4 +120,6 @@ class Strings {
   static const FEE = 'fee';
   static const ERROR_OCCURRED = 'An error has occurred';
   static const TRY_AGAIN = 'try again';
+  static const NETWORKS = 'Networks';
+  static const ADD_NETWORK = 'Add Network';
 }

@@ -1,6 +1,7 @@
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/pages/settings/currency.dart';
 import 'package:digit41/pages/settings/languages.dart';
+import 'package:digit41/pages/settings/networks.dart';
 import 'package:digit41/rest_full_apis/routes.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
 import 'package:digit41/utils/app_theme.dart';
@@ -64,6 +65,16 @@ class _SettingsState extends State<Settings> {
             trailing: GetBuilder(
               init: WalletController(),
               builder: (ctx) => Text(WalletController.appGet.walletModel!.name),
+            ),
+          ),
+          // todo: set icon and name interaction
+          item(
+            Images.WHITE_WALLET,
+            Strings.NETWORKS.tr,
+            onTap: networks,
+            trailing: GetBuilder(
+              init: WalletController(),
+              builder: (ctx) => Text('mainnet'),
             ),
           ),
           passcode(),

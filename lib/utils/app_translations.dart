@@ -183,6 +183,8 @@ class AppTranslations extends Translations{
       "An error has occurred": "bir hata oluştu",
       "to": "ile",
       "try again": "Tekrar deneyin",
+      "Networks": "Ağlar",
+      "Add Network": "Ağ ekle",
     },
   };
 
