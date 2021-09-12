@@ -6,8 +6,6 @@ import 'package:digit41/hive/wallet_model.dart';
 import 'package:digit41/pages/settings/any_item.dart';
 import 'package:digit41/pages/settings/user_wallets/manage_wallet.dart';
 import 'package:digit41/pages/welcome.dart';
-import 'package:digit41/utils/app_theme.dart';
-import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_bottom_sheet.dart';
