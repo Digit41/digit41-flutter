@@ -20,7 +20,7 @@ void languagesBottomSheet() {
     child: Column(
       children: [
         const SizedBox(height: 16.0),
-        anyItem(
+        anyItemOfLanguageAndCurrency(
           _languages['En']!,
           Strings.CURRENT_LAN.tr == 'En',
           onTap: () {
@@ -30,7 +30,7 @@ void languagesBottomSheet() {
           },
         ),
         const SizedBox(height: 8.0),
-        anyItem(
+        anyItemOfLanguageAndCurrency(
           _languages['Tr']!,
           Strings.CURRENT_LAN.tr == 'Tr',
           onTap: () {

@@ -2,7 +2,7 @@ import 'package:digit41/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget anyItem(String title, bool select, {onTap}) => ListTile(
+Widget anyItemOfLanguageAndCurrency(String title, bool select, {onTap}) => ListTile(
       onTap: onTap,
       title: Text(title, style: TextStyle(color: select ? Colors.white : null)),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),

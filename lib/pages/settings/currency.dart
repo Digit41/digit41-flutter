@@ -23,7 +23,7 @@ void currencyBottomSheet(String currencyKey) {
         height: cL.length * 60.0,
         child: ListView.builder(
           itemCount: cL.length,
-          itemBuilder: (contx, int index) => anyItem(
+          itemBuilder: (contx, int index) => anyItemOfLanguageAndCurrency(
             cL[index].value,
             cL[index].key == currencyKey,
             onTap: () {

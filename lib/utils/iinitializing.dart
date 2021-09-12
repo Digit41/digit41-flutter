@@ -14,4 +14,5 @@ void initHiveNetwork() async{
   if(box.length == 0)
     for(NetworkModel nm in _networks)
       box.add(nm);
+  box.close();
 }
