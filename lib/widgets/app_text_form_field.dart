@@ -16,6 +16,7 @@ class AppTextFormField extends StatefulWidget {
   Widget? prefixIcon;
   bool obscure;
   bool enable;
+  bool hasTitle;
 
   FormFieldValidator<String>? validator;
   ValueChanged<String>? onFieldSubmitted;
@@ -41,6 +42,7 @@ class AppTextFormField extends StatefulWidget {
     this.enable = true,
     this.showLengthFail = true,
     this.obscure = false,
+    this.hasTitle = false,
     this.maxLine,
     this.textInputAction,
     this.autoValidateMode = true,
@@ -61,56 +63,75 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      autofocus: widget.autoFocus,
-      validator: widget.validator ?? selfValidator,
-      onFieldSubmitted: widget.onFieldSubmitted ?? selfSubmit,
-      controller: widget.controller,
-      focusNode: widget.focusNode,
-      onChanged: widget.onChanged,
-      maxLength: widget.length,
-      textDirection: widget.textDirection,
-      enabled: widget.enable,
-      maxLines: widget.maxLine,
-      keyboardType: widget.textInputType != null
-          ? widget.textInputType
-          : TextInputType.text,
-      textCapitalization: TextCapitalization.none,
-      textInputAction: widget.textInputAction != null
-          ? widget.textInputAction
-          : widget.nextFocusNode != null
-              ? TextInputAction.next
-              : TextInputAction.done,
-      autocorrect: false,
-      autovalidateMode:
-          widget.autoValidateMode ? AutovalidateMode.onUserInteraction : null,
-      cursorColor: Theme.of(context).primaryColor,
-      style: TextStyle(height: widget.enable ? 1.6 : 2.5),
-      decoration: InputDecoration(
-        counterText: "",
-        hintText: widget.hint,
-        contentPadding: widget.maxLine != null
-            ? null
-            : const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 4.0),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.0),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.0),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        widget.hasTitle
+            ? Container(
+                margin: const EdgeInsets.only(bottom: 10.0),
+                child: Text(
+                  widget.hint,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              )
+            : Center(),
+        TextFormField(
+          autofocus: widget.autoFocus,
+          validator: widget.validator ?? selfValidator,
+          onFieldSubmitted: widget.onFieldSubmitted ?? selfSubmit,
+          controller: widget.controller,
+          focusNode: widget.focusNode,
+          onChanged: widget.onChanged,
+          maxLength: widget.length,
+          textDirection: widget.textDirection,
+          enabled: widget.enable,
+          maxLines: widget.maxLine,
+          keyboardType: widget.textInputType != null
+              ? widget.textInputType
+              : TextInputType.text,
+          textCapitalization: TextCapitalization.none,
+          textInputAction: widget.textInputAction != null
+              ? widget.textInputAction
+              : widget.nextFocusNode != null
+                  ? TextInputAction.next
+                  : TextInputAction.done,
+          autocorrect: false,
+          autovalidateMode: widget.autoValidateMode
+              ? AutovalidateMode.onUserInteraction
+              : null,
+          cursorColor: Theme.of(context).primaryColor,
+          // style: TextStyle(height: widget.enable ? 1.6 : 2.5),
+          decoration: InputDecoration(
+            counterText: "",
+            hintText: widget.hasTitle ? '' : widget.hint,
+            contentPadding: widget.maxLine != null
+                ? null
+                : const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 4.0),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+              borderSide: BorderSide(color: Colors.grey.shade300, width: 1.0),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+              borderSide: BorderSide(color: Colors.grey.shade300, width: 1.0),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+              borderSide: BorderSide(color: Colors.red),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+              borderSide: BorderSide(color: Colors.red),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+            ),
+            suffixIcon: widget.suffixIcon,
+            prefixIcon: widget.prefixIcon,
+          ),
         ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.0),
-          borderSide: BorderSide(color: Colors.red),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.0),
-          borderSide: BorderSide(color: Colors.red),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.0),
-          borderSide: BorderSide(color: Theme.of(context).primaryColor),
-        ),
-        suffixIcon: widget.suffixIcon,
-        prefixIcon: widget.prefixIcon,
-      ),
+      ],
     );
   }
 

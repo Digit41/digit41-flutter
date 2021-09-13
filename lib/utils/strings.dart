@@ -58,6 +58,7 @@ class Strings {
   static const PASSCODE = 'Passcode';
   static const CLOSE = 'Close';
   static const DELETE = 'Delete';
+  static const SAVE = 'Save';
   static const PIN = 'Pin';
   static const ENTER_PASS = 'enterPassCode';
   static const ENTER_NEW_PASS = 'enterNewPass';
@@ -122,4 +123,11 @@ class Strings {
   static const TRY_AGAIN = 'try again';
   static const NETWORKS = 'Networks';
   static const ADD_NETWORK = 'Add Network';
+  static const NETWORK_NAME = 'Network Name';
+  static const NEW_RPC_URL = 'New RPC URL';
+  static const CHAIN_ID = 'Chain id';
+  static const CURRENCY_SYMBOL = 'Currency Symbol';
+  static const BLOCK_EXP_URL = 'Block Explorer URL';
+  static const DETAIL = 'Detail';
+  static const DESC_NETWORK_DELETE = 'DeacNetDelete';
 }

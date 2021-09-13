@@ -53,8 +53,7 @@ void userWallets() {
                 },
                 trailing: IconButton(
                   onPressed: () {
-                    Get.back();
-                    Timer(Duration(milliseconds: 200), () {
+                    bottomSheetNavigateWithReplace((){
                       manageWallet(wallets[i]);
                     });
                   },

@@ -1,4 +1,6 @@
 // import 'package:barcode_scan2/barcode_scan2.dart';
+import 'dart:async';
+
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,6 +35,13 @@ Future? navigateToPage(Widget page,
     return Get.offAll(withCallback ? () => page : page, transition: trans);
   else
     return Get.to(withCallback ? () => page : page, transition: trans);
+}
+
+void bottomSheetNavigateWithReplace(sheet){
+  Get.back();
+  Timer(Duration(microseconds: 200), (){
+    sheet();
+  });
 }
 
 /*

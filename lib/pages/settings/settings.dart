@@ -1,7 +1,7 @@
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/pages/settings/currency.dart';
 import 'package:digit41/pages/settings/languages.dart';
-import 'package:digit41/pages/settings/networks.dart';
+import 'package:digit41/pages/settings/networks/networks.dart';
 import 'package:digit41/rest_full_apis/routes.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
 import 'package:digit41/utils/app_theme.dart';

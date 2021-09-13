@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:digit41/hive/app_hive.dart';
 import 'package:digit41/models/network_model.dart';
 import 'package:digit41/pages/settings/any_item.dart';
+import 'package:digit41/pages/settings/networks/network.dart';
 import 'package:digit41/utils/strings.dart';
+import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_bottom_sheet.dart';
 import 'package:digit41/widgets/fab_add.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,13 +45,12 @@ void networks() {
                   child: ListView.builder(
                     itemCount: netList.length,
                     itemBuilder: (ctx, int index) {
-                      if(netList[index].selected)
-                        selectedIndex = index;
+                      if (netList[index].selected) selectedIndex = index;
                       return anyItemOfWalletAndNetwork(
                         netList[index].name!,
                         netList[index].selected,
-                        onTap: (){
-                          if(!netList[index].selected){
+                        onTap: () {
+                          if (!netList[index].selected) {
                             netList[index].selected = true;
                             netList[index].save();
                             netList[selectedIndex].selected = false;
@@ -64,26 +65,33 @@ void networks() {
                           }
                           Get.back();
                         },
-                        trailing: netList[index].byUser
-                            ? IconButton(
-                                onPressed: () {
-                                  Get.back();
-                                  Timer(Duration(milliseconds: 200), () {});
-                                },
-                                icon: Icon(
-                                  Icons.edit,
-                                  color: netList[index].selected
-                                      ? Colors.white
-                                      : null,
-                                ),
-                              )
-                            : null,
+                        trailing: IconButton(
+                          onPressed: () {
+                            bottomSheetNavigateWithReplace((){
+                              network(_box!, netModel: netList[index]);
+                            });
+                          },
+                          icon: Icon(
+                            netList[index].byUser
+                                ? Icons.edit
+                                : Icons.visibility_outlined,
+                            color:
+                                netList[index].selected ? Colors.white : null,
+                          ),
+                        ),
                       );
                     },
                   ),
                 ),
                 const SizedBox(height: 8.0),
-                fabAdd(Strings.ADD_NETWORK.tr),
+                fabAdd(
+                  Strings.ADD_NETWORK.tr,
+                  onTap: () {
+                    bottomSheetNavigateWithReplace((){
+                      network(_box!);
+                    });
+                  },
+                ),
               ],
             ),
           );

@@ -61,6 +61,7 @@ class AppTranslations extends Translations{
       "descYourRecPh": "Write down or copy these words in the right order and save them somewhere safe.",
       "qImportWallet":"What is recovery phrase?",
       "emptyData": "No information to display",
+      "DeacNetDelete": "Are you sure you want to delete the network?",
     },
     'tr_TU':{
       'currentLan': 'Tr',
@@ -121,6 +122,7 @@ class AppTranslations extends Translations{
       "Passcode": "şifre",
       "Close": "Kapat",
       "Delete": "Silmek",
+      "Save": "Kaydetmek",
       "Pin": "Toplu iğne",
       "enterPassCode": "Şifreyi gir",
       "enterNewPass": "Yeni bir şifre girin",
@@ -185,6 +187,13 @@ class AppTranslations extends Translations{
       "try again": "Tekrar deneyin",
       "Networks": "Ağlar",
       "Add Network": "Ağ ekle",
+      "Network Name": "Ağ Adı",
+      "New RPC URL": "Yeni RPC URL'si",
+      "Chain id": "zincir kimliği",
+      "Currency Symbol": "Para Birimi Sembolü",
+      "Block Explorer URL": "Gezgin URL'sini Engelle",
+      "Detail": "Detay",
+      "DeacNetDelete": "Ağı silmek istediğinizden emin misiniz?",
     },
   };
 

@@ -52,10 +52,11 @@ void termOfRecPhrase(String mnemonic) {
             title: Strings.CONTINUE.tr,
             btnColor: Get.theme.primaryColor,
             onTap: () {
-              Get.back();
-              Timer(Duration(milliseconds: 200), () {
-                showRecoveryPhrases(mnemonic);
-              });
+              bottomSheetNavigateWithReplace(
+                () {
+                  showRecoveryPhrases(mnemonic);
+                },
+              );
             },
           ),
         ),

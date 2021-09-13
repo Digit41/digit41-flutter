@@ -26,10 +26,7 @@ class Welcome extends StatelessWidget {
         Strings.WARNING.tr,
         Strings.STORAGE_PERMISSION.tr,
         () {
-          Get.back();
-          Timer(Duration(milliseconds: 200), () {
-            storagePermission();
-          });
+          bottomSheetNavigateWithReplace(storagePermission);
         },
         Strings.YES.tr,
       );
