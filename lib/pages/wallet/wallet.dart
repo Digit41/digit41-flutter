@@ -35,28 +35,28 @@ class _WalletState extends State<Wallet> {
                   appGet.walletModel!.name,
                   style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 32.0),
+                const SizedBox(height: 16.0),
                 Text(
                   Strings.ASSETS_VALUE.tr,
                   style: TextStyle(color: Colors.grey, fontSize: 20.0),
                 ),
-                const SizedBox(height: 32.0),
+                const SizedBox(height: 16.0),
                 GetBuilder(
                   init: AssetsController(),
                   builder: (AssetsController controller) => controller.isLoading
                       ? Padding(
-                        padding: const EdgeInsets.only(top: 32.0),
-                        child: CupertinoActivityIndicator(),
-                      )
+                          padding: const EdgeInsets.only(top: 32.0),
+                          child: CupertinoActivityIndicator(),
+                        )
                       : Text(
                           '\$ ${controller.totalAssets[0].toStringAsFixed(2)}',
                           style: TextStyle(
-                            fontSize: 52.0,
+                            fontSize: 48.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                 ),
-                const SizedBox(height: 30.0),
+                const SizedBox(height: 24.0),
                 TabBar(
                   onTap: (index) {
                     setState(() {

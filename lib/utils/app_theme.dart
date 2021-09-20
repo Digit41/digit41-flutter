@@ -16,7 +16,7 @@ class AppTheme {
     primaryColor: _green,
     scaffoldBackgroundColor: Colors.white,
     checkboxTheme: _checkBoxTh,
-    fontFamily: 'IBM_Plex',
+    fontFamily: 'Kalameh',
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
       elevation: 3.0,
@@ -26,8 +26,7 @@ class AppTheme {
       backgroundColor: _green,
     ),
     textButtonTheme: TextButtonThemeData(
-      style: ButtonStyle(foregroundColor: MaterialStateProperty.all(gray))
-    ),
+        style: ButtonStyle(foregroundColor: MaterialStateProperty.all(gray))),
   );
 
   static ThemeData dark = ThemeData(
@@ -35,7 +34,7 @@ class AppTheme {
     primaryColor: _green,
     scaffoldBackgroundColor: Colors.black,
     checkboxTheme: _checkBoxTh,
-    fontFamily: 'IBM_Plex',
+    fontFamily: 'Kalameh',
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Color(0xff151515),
       elevation: 3.0,
@@ -45,7 +44,6 @@ class AppTheme {
       backgroundColor: _green,
     ),
     textButtonTheme: TextButtonThemeData(
-        style: ButtonStyle(foregroundColor: MaterialStateProperty.all(gray))
-    ),
+        style: ButtonStyle(foregroundColor: MaterialStateProperty.all(gray))),
   );
 }
