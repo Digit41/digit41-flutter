@@ -60,7 +60,8 @@ flutter:
    - family: Kalameh
      fonts:
        - asset: assets/fonts/Kalameh-Regular.ttf
-       - asset: assets/fonts/Kalameh-Bold.ttf
+      #  - asset: assets/fonts/Kalameh-Bold.ttf
+      
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
