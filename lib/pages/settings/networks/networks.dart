@@ -67,14 +67,12 @@ void networks() {
                         },
                         trailing: IconButton(
                           onPressed: () {
-                            bottomSheetNavigateWithReplace((){
+                            bottomSheetNavigateWithReplace(() {
                               network(_box!, netModel: netList[index]);
                             });
                           },
                           icon: Icon(
-                            netList[index].byUser
-                                ? Icons.edit
-                                : Icons.visibility_outlined,
+                            netList[index].byUser ? Icons.edit : Icons.lock,
                             color:
                                 netList[index].selected ? Colors.white : null,
                           ),
@@ -87,7 +85,7 @@ void networks() {
                 fabAdd(
                   Strings.ADD_NETWORK.tr,
                   onTap: () {
-                    bottomSheetNavigateWithReplace((){
+                    bottomSheetNavigateWithReplace(() {
                       network(_box!);
                     });
                   },

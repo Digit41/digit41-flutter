@@ -30,7 +30,7 @@ void network(Box netBox, {NetworkModel? netModel}) {
     hasTitle: true,
   );
   AppTextFormField rpcUrl = AppTextFormField(
-    hint: Strings.NETWORK_NAME.tr,
+    hint: Strings.NEW_RPC_URL.tr,
     textInputType: TextInputType.url,
     nextFocusNode: chainId.focusNode,
     enable: netModel != null && !netModel.byUser ? false : true,
