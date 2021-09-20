@@ -1,5 +1,4 @@
-
-class Images{
+class Images {
   static const SPLASH_LOGO = 'assets/images/splash_logo.png';
   static const LOGO = 'assets/images/logo.png';
   static const ARROW_RIGHT = 'assets/images/arrow_right.png';
@@ -24,4 +23,5 @@ class Images{
   static const SCAN = 'assets/images/scaner.png';
   static const FIRE = 'assets/images/fire.png';
   static const KEY = 'assets/images/key.png';
+  static const NETWORK = 'assets/images/network.png';
 }

@@ -69,7 +69,7 @@ class _SettingsState extends State<Settings> {
           ),
           // todo: set icon and name interaction
           item(
-            Images.WHITE_WALLET,
+            Images.NETWORK,
             Strings.NETWORKS.tr,
             onTap: networks,
             trailing: GetBuilder(
@@ -93,7 +93,7 @@ class _SettingsState extends State<Settings> {
                 },
               ),
             ),
-            onTap: (){
+            onTap: () {
               currencyBottomSheet(currencyKey!);
             },
           ),
