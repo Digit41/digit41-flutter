@@ -78,6 +78,7 @@ void network(Box netBox, {NetworkModel? netModel}) {
         netModel.blockExplorerURL = nm.blockExplorerURL;
         netModel.save();
       }
+      netBox.close();
       Get.back();
     }
   }
