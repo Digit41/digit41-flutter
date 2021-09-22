@@ -16,8 +16,23 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 void importWallet() async {
+  Get.bottomSheet(
+    _ImportWallet(),
+    isScrollControlled: true,
+    backgroundColor: Get.theme.bottomSheetTheme.backgroundColor,
+    shape: const RoundedRectangleBorder(
+      borderRadius: const BorderRadius.only(
+        topLeft: const Radius.circular(16.0),
+        topRight: const Radius.circular(16.0),
+      ),
+    ),
+  );
+}
+
+class _ImportWallet extends StatelessWidget {
   WalletHive walletHive = WalletHive();
   final formKey = GlobalKey<FormState>();
+  AppTextFormField? name;
   AppTextFormField phrases = AppTextFormField(
     hint: Strings.PHRASE.tr,
     maxLine: 5,
@@ -42,47 +57,51 @@ void importWallet() async {
         return Strings.INVALID.tr + ' ' + Strings.PHRASE.tr;
     },
   );
-  AppTextFormField name = AppTextFormField(
-    hint: Strings.NAME.tr,
-    nextFocusNode: phrases.focusNode,
-  );
 
-  phrases.suffixIcon = Column(
-    children: [
-      const SizedBox(height: 100.0),
-      Padding(
-        padding: const EdgeInsets.only(right: 8.0),
-        child: TextButton(
-          onPressed: () {
-            FlutterClipboard.paste().then((value) {
-              phrases.controller.text = value;
-            });
-          },
-          child: Text(
-            Strings.PASTE.tr,
-            style: TextStyle(color: Get.theme.primaryColor),
+  _ImportWallet({Key? key}) : super(key: key) {
+    phrases.suffixIcon = Column(
+      children: [
+        const SizedBox(height: 100.0),
+        Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: TextButton(
+            onPressed: () {
+              FlutterClipboard.paste().then((value) {
+                phrases.controller.text = value;
+              });
+            },
+            child: Text(
+              Strings.PASTE.tr,
+              style: TextStyle(color: Get.theme.primaryColor),
+            ),
           ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+    name = AppTextFormField(
+      hint: Strings.NAME.tr,
+      nextFocusNode: phrases.focusNode,
+    );
 
-  int countWall;
-  Box box = await walletHive.getBox();
-  countWall = box.length + 1;
-  name.controller.text = 'Wallet $countWall';
-  box.close();
+    init();
+  }
+
+  void init() async {
+    int countWall;
+    Box box = await walletHive.getBox();
+    countWall = box.length + 1;
+    name!.controller.text = 'Wallet $countWall';
+    box.close();
+  }
 
   void import() async {
-
     bool isAllow = true;
-    if(!GetPlatform.isWeb)
-      isAllow = await storagePermission();
+    if (!GetPlatform.isWeb) isAllow = await storagePermission();
 
     if (formKey.currentState!.validate() && isAllow) {
       WalletModel walletModel = await walletHive.configureWallet(
         phrases.controller.text,
-        name: name.controller.text,
+        name: name!.controller.text,
       );
 
       /// set active wallet
@@ -116,8 +135,9 @@ void importWallet() async {
         child: child,
       );
 
-  Get.bottomSheet(
-    SingleChildScrollView(
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 32.0),
         child: Form(
@@ -177,14 +197,13 @@ void importWallet() async {
               const SizedBox(height: 16.0),
               txt(Text(Strings.WALLET_NAME.tr)),
               const SizedBox(height: 8.0),
-              name,
+              name!,
               const SizedBox(height: 32.0),
               TextButton(
                 onPressed: () {},
                 child: Text(Strings.Q_IMPORT_WALL.tr),
               ),
-              if(GetPlatform.isWeb)
-                const SizedBox(height: 8.0),
+              if (GetPlatform.isWeb) const SizedBox(height: 8.0),
               AppButton(
                 title: Strings.IMPORT.tr,
                 onTap: import,
@@ -194,14 +213,6 @@ void importWallet() async {
           ),
         ),
       ),
-    ),
-    isScrollControlled: true,
-    backgroundColor: Get.theme.bottomSheetTheme.backgroundColor,
-    shape: const RoundedRectangleBorder(
-      borderRadius: const BorderRadius.only(
-        topLeft: const Radius.circular(16.0),
-        topRight: const Radius.circular(16.0),
-      ),
-    ),
-  );
+    );
+  }
 }
