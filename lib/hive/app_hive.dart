@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 
-import 'wallet_model.dart';
+import '../models/wallet_model.dart';
 
 class WalletHive {
   Box? box;

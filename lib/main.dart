@@ -11,7 +11,7 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
-import 'hive/wallet_model.dart';
+import 'models/wallet_model.dart';
 import 'pages/splash.dart';
 import 'utils/app_local_notification.dart';
 import 'utils/app_push_notification.dart';

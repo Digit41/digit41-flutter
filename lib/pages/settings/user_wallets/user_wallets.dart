@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/hive/app_hive.dart';
-import 'package:digit41/hive/wallet_model.dart';
+import 'package:digit41/models/wallet_model.dart';
 import 'package:digit41/pages/settings/any_item.dart';
 import 'package:digit41/pages/settings/user_wallets/manage_wallet.dart';
 import 'package:digit41/pages/welcome.dart';

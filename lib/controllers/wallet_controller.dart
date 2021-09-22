@@ -1,6 +1,6 @@
 import 'package:digit41/controllers/assets_controller.dart';
 import 'package:digit41/hive/app_hive.dart';
-import 'package:digit41/hive/wallet_model.dart';
+import 'package:digit41/models/wallet_model.dart';
 import 'package:get/get.dart';
 
 class WalletController extends GetxController {

@@ -1,5 +1,5 @@
 import 'package:digit41/controllers/wallet_controller.dart';
-import 'package:digit41/hive/wallet_model.dart';
+import 'package:digit41/models/wallet_model.dart';
 import 'package:digit41/pages/settings/user_wallets/term_of_recovery_phrase.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/strings.dart';
