@@ -130,11 +130,6 @@ class _ImportWallet extends StatelessWidget {
     }
   }
 
-  Widget txt(Widget child) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0.0),
-        child: child,
-      );
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -188,14 +183,12 @@ class _ImportWallet extends StatelessWidget {
               const SizedBox(height: 16.0),
               phrases,
               const SizedBox(height: 8.0),
-              txt(
-                Text(
-                  Strings.DESC_IMPORT_WALL.tr,
-                  style: TextStyle(fontSize: 12.0),
-                ),
+              Text(
+                Strings.DESC_IMPORT_WALL.tr,
+                style: TextStyle(fontSize: 12.0),
               ),
               const SizedBox(height: 16.0),
-              txt(Text(Strings.WALLET_NAME.tr)),
+              Text(Strings.WALLET_NAME.tr),
               const SizedBox(height: 8.0),
               name!,
               const SizedBox(height: 32.0),
