@@ -13,10 +13,6 @@ enum Coins {
   Ripple,
 }
 
-class Networks{
-  static const MAIN_NET = 'mainnet';
-}
-
 class BlockChains{
   static const ETHEREUM = 'ethereum';
 }

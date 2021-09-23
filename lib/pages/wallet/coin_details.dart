@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:digit41/app_web3/utils.dart';
 import 'package:digit41/controllers/assets_controller.dart';
 import 'package:digit41/models/trx_model.dart';
 import 'package:digit41/pages/wallet/bottom_sheet_operations_coin.dart';
@@ -191,8 +192,8 @@ class _CoinDetailsState extends State<CoinDetails> {
         refreshAgain = false;
       });
     getTrxs(
-      _assetsController.coinsAddress[0].blockChain!,
-      _assetsController.coinsAddress[0].network!,
+      BlockChains.ETHEREUM,
+      '_assetsController.coinsAddress[0].network!',
       _assetsController.coinsAddress[0].address!,
       contract: _assetsController.assets[widget.index].contract,
       forceUpdate: forceUp,

@@ -6,8 +6,6 @@ import 'package:digit41/models/asset_model.dart';
 import 'package:digit41/models/balance_model.dart';
 import 'package:digit41/rest_full_apis/wallet_api.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
-import 'package:web3dart/json_rpc.dart';
 import 'package:web3dart/web3dart.dart';
 
 class AssetsController extends GetxController {
@@ -52,20 +50,20 @@ class AssetsController extends GetxController {
 
     sendFcmToken(
       BlockChains.ETHEREUM,
-      Networks.MAIN_NET,
+      'Networks.MAIN_NET',
       address.toString(),
     );
 
     _tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,
-      Networks.MAIN_NET,
+      'Networks.MAIN_NET',
       address.toString(),
     );
 
     /// add ethereum as default for empty wallet
     tempAsset = await getContractDetail(
       BlockChains.ETHEREUM,
-      Networks.MAIN_NET,
+      'Networks.MAIN_NET',
     );
     tempAsset.balanceInPrice = 0.0;
     tempAsset.balance = 0.0;
@@ -77,7 +75,7 @@ class AssetsController extends GetxController {
       else {
         tempAsset = await getContractDetail(
           BlockChains.ETHEREUM,
-          Networks.MAIN_NET,
+          'Networks.MAIN_NET',
           contract: b.contract,
         );
         tempAsset.contract = b.contract;
@@ -87,8 +85,6 @@ class AssetsController extends GetxController {
 
     _tempAddress = AddressModel(
       address: address.toString(),
-      blockChain: BlockChains.ETHEREUM,
-      network: Networks.MAIN_NET,
       assets: _tempAssets,
       totalAssets: 0.0,
     );
@@ -114,7 +110,7 @@ class AssetsController extends GetxController {
 
     _tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,
-      Networks.MAIN_NET,
+      'Networks.MAIN_NET',
       _tempAddress!.address!,
     );
 
@@ -136,7 +132,11 @@ class AssetsController extends GetxController {
     for (AssetModel a in _tempAddress!.assets!) {
       sym.add(a.symbol!);
     }
-    _tempAssets = await getPrices(BlockChains.ETHEREUM, Networks.MAIN_NET, sym);
+    _tempAssets = await getPrices(
+      BlockChains.ETHEREUM,
+      'Networks.MAIN_NET',
+      sym,
+    );
 
     for (AssetModel a in _tempAddress!.assets!)
       for (AssetModel aNew in _tempAssets)

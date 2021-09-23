@@ -1,14 +1,14 @@
-import 'package:digit41/widgets/app_bottom_sheet.dart';
-import 'package:digit41/widgets/app_button.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:digit41/models/network_model.dart';
 import 'package:digit41/utils/strings.dart';
+import 'package:digit41/widgets/app_bottom_sheet.dart';
+import 'package:digit41/widgets/app_button.dart';
 import 'package:digit41/widgets/app_text_form_field.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 void network(Box netBox, {NetworkModel? netModel}) {
-  _Netwotk _netwotk = _Netwotk(netBox, netModel: netModel);
+  _Netwotk _netwotk = _Netwotk(netBox, netModel);
 
   bottomSheet(Strings.DETAIL.tr, child: _netwotk);
 }
@@ -24,7 +24,7 @@ class _Netwotk extends StatelessWidget {
   AppTextFormField? rpcUrl;
   AppTextFormField? netName;
 
-  _Netwotk(this.netBox, {this.netModel, Key? key}) : super(key: key) {
+  _Netwotk(this.netBox, this.netModel, {Key? key}) : super(key: key) {
     blockUrl = AppTextFormField(
       hint: Strings.BLOCK_EXP_URL.tr,
       textInputType: TextInputType.url,
@@ -129,21 +129,21 @@ class _Netwotk extends StatelessWidget {
             netModel == null
                 ? const Center()
                 : AppButton(
-                    title: Strings.DELETE.tr,
-                    onTap: () {
-                      confirmBottomSheet(
-                        Strings.WARNING.tr,
-                        Strings.DESC_NETWORK_DELETE.tr,
-                        () {
-                          netModel!.delete();
-                          Get.back();
-                          Get.back();
-                        },
-                        Strings.YES.tr,
-                      );
-                    },
-                    btnColor: Colors.red,
-                  ),
+              title: Strings.DELETE.tr,
+              onTap: () {
+                confirmBottomSheet(
+                  Strings.WARNING.tr,
+                  Strings.DESC_NETWORK_DELETE.tr,
+                      () {
+                    netModel!.delete();
+                    Get.back();
+                    Get.back();
+                  },
+                  Strings.YES.tr,
+                );
+              },
+              btnColor: Colors.red,
+            ),
           ),
         ],
       ),
