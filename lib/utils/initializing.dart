@@ -27,8 +27,7 @@ final _defaultNetworks = [
   ),
 ];
 
-void initHiveNetwork() async {
+Future<void> initHiveNetwork() async {
   Box box = await Hive.openBox(HiveKey.HIVE_NETWORK_BOX);
   if (box.length == 0) for (NetworkModel nm in _defaultNetworks) box.add(nm);
-  box.close();
 }

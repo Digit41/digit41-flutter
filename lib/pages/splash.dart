@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:digit41/controllers/network_controller.dart';
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/pages/welcome.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
@@ -7,6 +8,7 @@ import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/initializing.dart';
 import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_bottom_navigation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'with_confirmation.dart';
@@ -20,14 +22,21 @@ class _SplashState extends State<Splash> {
   WalletController walletCtl = WalletController.walletCtl;
   bool exist = false;
 
+  Future<void> initNetwork() async {
+    await initHiveNetwork();
+
+    /// init default network
+    NetworkController.netCtl.initDefaultNetwork();
+  }
+
   Future<void> checkExistActiveWallet() async {
-    /// init set active wallet
+    /// init default network
     await walletCtl.setWalletModel();
     if (walletCtl.walletModel != null) exist = true;
   }
 
   void go() async {
-    initHiveNetwork();
+    await initNetwork();
     await checkExistActiveWallet();
     AppSharedPreferences pref = AppSharedPreferences();
     Widget page;
@@ -56,12 +65,17 @@ class _SplashState extends State<Splash> {
         width: double.infinity,
         height: double.infinity,
         color: Colors.black,
-        child: Center(
-          child: Image.asset(
-            Images.SPLASH_LOGO,
-            height: 200.0,
-            width: 200.0,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              Images.SPLASH_LOGO,
+              height: 200.0,
+              width: 200.0,
+            ),
+            const SizedBox(height: 24.0),
+            const CupertinoActivityIndicator(),
+          ],
         ),
       ),
     );

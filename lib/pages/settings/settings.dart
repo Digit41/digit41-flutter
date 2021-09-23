@@ -1,3 +1,4 @@
+import 'package:digit41/controllers/network_controller.dart';
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/pages/settings/currency.dart';
 import 'package:digit41/pages/settings/languages.dart';
@@ -74,8 +75,10 @@ class _SettingsState extends State<Settings> {
             Strings.NETWORKS.tr,
             onTap: networks,
             trailing: GetBuilder(
-              init: WalletController(),
-              builder: (ctx) => Text('mainnet'),
+              init: NetworkController(),
+              builder: (ctx) => Text(
+                NetworkController.netCtl.networkModel!.name!,
+              ),
             ),
           ),
           passcode(),

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:digit41/controllers/network_controller.dart';
 import 'package:digit41/hive/app_hive.dart';
 import 'package:digit41/models/network_model.dart';
 import 'package:digit41/pages/settings/any_item.dart';
@@ -53,6 +54,10 @@ void networks() {
                           if (!netList[index].selected) {
                             netList[index].selected = true;
                             netList[index].save();
+                            NetworkController.netCtl.initDefaultNetwork(
+                              network: netList[index],
+                            );
+
                             netList[selectedIndex].selected = false;
 
                             /// There may be no selected network

@@ -1,3 +1,4 @@
+import 'package:digit41/controllers/network_controller.dart';
 import 'package:digit41/models/network_model.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/widgets/app_bottom_sheet.dart';
@@ -100,6 +101,20 @@ class _Netwotk extends StatelessWidget {
     }
   }
 
+  void delete() {
+    confirmBottomSheet(
+      Strings.WARNING.tr,
+      Strings.DESC_NETWORK_DELETE.tr,
+      () async {
+        netModel!.delete();
+        await NetworkController.netCtl.setDefaultNetwork();
+        Get.back();
+        Get.back();
+      },
+      Strings.YES.tr,
+    );
+  }
+
   Widget showButton(child) => showButtons ? child : const Center();
 
   @override
@@ -129,21 +144,10 @@ class _Netwotk extends StatelessWidget {
             netModel == null
                 ? const Center()
                 : AppButton(
-              title: Strings.DELETE.tr,
-              onTap: () {
-                confirmBottomSheet(
-                  Strings.WARNING.tr,
-                  Strings.DESC_NETWORK_DELETE.tr,
-                      () {
-                    netModel!.delete();
-                    Get.back();
-                    Get.back();
-                  },
-                  Strings.YES.tr,
-                );
-              },
-              btnColor: Colors.red,
-            ),
+                    title: Strings.DELETE.tr,
+                    onTap: delete,
+                    btnColor: Colors.red,
+                  ),
           ),
         ],
       ),
