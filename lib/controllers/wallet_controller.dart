@@ -4,7 +4,7 @@ import 'package:digit41/models/wallet_model.dart';
 import 'package:get/get.dart';
 
 class WalletController extends GetxController {
-  static WalletController get appGet => Get.put(WalletController());
+  static WalletController get walletCtl => Get.put(WalletController());
 
   /// use for recognize active wallet
   WalletModel? walletModel;

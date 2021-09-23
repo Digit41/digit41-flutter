@@ -84,7 +84,7 @@ class _MyPassCodeState extends State<MyPassCode> {
         isValidCallback: () {
           /// it is call final with set correctly passcode
           pref.setPasscode(widget.pass.hashCode.toString());
-          WalletController.appGet.forUpdateUI();
+          WalletController.walletCtl.forUpdateUI();
         },
         cancelButton: Text(
           Strings.CLOSE.tr,

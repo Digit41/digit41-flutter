@@ -109,25 +109,25 @@ void trxDetailsBottomSheet(
 }
 
 void sendBottomSheet(BuildContext context) {
-  WalletController appGet = WalletController.appGet;
+  WalletController walletCtl = WalletController.walletCtl;
   final formKey = GlobalKey<FormState>();
   AppTextFormField amount = AppTextFormField(
     hint: Strings.AMOUNT.tr,
     textInputType: TextInputType.number,
     onChanged: (val) {
-      appGet.forUpdateUI();
+      walletCtl.forUpdateUI();
     },
   );
   AppTextFormField address = AppTextFormField(
     hint: Strings.RECIPIENT_ADDR.tr,
     nextFocusNode: amount.focusNode,
     onChanged: (val) {
-      appGet.forUpdateUI();
+      walletCtl.forUpdateUI();
     },
   );
   address.focusNode.requestFocus();
   address.focusNode.addListener(() {
-    appGet.forUpdateUI();
+    walletCtl.forUpdateUI();
   });
 
   _bottomSheetOperationCoins(

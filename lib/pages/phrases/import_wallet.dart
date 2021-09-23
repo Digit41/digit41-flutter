@@ -105,7 +105,7 @@ class _ImportWallet extends StatelessWidget {
       );
 
       /// set active wallet
-      WalletController.appGet.setWalletModel(wm: walletModel);
+      WalletController.walletCtl.setWalletModel(wm: walletModel);
 
       bottomSheet(
         'DIGIT41',

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/pages/welcome.dart';
 import 'package:digit41/utils/app_shared_preferences.dart';
-import 'package:digit41/utils/initializing.dart';
 import 'package:digit41/utils/images_path.dart';
+import 'package:digit41/utils/initializing.dart';
 import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_bottom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +17,13 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
-  WalletController appGet = WalletController.appGet;
+  WalletController walletCtl = WalletController.walletCtl;
   bool exist = false;
 
   Future<void> checkExistActiveWallet() async {
     /// init set active wallet
-    await appGet.setWalletModel();
-    if (appGet.walletModel != null) exist = true;
+    await walletCtl.setWalletModel();
+    if (walletCtl.walletModel != null) exist = true;
   }
 
   void go() async {

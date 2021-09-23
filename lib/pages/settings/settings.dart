@@ -64,7 +64,8 @@ class _SettingsState extends State<Settings> {
             onTap: userWallets,
             trailing: GetBuilder(
               init: WalletController(),
-              builder: (ctx) => Text(WalletController.appGet.walletModel!.name),
+              builder: (ctx) =>
+                  Text(WalletController.walletCtl.walletModel!.name),
             ),
           ),
           // todo: set icon and name interaction

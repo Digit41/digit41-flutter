@@ -1,7 +1,7 @@
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/hive/app_hive.dart';
-import 'package:digit41/models/wallet_model.dart';
 import 'package:digit41/models/phrase_model.dart';
+import 'package:digit41/models/wallet_model.dart';
 import 'package:digit41/pages/phrases/any_phrase.dart';
 import 'package:digit41/utils/app_permission.dart';
 import 'package:digit41/utils/app_theme.dart';
@@ -177,7 +177,7 @@ class _VerifyingPhrasesState extends State<VerifyingPhrases> {
       );
 
       /// set active wallet
-      WalletController.appGet.setWalletModel(wm: walletModel);
+      WalletController.walletCtl.setWalletModel(wm: walletModel);
 
       navigateToPage(BottomNavigation(), popAll: true);
     }

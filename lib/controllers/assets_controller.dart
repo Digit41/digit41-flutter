@@ -18,7 +18,7 @@ class AssetsController extends GetxController {
   List<double> totalAssets = [0.0];
 
   List<AddressModel> coinsAddress = <AddressModel>[];
-  WalletController _wallet = WalletController.appGet;
+  WalletController _wallet = WalletController.walletCtl;
   List<BalanceModel>? _tempBalanceList;
   List<AssetModel> _tempAssets = [];
   AddressModel? _tempAddress;

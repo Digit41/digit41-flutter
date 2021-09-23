@@ -28,7 +28,7 @@ void currencyBottomSheet(String currencyKey) {
             cL[index].key == currencyKey,
             onTap: () {
               _pref.saveCurrency(cL[index].key);
-              WalletController.appGet.forUpdateUI();
+              WalletController.walletCtl.forUpdateUI();
               Get.back();
             },
           ),

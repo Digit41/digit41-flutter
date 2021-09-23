@@ -27,7 +27,8 @@ void manageWallet(WalletModel wallet) {
         if (wallet.name != walletName.controller.text) {
           wallet.name = walletName.controller.text;
           wallet.save();
-          if (wallet.selected) WalletController.appGet.setWalletModel(wm: wallet);
+          if (wallet.selected)
+            WalletController.walletCtl.setWalletModel(wm: wallet);
         }
         Get.back();
       },

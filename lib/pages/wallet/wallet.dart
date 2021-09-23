@@ -15,7 +15,7 @@ class Wallet extends StatefulWidget {
 
 class _WalletState extends State<Wallet> {
   int selectedTab = 0;
-  WalletController appGet = WalletController.appGet;
+  WalletController walletCtl = WalletController.walletCtl;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _WalletState extends State<Wallet> {
               children: [
                 const SizedBox(height: 32.0),
                 Text(
-                  appGet.walletModel!.name,
+                  walletCtl.walletModel!.name,
                   style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16.0),
