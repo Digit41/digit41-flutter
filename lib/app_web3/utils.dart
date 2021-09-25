@@ -13,6 +13,8 @@ enum Coins {
   Ripple,
 }
 
-class BlockChains{
+class BlockChains {
   static const ETHEREUM = 'ethereum';
 }
+
+double convertWeiToEther(double wei) => wei / 10e17;

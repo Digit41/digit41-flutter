@@ -11,7 +11,6 @@ class NFTs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: AssetsController(),
       builder: (AssetsController controller) {
         if (controller.isLoading)
           return Padding(

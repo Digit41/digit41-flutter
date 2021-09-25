@@ -18,6 +18,12 @@ class _WalletState extends State<Wallet> {
   WalletController walletCtl = WalletController.walletCtl;
 
   @override
+  void initState() {
+    super.initState();
+    AssetsController.assetsController;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 0,
@@ -42,7 +48,6 @@ class _WalletState extends State<Wallet> {
                 ),
                 const SizedBox(height: 16.0),
                 GetBuilder(
-                  init: AssetsController(),
                   builder: (AssetsController controller) => controller.isLoading
                       ? Padding(
                           padding: const EdgeInsets.only(top: 32.0),

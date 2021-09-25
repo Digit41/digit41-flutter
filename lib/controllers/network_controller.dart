@@ -3,6 +3,8 @@ import 'package:digit41/models/network_model.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
+import 'assets_controller.dart';
+
 class NetworkController extends GetxController {
   static NetworkController get netCtl => Get.put(NetworkController());
 
@@ -23,8 +25,8 @@ class NetworkController extends GetxController {
     } else
       networkModel = network;
 
-    /// with Adding or changing network requires asset renewal
-    // Get.delete<AssetsController>(force: true);
+    /// with changing network requires asset renewal
+    Get.delete<AssetsController>(force: true);
 
     update();
   }
@@ -38,8 +40,8 @@ class NetworkController extends GetxController {
     networkModel = nm;
     box.close();
 
-    /// with Adding or changing network requires asset renewal
-    // Get.delete<AssetsController>(force: true);
+    /// changing network requires asset renewal
+    Get.delete<AssetsController>(force: true);
 
     update();
   }

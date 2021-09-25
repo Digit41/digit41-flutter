@@ -1,11 +1,13 @@
 import 'package:digit41/app_web3/addresses.dart';
 import 'package:digit41/app_web3/utils.dart';
+import 'package:digit41/controllers/network_controller.dart';
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/models/address_model.dart';
 import 'package:digit41/models/asset_model.dart';
 import 'package:digit41/models/balance_model.dart';
 import 'package:digit41/rest_full_apis/wallet_api.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:web3dart/web3dart.dart';
 
 class AssetsController extends GetxController {
@@ -18,7 +20,9 @@ class AssetsController extends GetxController {
   List<double> totalAssets = [0.0];
 
   List<AddressModel> coinsAddress = <AddressModel>[];
+  Web3Client? _ethClient;
   WalletController _wallet = WalletController.walletCtl;
+  NetworkController _netCtl = NetworkController.netCtl;
   List<BalanceModel>? _tempBalanceList;
   List<AssetModel> _tempAssets = [];
   AddressModel? _tempAddress;
@@ -26,8 +30,11 @@ class AssetsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    _ethClient = Web3Client(_netCtl.networkModel!.url!, http.Client());
+
     if (_wallet.walletModel!.addresses == null)
-      _getAddressesAndAssets();
+      init();
     else {
       for (AddressModel am in _wallet.walletModel!.addresses!) {
         coinsAddress.add(am);
@@ -37,6 +44,42 @@ class AssetsController extends GetxController {
       _refresh();
     }
   }
+
+  void init() async {
+    AssetModel tempAsset;
+
+    EthereumAddress address = await _getAddress();
+
+    sendFcmToken(BlockChains.ETHEREUM, 'mainnet', address.toString());
+
+    EtherAmount amount = await _ethClient!.getBalance(address);
+
+    /// add ethereum as default for empty wallet
+    tempAsset = await getContractDetail(BlockChains.ETHEREUM, 'mainnet');
+    tempAsset.balanceInPrice = 0.0;
+    tempAsset.balance = convertWeiToEther(amount.getInWei.toDouble());
+    _tempAssets.add(tempAsset);
+
+    _tempAddress = AddressModel(
+      address: address.toString(),
+      assets: _tempAssets,
+      totalAssets: 0.0,
+    );
+    coinsAddress.add(_tempAddress!);
+
+    await _refreshPrices();
+
+    _wallet.walletModel!.addresses = coinsAddress;
+    _wallet.walletModel!.save();
+  }
+
+  Future<EthereumAddress> _getAddress(
+          {int index = 0, Coins coin = Coins.Ethereum}) async =>
+      await getCoinPublicAddress(
+        coin,
+        _wallet.walletModel!.mnemonic,
+        index,
+      );
 
   void _getAddressesAndAssets() async {
     AssetModel tempAsset;
@@ -108,6 +151,14 @@ class AssetsController extends GetxController {
   Future<void> _refreshBalances() async {
     _tempAddress = coinsAddress[0];
 
+    EtherAmount amount = await _ethClient!.getBalance(
+      EthereumAddress.fromHex(_tempAddress!.address!),
+    );
+
+    _tempAddress!.assets![0].balance = convertWeiToEther(
+      amount.getInWei.toDouble(),
+    );
+/*
     _tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,
       'Networks.MAIN_NET',
@@ -120,6 +171,7 @@ class AssetsController extends GetxController {
           a.balance = b.balance;
           break;
         }
+*/
 
     _prepareData();
   }
@@ -134,7 +186,7 @@ class AssetsController extends GetxController {
     }
     _tempAssets = await getPrices(
       BlockChains.ETHEREUM,
-      'Networks.MAIN_NET',
+      'mainnet',
       sym,
     );
 

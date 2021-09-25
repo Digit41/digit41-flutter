@@ -70,7 +70,6 @@ class _SettingsState extends State<Settings> {
               ),
             ),
           ),
-          // todo: set icon and name interaction
           item(
             Images.NETWORK,
             Strings.NETWORKS.tr,
