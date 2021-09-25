@@ -38,10 +38,12 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 200),
       lowerBound: 0.0,
       upperBound: 0.05,
-    );
+    )..addListener(() {
+        setState(() {});
+      });
   }
 
   @override
@@ -56,12 +58,12 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
     return GestureDetector(
       onTapDown: (TapDownDetails details) {
         setState(() {
-          _animationController!.reverse();
+          _animationController!.forward();
         });
-        Timer(Duration(milliseconds: 350), () {
+        Timer(Duration(milliseconds: 200), () {
           widget.onTap!();
           setState(() {
-            _animationController!.forward();
+            _animationController!.reverse();
           });
         });
       },
