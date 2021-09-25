@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:digit41/app_web3/utils.dart';
 import 'package:digit41/controllers/assets_controller.dart';
 import 'package:digit41/models/trx_model.dart';
-import 'package:digit41/pages/wallet/bottom_sheet_operations_coin.dart';
 import 'package:digit41/rest_full_apis/wallet_api.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/images_path.dart';
@@ -14,6 +13,8 @@ import 'package:digit41/widgets/app_error_again.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'coin_operations/bottom_sheet.dart';
 
 class CoinDetails extends StatefulWidget {
   int index;
@@ -36,7 +37,6 @@ class _CoinDetailsState extends State<CoinDetails> {
         textBaseline: TextBaseline.alphabetic,
         children: [
           Text(title),
-          const SizedBox(height: 4.0),
           Text(
             sub,
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
@@ -91,8 +91,8 @@ class _CoinDetailsState extends State<CoinDetails> {
       );
 
   Widget bottom() => Container(
-        padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
-        height: 92.0,
+    padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
+        height: 100.0,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.bottomCenter,
