@@ -20,6 +20,8 @@ class _WalletState extends State<Wallet> {
   @override
   void initState() {
     super.initState();
+
+    /// for add assets controller to Get
     AssetsController.assetsController;
   }
 

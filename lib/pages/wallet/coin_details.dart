@@ -17,9 +17,9 @@ import 'package:get/get.dart';
 import 'coin_operations/bottom_sheet.dart';
 
 class CoinDetails extends StatefulWidget {
-  int index;
+  int assetIndex;
 
-  CoinDetails(this.index);
+  CoinDetails(this.assetIndex);
 
   @override
   _CoinDetailsState createState() => _CoinDetailsState();
@@ -53,7 +53,7 @@ class _CoinDetailsState extends State<CoinDetails> {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
-                _assetsController.assets[widget.index].name!,
+                _assetsController.assets[widget.assetIndex].name!,
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
               ),
               const SizedBox(height: 4.0),
@@ -61,7 +61,7 @@ class _CoinDetailsState extends State<CoinDetails> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '\$ ${_assetsController.assets[widget.index].price!.toStringAsFixed(2)}',
+                    '\$ ${_assetsController.assets[widget.assetIndex].price!.toStringAsFixed(2)}',
                     style: TextStyle(
                       color: positive ? Get.theme.primaryColor : Colors.red,
                       fontSize: 18.0,
@@ -80,12 +80,12 @@ class _CoinDetailsState extends State<CoinDetails> {
             padding: const EdgeInsets.only(right: 24.0),
             child: infoItem(
               Strings.BALANCE.tr,
-              '${_assetsController.assets[widget.index].balance!.toStringAsPrecision(_assetsController.assets[widget.index].precision!)}',
+              '${_assetsController.assets[widget.assetIndex].balance!.toStringAsPrecision(_assetsController.assets[widget.assetIndex].precision!)}',
             ),
           ),
           infoItem(
             Strings.VALUE.tr,
-            '\$ ${_assetsController.assets[widget.index].balanceInPrice!.toStringAsFixed(2)}',
+            '\$ ${_assetsController.assets[widget.assetIndex].balanceInPrice!.toStringAsFixed(2)}',
           ),
         ],
       );
@@ -120,7 +120,10 @@ class _CoinDetailsState extends State<CoinDetails> {
                     FloatingActionButton(
                       heroTag: 'send',
                       onPressed: () {
-                        sendBottomSheet(context);
+                        sendBottomSheet(
+                          context,
+                          asset: _assetsController.assets[widget.assetIndex],
+                        );
                       },
                       child: Icon(Icons.arrow_upward, color: Colors.black),
                     ),
@@ -195,7 +198,7 @@ class _CoinDetailsState extends State<CoinDetails> {
       BlockChains.ETHEREUM,
       '_assetsController.coinsAddress[0].network!',
       _assetsController.coinsAddress[0].address!,
-      contract: _assetsController.assets[widget.index].contract,
+      contract: _assetsController.assets[widget.assetIndex].contract,
       forceUpdate: forceUp,
     ).then((value) {
       setState(() {
@@ -203,7 +206,7 @@ class _CoinDetailsState extends State<CoinDetails> {
       });
 
       /// for updating and fetch trxList form root if trxList is empty
-      if(trxList!.isEmpty && update){
+      if (trxList!.isEmpty && update) {
         update = false;
         getTrxList(forceUp: 'true');
       }
@@ -217,7 +220,8 @@ class _CoinDetailsState extends State<CoinDetails> {
   @override
   void initState() {
     super.initState();
-    positive = _assetsController.assets[widget.index].percentChange24h! > 0;
+    positive =
+        _assetsController.assets[widget.assetIndex].percentChange24h! > 0;
     getTrxList();
   }
 
@@ -242,13 +246,13 @@ class _CoinDetailsState extends State<CoinDetails> {
                 ),
                 const SizedBox(height: 8.0),
                 Text(
-                  _assetsController.assets[widget.index].contract == null
+                  _assetsController.assets[widget.assetIndex].contract == null
                       ? Strings.COIN.tr
                       : Strings.TOKEN.tr,
                 ),
                 const SizedBox(height: 16.0),
                 CacheImage(
-                  _assetsController.assets[widget.index].icon!,
+                  _assetsController.assets[widget.assetIndex].icon!,
                   size: 90.0,
                 ),
                 const SizedBox(height: 16.0),
@@ -292,7 +296,7 @@ class _CoinDetailsState extends State<CoinDetails> {
             trxDetailsBottomSheet(
               context,
               trxList![index],
-              _assetsController.assets[widget.index],
+              _assetsController.assets[widget.assetIndex],
             );
           },
           title: Row(
@@ -321,7 +325,7 @@ class _CoinDetailsState extends State<CoinDetails> {
             children: [
               Text(
                 trxList![index].amount!.toStringAsPrecision(
-                      _assetsController.assets[widget.index].precision!,
+                  _assetsController.assets[widget.assetIndex].precision!,
                     ),
                 style: TextStyle(color: Get.theme.primaryColor),
               ),

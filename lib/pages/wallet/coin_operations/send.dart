@@ -1,11 +1,13 @@
 part of 'bottom_sheet.dart';
 
-void sendBottomSheet(BuildContext context) {
-  _coinOperationsBottomSheet(context, '', _Send());
+void sendBottomSheet(BuildContext context, {AssetModel? asset}) {
+  _coinOperationsBottomSheet(context, asset!.icon!, _Send(asset));
 }
 
 class _Send extends StatefulWidget {
-  const _Send({Key? key}) : super(key: key);
+  final AssetModel assetModel;
+
+  const _Send(this.assetModel, {Key? key}) : super(key: key);
 
   @override
   _SendState createState() => _SendState();
@@ -34,13 +36,62 @@ class _SendState extends State<_Send> {
       },
     );
     address!.focusNode.requestFocus();
-    address!.focusNode.addListener(() {
+    address!.controller.addListener(() {
+      setState(() {});
+    });
+    amount!.controller.addListener(() {
       setState(() {});
     });
   }
 
+  Widget addressBtns() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Expanded(
+            child: AppButton1(
+              title: Strings.PASTE.tr,
+              onTap: () {
+                FlutterClipboard.paste().then((value) {
+                  address!.controller.text = value;
+                  if (value.length > 0) amount!.focusNode.requestFocus();
+                });
+              },
+              icon: _buttonIcon(Images.COPY),
+            ),
+          ),
+          if (!GetPlatform.isWeb) const SizedBox(width: 32.0),
+          if (!GetPlatform.isWeb)
+            Expanded(
+              child: AppButton1(
+                title: Strings.SCAN_QR.tr,
+                onTap: () {
+                  barcodeScan().then((value) {
+                    address!.controller.text = value;
+                    if (value.length > 0) amount!.focusNode.requestFocus();
+                  });
+                },
+                icon: _buttonIcon(Images.SCAN),
+              ),
+            ),
+        ],
+      );
+
+  Widget amountBtn() => AppButton1(
+        title: Strings.MAX_AMOUNT.tr,
+        onTap: () {
+          amount!.controller.text = widget.assetModel.balance.toString();
+        },
+        icon: _buttonIcon(Images.FIRE),
+      );
+
   @override
   Widget build(BuildContext context) {
+    FocusScope.of(context).addListener(() {
+      if (address!.controller.text == '')
+        address!.focusNode.requestFocus();
+      else if (amount!.controller.text == '') amount!.focusNode.requestFocus();
+      setState(() {});
+    });
     return Form(
       key: formKey,
       child: Column(
@@ -62,43 +113,9 @@ class _SendState extends State<_Send> {
                   onTap: () {},
                   btnColor: Get.theme.primaryColor,
                 )
-              : address!.focusNode.hasFocus
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Expanded(
-                          child: AppButton1(
-                            title: Strings.PASTE.tr,
-                            onTap: () {
-                              FlutterClipboard.paste().then((value) {
-                                address!.controller.text = value;
-                              });
-                            },
-                            icon: _buttonIcon(Images.COPY),
-                          ),
-                        ),
-                        if (!GetPlatform.isWeb) const SizedBox(width: 32.0),
-                        if (!GetPlatform.isWeb)
-                          Expanded(
-                            child: AppButton1(
-                              title: Strings.SCAN_QR.tr,
-                              onTap: () {
-                                barcodeScan().then((value) {
-                                  address!.controller.text = value;
-                                });
-                              },
-                              icon: _buttonIcon(Images.SCAN),
-                            ),
-                          ),
-                      ],
-                    )
-                  : amount!.focusNode.hasFocus
-                      ? AppButton1(
-                          title: Strings.MAX_AMOUNT.tr,
-                          onTap: () {},
-                          icon: _buttonIcon(Images.FIRE),
-                        )
-                      : Center(),
+              : amount!.focusNode.hasFocus
+                  ? amountBtn()
+                  : addressBtns(),
         ],
       ),
     );
