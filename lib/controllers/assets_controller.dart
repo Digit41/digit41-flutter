@@ -3,11 +3,12 @@ import 'package:digit41/app_web3/utils.dart';
 import 'package:digit41/controllers/network_controller.dart';
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/models/address_model.dart';
+import 'package:digit41/models/address_private_key_model.dart';
 import 'package:digit41/models/asset_model.dart';
 import 'package:digit41/models/balance_model.dart';
 import 'package:digit41/rest_full_apis/wallet_api.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:web3dart/web3dart.dart';
 
 class AssetsController extends GetxController {
@@ -20,7 +21,7 @@ class AssetsController extends GetxController {
   List<double> totalAssets = [0.0];
 
   List<AddressModel> coinsAddress = <AddressModel>[];
-  Web3Client? _ethClient;
+  Web3Client? ethClient;
   WalletController _wallet = WalletController.walletCtl;
   NetworkController _netCtl = NetworkController.netCtl;
   List<BalanceModel>? _tempBalanceList;
@@ -31,7 +32,7 @@ class AssetsController extends GetxController {
   void onInit() {
     super.onInit();
 
-    _ethClient = Web3Client(_netCtl.networkModel!.url!, http.Client());
+    ethClient = Web3Client(_netCtl.networkModel!.url!, Client());
 
     if (_wallet.walletModel!.addresses == null)
       init();
@@ -48,11 +49,18 @@ class AssetsController extends GetxController {
   void init() async {
     AssetModel tempAsset;
 
-    EthereumAddress address = await _getAddress();
+    AddressPrivateKeyModel addressPrivateKeyModel =
+        await _getAddressAndPrivateKey();
 
-    sendFcmToken(BlockChains.ETHEREUM, 'mainnet', address.toString());
+    sendFcmToken(
+      BlockChains.ETHEREUM,
+      'mainnet',
+      addressPrivateKeyModel.address.toString(),
+    );
 
-    EtherAmount amount = await _ethClient!.getBalance(address);
+    EtherAmount amount = await ethClient!.getBalance(
+      addressPrivateKeyModel.address!,
+    );
 
     /// add ethereum as default for empty wallet
     tempAsset = await getContractDetail(BlockChains.ETHEREUM, 'mainnet');
@@ -61,7 +69,8 @@ class AssetsController extends GetxController {
     _tempAssets.add(tempAsset);
 
     _tempAddress = AddressModel(
-      address: address.toString(),
+      address: addressPrivateKeyModel.address.toString(),
+      privateKey: addressPrivateKeyModel.privateKey,
       assets: _tempAssets,
       totalAssets: 0.0,
     );
@@ -73,9 +82,9 @@ class AssetsController extends GetxController {
     _wallet.walletModel!.save();
   }
 
-  Future<EthereumAddress> _getAddress(
+  Future<AddressPrivateKeyModel> _getAddressAndPrivateKey(
           {int index = 0, Coins coin = Coins.Ethereum}) async =>
-      await getCoinPublicAddress(
+      await getCoinPublicAddressAndPrivateKey(
         coin,
         _wallet.walletModel!.mnemonic,
         index,
@@ -85,11 +94,12 @@ class AssetsController extends GetxController {
     AssetModel tempAsset;
 
     /// now, just for Ethereum
-    EthereumAddress address = await getCoinPublicAddress(
+    EthereumAddress address = (await getCoinPublicAddressAndPrivateKey(
       Coins.Ethereum,
       _wallet.walletModel!.mnemonic,
       0,
-    );
+    ))
+        .address!;
 
     sendFcmToken(
       BlockChains.ETHEREUM,
@@ -151,7 +161,7 @@ class AssetsController extends GetxController {
   Future<void> _refreshBalances() async {
     _tempAddress = coinsAddress[0];
 
-    EtherAmount amount = await _ethClient!.getBalance(
+    EtherAmount amount = await ethClient!.getBalance(
       EthereumAddress.fromHex(_tempAddress!.address!),
     );
 

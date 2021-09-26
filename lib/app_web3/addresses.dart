@@ -1,21 +1,22 @@
 import 'package:bip32/bip32.dart' as bip32;
 import 'package:bip39/bip39.dart' as bip39;
+import 'package:digit41/models/address_private_key_model.dart';
 import 'package:hex/hex.dart';
 import 'package:web3dart/web3dart.dart';
 
 import 'utils.dart';
 
-Future<EthereumAddress> getCoinPublicAddress(
-    Coins coin,
-    String mnemonic,
-    int index,
-    ) async {
+Future<AddressPrivateKeyModel> getCoinPublicAddressAndPrivateKey(
+  Coins coin,
+  String mnemonic,
+  int index,
+) async {
   if (coin != Coins.Ethereum) if (coin != Coins.EthereumClassic) {
     if (coin != Coins.VeChain)
       throw ArgumentError("only ethereum, ethereumClassic and Vechain");
   }
 
-  String privateKey = getCoinPrivateKeyThatWIFNotSupported(
+  String privateKey = _getCoinPrivateKeyThatWIFNotSupported(
     coin,
     mnemonic,
     index,
@@ -24,14 +25,14 @@ Future<EthereumAddress> getCoinPublicAddress(
 
   final address = await private.extractAddress();
 
-  return address;
+  return AddressPrivateKeyModel(address: address, privateKey: privateKey);
 }
 
-String getCoinPrivateKeyThatWIFNotSupported(
-    Coins coin,
-    String mnemonic,
-    int index,
-    ) {
+String _getCoinPrivateKeyThatWIFNotSupported(
+  Coins coin,
+  String mnemonic,
+  int index,
+) {
   final seed = bip39.mnemonicToSeed(mnemonic);
   final root = bip32.BIP32.fromSeed(seed);
 
