@@ -130,4 +130,6 @@ class Strings {
   static const BLOCK_EXP_URL = 'Block Explorer URL';
   static const DETAIL = 'Detail';
   static const DESC_NETWORK_DELETE = 'DeacNetDelete';
+  static const ADDRESS = 'Address';
+  static const SUCCESS_DONE = 'Done successfully';
 }

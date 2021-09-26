@@ -18,3 +18,5 @@ class BlockChains {
 }
 
 double convertWeiToEther(double wei) => wei / 10e17;
+
+int convertEtherToWei(double ether) => (ether * 10e17).toInt();

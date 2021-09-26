@@ -1,6 +1,13 @@
+import 'dart:async';
+
 import 'package:clipboard/clipboard.dart';
+import 'package:digit41/app_web3/utils.dart';
+import 'package:digit41/controllers/assets_controller.dart';
+import 'package:digit41/controllers/network_controller.dart';
+import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/models/asset_model.dart';
 import 'package:digit41/models/trx_model.dart';
+import 'package:digit41/utils/app_snackbar.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
@@ -8,21 +15,21 @@ import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_button.dart';
 import 'package:digit41/widgets/app_cache_image.dart';
 import 'package:digit41/widgets/app_text_form_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:web3dart/web3dart.dart';
 
 part 'receipt.dart';
-
 part 'send.dart';
-
 part 'trx_detail.dart';
 
 Widget _buttonIcon(String path, {Color? color}) => Image.asset(
-      path,
-      width: 25.0,
-      height: 25.0,
-      color: Colors.white,
-    );
+  path,
+  width: 25.0,
+  height: 25.0,
+  color: Colors.white,
+);
 
 void _coinOperationsBottomSheet(BuildContext context, String icon, Widget child,
     {bool send = true, bool trxDetail = false}) {
@@ -55,12 +62,12 @@ void _coinOperationsBottomSheet(BuildContext context, String icon, Widget child,
             height: 85.0,
             decoration: trxDetail
                 ? BoxDecoration(
-                    border: Border.all(
-                      width: 2.0,
-                      color: Get.theme.primaryColor,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                  )
+              border: Border.all(
+                width: 2.0,
+                color: Get.theme.primaryColor,
+              ),
+              borderRadius: BorderRadius.circular(50.0),
+            )
                 : null,
             child: CacheImage(icon),
           ),

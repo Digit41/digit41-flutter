@@ -91,7 +91,7 @@ class _CoinDetailsState extends State<CoinDetails> {
       );
 
   Widget bottom() => Container(
-    padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
         height: 100.0,
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -123,6 +123,7 @@ class _CoinDetailsState extends State<CoinDetails> {
                         sendBottomSheet(
                           context,
                           asset: _assetsController.assets[widget.assetIndex],
+                          getTrxs: getTrxList,
                         );
                       },
                       child: Icon(Icons.arrow_upward, color: Colors.black),
@@ -189,17 +190,17 @@ class _CoinDetailsState extends State<CoinDetails> {
         ),
       );
 
-  void getTrxList({String forceUp = 'false'}) {
+  void getTrxList({String forceUpdate = 'false'}) {
     if (refreshAgain)
       setState(() {
         refreshAgain = false;
       });
     getTrxs(
       BlockChains.ETHEREUM,
-      '_assetsController.coinsAddress[0].network!',
+      'mainnet',
       _assetsController.coinsAddress[0].address!,
       contract: _assetsController.assets[widget.assetIndex].contract,
-      forceUpdate: forceUp,
+      forceUpdate: forceUpdate,
     ).then((value) {
       setState(() {
         trxList = value;
@@ -208,7 +209,7 @@ class _CoinDetailsState extends State<CoinDetails> {
       /// for updating and fetch trxList form root if trxList is empty
       if (trxList!.isEmpty && update) {
         update = false;
-        getTrxList(forceUp: 'true');
+        getTrxList(forceUpdate: 'true');
       }
     }).catchError((e) {
       setState(() {
@@ -269,7 +270,7 @@ class _CoinDetailsState extends State<CoinDetails> {
                               ? AppEmptyData()
                               : RefreshIndicator(
                                   onRefresh: () async {
-                                    getTrxList(forceUp: 'true');
+                                    getTrxList(forceUpdate: 'true');
                                     await Future.delayed(Duration(seconds: 3));
                                   },
                                   child: ListView.builder(
