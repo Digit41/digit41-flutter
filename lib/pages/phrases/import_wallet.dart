@@ -1,5 +1,4 @@
 import 'package:bip39/bip39.dart' as bip39;
-import 'package:clipboard/clipboard.dart';
 import 'package:digit41/controllers/wallet_controller.dart';
 import 'package:digit41/hive/app_hive.dart';
 import 'package:digit41/models/wallet_model.dart';
@@ -66,8 +65,8 @@ class _ImportWallet extends StatelessWidget {
           padding: const EdgeInsets.only(right: 8.0),
           child: TextButton(
             onPressed: () {
-              FlutterClipboard.paste().then((value) {
-                phrases.controller.text = value;
+              clipboardPaste().then((value) {
+                phrases.controller.text = value != null ? value : '';
               });
             },
             child: Text(

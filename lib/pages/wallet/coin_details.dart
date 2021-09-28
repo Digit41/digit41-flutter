@@ -326,7 +326,7 @@ class _CoinDetailsState extends State<CoinDetails> {
             children: [
               Text(
                 trxList![index].amount!.toStringAsPrecision(
-                  _assetsController.assets[widget.assetIndex].precision!,
+                      _assetsController.assets[widget.assetIndex].precision!,
                     ),
                 style: TextStyle(color: Get.theme.primaryColor),
               ),

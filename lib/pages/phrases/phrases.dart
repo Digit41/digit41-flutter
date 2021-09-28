@@ -1,5 +1,4 @@
 import 'package:bip39/bip39.dart' as bip39;
-import 'package:clipboard/clipboard.dart';
 import 'package:digit41/pages/phrases/any_phrase.dart';
 import 'package:digit41/pages/phrases/verifying_phrases.dart';
 import 'package:digit41/utils/app_snackbar.dart';
@@ -43,7 +42,7 @@ class Phrases extends StatelessWidget {
               btnColor: AppTheme.gray,
               titleColor: Colors.white,
               onTap: () {
-                FlutterClipboard.copy(mnemonic!);
+                clipboardCopy(mnemonic);
                 showSnackBar(Strings.COPIED.tr);
               },
             ),

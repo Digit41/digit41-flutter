@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:clipboard/clipboard.dart';
 import 'package:digit41/app_web3/utils.dart';
 import 'package:digit41/controllers/assets_controller.dart';
 import 'package:digit41/controllers/network_controller.dart';

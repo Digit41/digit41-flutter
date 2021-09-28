@@ -37,9 +37,9 @@ Future? navigateToPage(Widget page,
     return Get.to(withCallback ? () => page : page, transition: trans);
 }
 
-void bottomSheetNavigateWithReplace(sheet){
+void bottomSheetNavigateWithReplace(sheet) {
   Get.back();
-  Timer(Duration(microseconds: 200), (){
+  Timer(Duration(microseconds: 200), () {
     sheet();
   });
 }
@@ -81,4 +81,13 @@ void launchURL(url,
       universalLinksOnly: universalLinksOnly,
     );
   }
+}
+
+void clipboardCopy(String? text) => Clipboard.setData(
+      ClipboardData(text: text),
+    );
+
+Future<String?> clipboardPaste() async {
+  var result = await Clipboard.getData('text/plain');
+  return result!.text;
 }

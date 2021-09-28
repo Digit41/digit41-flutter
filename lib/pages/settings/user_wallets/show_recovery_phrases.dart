@@ -1,8 +1,8 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:digit41/pages/phrases/any_phrase.dart';
 import 'package:digit41/utils/app_snackbar.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/strings.dart';
+import 'package:digit41/utils/utils.dart';
 import 'package:digit41/widgets/app_bottom_sheet.dart';
 import 'package:digit41/widgets/app_button.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ void showRecoveryPhrases(String mnemonic) {
           btnColor: AppTheme.gray,
           titleColor: Colors.white,
           onTap: () {
-            FlutterClipboard.copy(mnemonic);
+            clipboardCopy(mnemonic);
             showSnackBar(Strings.COPIED.tr);
           },
         ),

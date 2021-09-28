@@ -57,11 +57,13 @@ class _SendState extends State<_Send> {
         child: AppButton1(
           title: Strings.PASTE.tr,
           onTap: () {
-            FlutterClipboard.paste().then((value) {
-              address!.controller.text = value;
-              if (value.length > 0) amount!.focusNode.requestFocus();
-            });
-          },
+                clipboardPaste().then((value) {
+                  if (value != null) {
+                    address!.controller.text = value;
+                    if (value.length > 0) amount!.focusNode.requestFocus();
+                  }
+                });
+              },
           icon: _buttonIcon(Images.COPY),
         ),
       ),
