@@ -23,6 +23,7 @@ class Phrases extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 24.0),
             Text(Strings.LETS_CREATE_WALL.tr, style: TextStyle(fontSize: 26.0)),
             const SizedBox(height: 16.0),
             Text(Strings.KEEP_SAFE.tr),

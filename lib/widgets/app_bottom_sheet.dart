@@ -10,8 +10,16 @@ void bottomSheet(String title,
     bool enableDrag = true,
     bool isDismissible = true}) {
   Get.bottomSheet(
-    Padding(
+    Container(
+      margin: const EdgeInsets.only(top: 36.0),
       padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 16.0),
+      decoration: BoxDecoration(
+        color: Get.theme.bottomSheetTheme.backgroundColor,
+        borderRadius: const BorderRadius.only(
+          topLeft: const Radius.circular(16.0),
+          topRight: const Radius.circular(16.0),
+        ),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,13 +61,6 @@ void bottomSheet(String title,
     isScrollControlled: true,
     enableDrag: enableDrag,
     isDismissible: isDismissible,
-    backgroundColor: Get.theme.bottomSheetTheme.backgroundColor,
-    shape: const RoundedRectangleBorder(
-      borderRadius: const BorderRadius.only(
-        topLeft: const Radius.circular(16.0),
-        topRight: const Radius.circular(16.0),
-      ),
-    ),
   );
 }
 

@@ -119,37 +119,41 @@ class _Netwotk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Column(
-        children: [
-          const SizedBox(height: 8.0),
-          netName!,
-          const SizedBox(height: 16.0),
-          rpcUrl!,
-          const SizedBox(height: 16.0),
-          chainId!,
-          const SizedBox(height: 16.0),
-          currSymbol!,
-          const SizedBox(height: 16.0),
-          blockUrl!,
-          showButton(const SizedBox(height: 24.0)),
-          showButton(AppButton(
-            title: Strings.SAVE.tr,
-            onTap: save,
-            btnColor: Get.theme.primaryColor,
-          )),
-          showButton(const SizedBox(height: 12.0)),
-          showButton(
-            netModel == null
-                ? const Center()
-                : AppButton(
-                    title: Strings.DELETE.tr,
-                    onTap: delete,
-                    btnColor: Colors.red,
-                  ),
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              const SizedBox(height: 8.0),
+              netName!,
+              const SizedBox(height: 16.0),
+              rpcUrl!,
+              const SizedBox(height: 16.0),
+              chainId!,
+              const SizedBox(height: 16.0),
+              currSymbol!,
+              const SizedBox(height: 16.0),
+              blockUrl!,
+              showButton(const SizedBox(height: 24.0)),
+              showButton(AppButton(
+                title: Strings.SAVE.tr,
+                onTap: save,
+                btnColor: Get.theme.primaryColor,
+              )),
+              showButton(const SizedBox(height: 12.0)),
+              showButton(
+                netModel == null
+                    ? const Center()
+                    : AppButton(
+                        title: Strings.DELETE.tr,
+                        onTap: delete,
+                        btnColor: Colors.red,
+                      ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

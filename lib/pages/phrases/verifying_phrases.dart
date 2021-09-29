@@ -51,7 +51,7 @@ class _VerifyingPhrasesState extends State<VerifyingPhrases> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 16.0),
+                    const SizedBox(height: 24.0),
                     Text(
                       Strings.CONF_PHRASES.tr,
                       style: TextStyle(fontSize: 26.0),

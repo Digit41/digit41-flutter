@@ -21,7 +21,7 @@ class _BackupState extends State<Backup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 24.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Image.asset(

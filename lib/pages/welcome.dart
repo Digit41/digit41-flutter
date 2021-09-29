@@ -42,7 +42,7 @@ class Welcome extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0),
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 32.0),
               child: Image.asset(Images.LOGO, width: 140.0, height: 140.0),
             ),
             Expanded(

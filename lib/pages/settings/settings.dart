@@ -53,7 +53,7 @@ class _SettingsState extends State<Settings> {
       child: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          const SizedBox(height: 56.0),
+          const SizedBox(height: 32.0),
           Text(
             Strings.SETTING_CAP.tr,
             style: TextStyle(color: Colors.grey, fontSize: 20.0),
@@ -78,6 +78,12 @@ class _SettingsState extends State<Settings> {
               init: NetworkController(),
               builder: (ctx) => Text(
                 NetworkController.netCtl.networkModel!.name!,
+                style: TextStyle(
+                  fontSize:
+                      NetworkController.netCtl.networkModel!.name!.length > 26
+                          ? 10.0
+                          : 14.0,
+                ),
               ),
             ),
           ),

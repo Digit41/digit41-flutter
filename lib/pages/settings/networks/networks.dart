@@ -38,11 +38,11 @@ void networks() {
             /// adjust the height to expand the display list according to the content
             /// means --> 52.0 * netList.length
             /// and also above value + with 100.0 for stay on fab below of list
-            height: 52.0 * netList.length + 100.0,
+            height: 60.0 * netList.length + 100.0,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Flexible(
+                Expanded(
                   child: ListView.builder(
                     itemCount: netList.length,
                     itemBuilder: (ctx, int index) {

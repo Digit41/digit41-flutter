@@ -39,7 +39,7 @@ Future? navigateToPage(Widget page,
 
 void bottomSheetNavigateWithReplace(sheet) {
   Get.back();
-  Timer(Duration(microseconds: 200), () {
+  Timer(Duration(microseconds: 250), () {
     sheet();
   });
 }
