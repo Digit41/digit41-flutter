@@ -146,7 +146,10 @@ class _CoinDetailsState extends State<CoinDetails> {
                       heroTag: 'receive',
                       backgroundColor: AppTheme.yellow,
                       onPressed: () {
-                        receiveBottomSheet(context);
+                        receiveBottomSheet(
+                          context,
+                          asset: _assetsController.assets[widget.assetIndex],
+                        );
                       },
                       child: Icon(Icons.arrow_downward, color: Colors.black),
                     ),
@@ -331,9 +334,11 @@ class _CoinDetailsState extends State<CoinDetails> {
                 style: TextStyle(color: Get.theme.primaryColor),
               ),
               const SizedBox(height: 4.0),
-              Text(
-                Strings.SUCCESS.tr,
-                style: TextStyle(color: Get.theme.primaryColor.withAlpha(90)),
+              Expanded(
+                child: Text(
+                  Strings.SUCCESS.tr,
+                  style: TextStyle(color: Get.theme.primaryColor.withAlpha(90)),
+                ),
               ),
             ],
           ),

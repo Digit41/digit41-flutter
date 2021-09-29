@@ -26,7 +26,7 @@ class AppTextFormField extends StatefulWidget {
   int? maxLine;
 
   bool autoValidateMode;
-  bool autoFocus;
+  bool disposing;
 
   AppTextFormField({
     required this.hint,
@@ -46,7 +46,7 @@ class AppTextFormField extends StatefulWidget {
     this.maxLine,
     this.textInputAction,
     this.autoValidateMode = true,
-    this.autoFocus = false,
+    this.disposing = true,
   });
 
   @override
@@ -56,8 +56,10 @@ class AppTextFormField extends StatefulWidget {
 class _AppTextFormFieldState extends State<AppTextFormField> {
   @override
   void dispose() {
-    widget.controller.dispose();
-    widget.focusNode.dispose();
+    if (widget.disposing) {
+      widget.controller.dispose();
+      widget.focusNode.dispose();
+    }
     super.dispose();
   }
 
@@ -76,7 +78,6 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               )
             : Center(),
         TextFormField(
-          autofocus: widget.autoFocus,
           validator: widget.validator ?? selfValidator,
           onFieldSubmitted: widget.onFieldSubmitted ?? selfSubmit,
           controller: widget.controller,
