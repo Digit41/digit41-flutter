@@ -26,7 +26,8 @@ class Assets extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (ctx, index) {
-              positive = controller.assets[index].percentChange24h! > 0;
+              if (controller.assets[index].percentChange24h != null)
+                positive = controller.assets[index].percentChange24h! > 0;
               return Padding(
                 padding: EdgeInsets.only(
                   bottom: index == controller.assets.length - 1 ? 80.0 : 0.0,
@@ -40,36 +41,43 @@ class Assets extends StatelessWidget {
                     controller.assets[index].icon ?? '',
                     size: 46.0,
                   ),
-                  title: Text(controller.assets[index].name!),
-                  subtitle: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        '\$ ${controller.assets[index].price!.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          color: positive ? Get.theme.primaryColor : Colors.red,
-                        ),
-                      ),
-                      Icon(
-                        positive ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                        color: positive ? Get.theme.primaryColor : Colors.red,
-                        size: 18.0,
-                      ),
-                    ],
+                  title: Text(
+                    '${controller.assets[index].balance!.toStringAsPrecision((controller.assets[index].precision ?? 4))} ' +
+                        '${controller.assets[index].symbol}',
+                  ),
+                  subtitle: Text(
+                    '\$ ${controller.assets[index].balanceInPrice!.toStringAsFixed(2)}',
+                    style: TextStyle(
+                      color: darkModeEnabled() ? Colors.grey : AppTheme.gray,
+                    ),
                   ),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '${controller.assets[index].balance!.toStringAsPrecision((controller.assets[index].precision ?? 4))} ${controller.assets[index].symbol}',
+                        '\$ ${controller.assets[index].price!.toStringAsFixed(2)}',
                       ),
-                      Text(
-                        '\$ ${controller.assets[index].balanceInPrice!.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          color:
-                              darkModeEnabled() ? Colors.grey : AppTheme.gray,
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            positive
+                                ? Icons.arrow_drop_up
+                                : Icons.arrow_drop_down,
+                            color:
+                                positive ? Get.theme.primaryColor : Colors.red,
+                            size: 18.0,
+                          ),
+                          Text(
+                            '${controller.assets[index].percentChange24h!.toStringAsFixed(2)}%',
+                            style: TextStyle(
+                              color: positive
+                                  ? Get.theme.primaryColor
+                                  : Colors.red,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

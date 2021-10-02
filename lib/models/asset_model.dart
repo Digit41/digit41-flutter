@@ -1,5 +1,8 @@
 import 'package:hive/hive.dart';
 
+List<AssetModel> assetModelsPriceFromJson(data) =>
+    data.map<AssetModel>((x) => AssetModel.fromJsonForPrice(x)).toList();
+
 @HiveType(typeId: 2)
 class AssetModel extends HiveObject {
   @HiveField(0)

@@ -49,7 +49,7 @@ Future<List<AssetModel>> getPrices(
     },
   );
 
-  return result.map<AssetModel>((x) => AssetModel.fromJsonForPrice(x)).toList();
+  return assetModelsPriceFromJson(result);
 }
 
 Future<List<TrxModel>> getTrxs(String blockChain, String network, String address,

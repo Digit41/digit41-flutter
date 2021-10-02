@@ -35,18 +35,18 @@ class AssetsController extends GetxController {
     ethClient = Web3Client(_netCtl.networkModel!.url!, Client());
 
     if (_wallet.walletModel!.addresses == null)
-      init();
+      _init();
     else {
       for (AddressModel am in _wallet.walletModel!.addresses!) {
         coinsAddress.add(am);
         totalAssets[0] = am.totalAssets!;
       }
       _prepareData();
-      _refresh();
+      refreshAssets();
     }
   }
 
-  void init() async {
+  void _init() async {
     AssetModel tempAsset;
 
     AddressPrivateKeyModel addressPrivateKeyModel =
@@ -65,6 +65,7 @@ class AssetsController extends GetxController {
     /// add ethereum as default for empty wallet
     tempAsset = await getContractDetail(BlockChains.ETHEREUM, 'mainnet');
     tempAsset.balanceInPrice = 0.0;
+    tempAsset.symbol = _netCtl.networkModel!.currencySymbol;
     tempAsset.balance = convertWeiToEther(amount.getInWei.toDouble());
     _tempAssets.add(tempAsset);
 
@@ -150,7 +151,7 @@ class AssetsController extends GetxController {
     _wallet.walletModel!.save();
   }
 
-  void _refresh() async {
+  void refreshAssets() async {
     await _refreshBalances();
     await _refreshPrices();
 
@@ -168,6 +169,7 @@ class AssetsController extends GetxController {
     _tempAddress!.assets![0].balance = convertWeiToEther(
       amount.getInWei.toDouble(),
     );
+    _tempAddress!.assets![0].symbol = _netCtl.networkModel!.currencySymbol;
 /*
     _tempBalanceList = await getBalances(
       BlockChains.ETHEREUM,

@@ -57,7 +57,7 @@ class _ReceiptState extends State<_Receipt> {
           },
           icon: _buttonIcon(Images.COPY),
         ),
-        //if (!GetPlatform.isWeb)
+        if (!GetPlatform.isWeb)
           Column(
             children: [
               const SizedBox(height: 16.0),
