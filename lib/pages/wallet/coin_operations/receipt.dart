@@ -57,36 +57,30 @@ class _ReceiptState extends State<_Receipt> {
           },
           icon: _buttonIcon(Images.COPY),
         ),
-        if (!GetPlatform.isWeb)
+        //if (!GetPlatform.isWeb)
           Column(
             children: [
               const SizedBox(height: 16.0),
               AnimatedContainer(
                 duration: Duration(milliseconds: 500),
-                height: isSetAmount ? 120.0 : 55.0,
+                height: isSetAmount ? 65.0 : 0.0,
                 child: Column(
                   children: [
-                    Visibility(
-                      child: amount,
-                      visible: isSetAmount,
-                    ),
-                    Visibility(
-                      child: const SizedBox(height: 16.0),
-                      visible: isSetAmount,
-                    ),
-                    AppButton1(
-                      title: isSetAmount
-                          ? Strings.CANCEL.tr
-                          : Strings.SET_AMOUNT.tr,
-                      onTap: () {
-                        setState(() {
-                          isSetAmount = !isSetAmount;
-                        });
-                      },
-                      icon: isSetAmount ? Center() : _buttonIcon(Images.NUMBER),
-                    ),
+                    amount,
+                    const SizedBox(height: 16.0),
                   ],
                 ),
+              ),
+              AppButton1(
+                title: isSetAmount ? Strings.CANCEL.tr : Strings.SET_AMOUNT.tr,
+                onTap: () {
+                  setState(() {
+                    isSetAmount = !isSetAmount;
+                    if(!isSetAmount)
+                      value = null;
+                  });
+                },
+                icon: isSetAmount ? Center() : _buttonIcon(Images.NUMBER),
               ),
               const SizedBox(height: 16.0),
               AppButton(
