@@ -36,7 +36,6 @@ Future<AssetModel> getContractDetail(String blockChain, String network,
 
 Future<List<AssetModel>> getPrices(
   String blockChain,
-  String network,
   List<String> symbols,
 ) async {
   var result = await anyApi(
@@ -44,7 +43,7 @@ Future<List<AssetModel>> getPrices(
     url: Routes.PRICES,
     data: {
       'blockchain': blockChain,
-      'network': network,
+      'network': 'mainnet',
       'symbol': symbols,
     },
   );

@@ -198,7 +198,6 @@ class AssetsController extends GetxController {
     }
     _tempAssets = await getPrices(
       BlockChains.ETHEREUM,
-      'mainnet',
       sym,
     );
 
