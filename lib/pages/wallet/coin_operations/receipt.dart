@@ -32,7 +32,10 @@ class _ReceiptState extends State<_Receipt> {
   @override
   void initState() {
     super.initState();
-    address = assetsCtl.coinsAddress[0].address;
+    address = assetsCtl
+        .coinsAddress[
+            WalletController.walletCtl.walletModel!.selectedAddressIndex]
+        .address;
     amount.onChanged = (val) {
       value = val;
     };
@@ -76,8 +79,7 @@ class _ReceiptState extends State<_Receipt> {
                 onTap: () {
                   setState(() {
                     isSetAmount = !isSetAmount;
-                    if(!isSetAmount)
-                      value = null;
+                    if (!isSetAmount) value = null;
                   });
                 },
                 icon: isSetAmount ? Center() : _buttonIcon(Images.NUMBER),

@@ -14,11 +14,15 @@ class WalletModel extends HiveObject {
   @HiveField(3)
   List? addresses;
 
+  @HiveField(4)
+  int selectedAddressIndex;
+
   WalletModel(
     this.name,
     this.mnemonic, {
     this.selected = false,
     this.addresses,
+    this.selectedAddressIndex = 0,
   });
 }
 
@@ -39,13 +43,14 @@ class WalletAdapter extends TypeAdapter<WalletModel> {
       fields[1],
       selected: fields[2],
       addresses: fields[3],
+      selectedAddressIndex: fields[4],
     );
   }
 
   @override
   void write(BinaryWriter writer, WalletModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -53,6 +58,8 @@ class WalletAdapter extends TypeAdapter<WalletModel> {
       ..writeByte(2)
       ..write(obj.selected)
       ..writeByte(3)
-      ..write(obj.addresses);
+      ..write(obj.addresses)
+      ..writeByte(4)
+      ..write(obj.selectedAddressIndex);
   }
 }

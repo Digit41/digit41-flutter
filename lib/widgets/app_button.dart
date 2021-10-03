@@ -121,8 +121,15 @@ class AppButton1 extends StatelessWidget {
   String title;
   GestureTapCallback? onTap;
   Widget icon;
+  Color? btnColor;
+  Color? titleColor;
 
-  AppButton1({required this.title, required this.onTap, required this.icon});
+  AppButton1(
+      {required this.title,
+      required this.onTap,
+      required this.icon,
+      this.btnColor,
+      this.titleColor});
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +138,7 @@ class AppButton1 extends StatelessWidget {
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all(Colors.white),
         backgroundColor: MaterialStateProperty.all(
-          AppTheme.gray.withOpacity(0.8),
+          btnColor ?? AppTheme.gray.withOpacity(0.8),
         ),
         elevation: MaterialStateProperty.all(3.0),
         shape: MaterialStateProperty.all(
@@ -142,7 +149,14 @@ class AppButton1 extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: GetPlatform.isWeb ? 14.0 : 5.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [icon, const SizedBox(width: 4.0), Text(title)],
+          children: [
+            icon,
+            const SizedBox(width: 4.0),
+            Text(
+              title,
+              style: TextStyle(color: titleColor),
+            ),
+          ],
         ),
       ),
     );

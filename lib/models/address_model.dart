@@ -1,3 +1,4 @@
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:hive/hive.dart';
 
 @HiveType(typeId: 1)
@@ -14,11 +15,15 @@ class AddressModel extends HiveObject {
   @HiveField(3)
   double? totalAssets;
 
+  @HiveField(4)
+  String? name;
+
   AddressModel({
     this.address,
     this.privateKey,
     this.assets,
     this.totalAssets,
+    this.name,
   });
 }
 
@@ -38,13 +43,14 @@ class AddressAdapter extends TypeAdapter<AddressModel> {
       privateKey: fields[1],
       assets: fields[2],
       totalAssets: fields[3],
+      name: fields[4],
     );
   }
 
   @override
   void write(BinaryWriter writer, AddressModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.address)
       ..writeByte(1)
@@ -52,6 +58,8 @@ class AddressAdapter extends TypeAdapter<AddressModel> {
       ..writeByte(2)
       ..write(obj.assets)
       ..writeByte(3)
-      ..write(obj.totalAssets);
+      ..write(obj.totalAssets)
+      ..writeByte(4)
+      ..write(obj.name);
   }
 }

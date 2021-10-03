@@ -36,7 +36,7 @@ void networks() {
           netList = snapData.data as List<NetworkModel>;
           return SizedBox(
             /// adjust the height to expand the display list according to the content
-            /// means --> 52.0 * netList.length
+            /// means --> 60.0 * netList.length
             /// and also above value + with 100.0 for stay on fab below of list
             height: 60.0 * netList.length + 100.0,
             child: Column(
@@ -86,7 +86,6 @@ void networks() {
                     },
                   ),
                 ),
-                const SizedBox(height: 8.0),
                 fabAdd(
                   Strings.ADD_NETWORK.tr,
                   onTap: () {

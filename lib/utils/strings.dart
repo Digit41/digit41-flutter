@@ -54,6 +54,9 @@ class Strings {
   static const ON = 'ON';
   static const OFF = 'OFF';
   static const YOUR_WALLETS = 'Your Wallets';
+  static const ACCOUNT = 'Account';
+  static const ACCOUNTS = 'Accounts';
+  static const CREATE = 'Create';
   static const ADD_WALLET = 'Add Wallet';
   static const PASSCODE = 'Passcode';
   static const CLOSE = 'Close';

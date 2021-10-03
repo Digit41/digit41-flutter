@@ -1,5 +1,6 @@
 import 'package:digit41/controllers/network_controller.dart';
 import 'package:digit41/controllers/wallet_controller.dart';
+import 'package:digit41/pages/settings/accounts/accounts.dart';
 import 'package:digit41/pages/settings/currency.dart';
 import 'package:digit41/pages/settings/languages.dart';
 import 'package:digit41/pages/settings/networks/networks.dart';
@@ -23,6 +24,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  WalletController walletCtl = WalletController.walletCtl;
   AppSharedPreferences pref = AppSharedPreferences();
   bool? enableDark;
   String? pass;
@@ -66,7 +68,21 @@ class _SettingsState extends State<Settings> {
             trailing: GetBuilder(
               init: WalletController(),
               builder: (ctx) => Text(
-                WalletController.walletCtl.walletModel!.name,
+                walletCtl.walletModel!.name,
+              ),
+            ),
+          ),
+          item(
+            Images.WHITE_WALLET,
+            Strings.ACCOUNTS.tr,
+            onTap: accounts,
+            trailing: GetBuilder(
+              init: WalletController(),
+              builder: (ctx) => Text(
+                walletCtl
+                    .walletModel!
+                    .addresses![walletCtl.walletModel!.selectedAddressIndex]
+                    .name,
               ),
             ),
           ),
