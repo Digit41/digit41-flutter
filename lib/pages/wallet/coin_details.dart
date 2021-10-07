@@ -8,6 +8,7 @@ import 'package:digit41/rest_full_apis/wallet_api.dart';
 import 'package:digit41/utils/app_theme.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
+import 'package:digit41/widgets/app_back_arrow.dart';
 import 'package:digit41/widgets/app_cache_image.dart';
 import 'package:digit41/widgets/app_empty_data.dart';
 import 'package:digit41/widgets/app_error_again.dart';
@@ -242,16 +243,7 @@ class _CoinDetailsState extends State<CoinDetails> {
             Column(
               children: [
                 const SizedBox(height: 40.0),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(Icons.arrow_back_ios),
-                  ),
-                ),
+                const BackArrow(),
                 const SizedBox(height: 8.0),
                 Text(
                   _assetsController.assets[widget.assetIndex].contract == null

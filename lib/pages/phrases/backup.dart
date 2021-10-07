@@ -2,6 +2,7 @@ import 'package:digit41/pages/phrases/phrases.dart';
 import 'package:digit41/utils/images_path.dart';
 import 'package:digit41/utils/strings.dart';
 import 'package:digit41/utils/utils.dart';
+import 'package:digit41/widgets/app_back_arrow.dart';
 import 'package:digit41/widgets/app_button.dart';
 import 'package:digit41/widgets/app_checkbox.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class _BackupState extends State<Backup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 16.0),
+            const BackArrow(),
             const SizedBox(height: 24.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -34,7 +37,7 @@ class _BackupState extends State<Backup> {
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: Text(
                 Strings.TITLE_BACKUP.tr,
-                style: TextStyle(fontSize: 36.0),
+                style: TextStyle(fontSize: 36.0, height: 1.2),
               ),
             ),
             Expanded(

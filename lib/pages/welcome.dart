@@ -55,6 +55,7 @@ class Welcome extends StatelessWidget {
                   Strings.MESS_WELCOME.tr,
                   style: TextStyle(
                     fontSize: 40.0,
+                    height: 1.2,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
